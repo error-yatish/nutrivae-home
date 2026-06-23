@@ -83,17 +83,19 @@ function initAfterLoad() {
 function animateHero() {
   const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-  tl.to('#hero-badge', { opacity: 1, y: 0, duration: 0.7 }, 0.1)
-    .to('.word-inner', { y: 0, duration: 0.9, stagger: 0.12, ease: 'power4.out' }, 0.3)
-    .to('.underline-path', { strokeDashoffset: 0, duration: 0.8, ease: 'power2.inOut' }, 0.95)
-    .to('#hero-p',   { opacity: 1, y: 0, duration: 0.7 }, 0.85)
-    .to('#hero-btns',{ opacity: 1, y: 0, duration: 0.7 }, 1.0)
-    .to('#hero-visual', { opacity: 1, duration: 0.01 }, 0.4)
-    .fromTo('#hero-img-wrap',
-      { clipPath: 'inset(100% 0% 0% 0% round 48px)' },
-      { clipPath: 'inset(0% 0% 0% 0% round 48px)', duration: 1.1, ease: 'power4.inOut' }, 0.4)
-    .to('#float-card-1', { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'back.out(1.4)' }, 1.1)
-    .to('#float-card-2', { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'back.out(1.4)' }, 1.25);
+  tl.fromTo('#hero-cover-bg img', 
+      { scale: 1.1, filter: 'blur(10px)' }, 
+      { scale: 1, filter: 'blur(0px)', duration: 1.8, ease: 'power3.out' }, 0.1)
+    .to('#float-card-1', { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'back.out(1.4)' }, 0.6)
+    .to('#float-card-2', { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'back.out(1.4)' }, 0.75);
+
+  // Intro text (now below fold) scroll trigger
+  const introTl = gsap.timeline({
+    scrollTrigger: { trigger: '.intro-section', start: 'top 75%' },
+    defaults: { ease: 'power3.out' }
+  });
+  introTl.to('.word-inner', { y: 0, duration: 0.9, stagger: 0.12, ease: 'power4.out' }, 0)
+         .to('.underline-path', { strokeDashoffset: 0, duration: 0.8, ease: 'power2.inOut' }, 0.6);
 }
 
 // ══════════════════════════════════════════════════════════════════════
@@ -298,13 +300,15 @@ function initScrollAnimations() {
   );
 
   // CTA banner
-  gsap.from('.cta-banner-text', {
-    opacity: 0, x: -50, duration: 1, ease: 'power3.out',
-    scrollTrigger: { trigger: '.cta-banner', start: 'top 80%' }
+  gsap.fromTo('.cta-banner-text', 
+    { opacity: 0, x: -50 },
+    { opacity: 1, x: 0, duration: 1, ease: 'power3.out',
+      scrollTrigger: { trigger: '.cta-banner', start: 'top 90%' }
   });
-  gsap.from('.cta-banner-img', {
-    opacity: 0, x: 50, scale: 1.05, duration: 1, ease: 'power3.out',
-    scrollTrigger: { trigger: '.cta-banner', start: 'top 80%' }
+  gsap.fromTo('.cta-banner-img',
+    { opacity: 0, x: 50, scale: 1.05 },
+    { opacity: 1, x: 0, scale: 1, duration: 1, ease: 'power3.out',
+      scrollTrigger: { trigger: '.cta-banner', start: 'top 90%' }
   });
 
   // Generic data-animate fallback
@@ -457,6 +461,7 @@ function initHeader() {
 // 12. HAMBURGER
 // ══════════════════════════════════════════════════════════════════════
 function initHamburger() {
+  const header     = document.getElementById('header');
   const hamburger  = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
   if (!hamburger || !mobileMenu) return;
@@ -464,6 +469,7 @@ function initHamburger() {
   hamburger.addEventListener('click', () => {
     const isOpen = hamburger.classList.toggle('open');
     mobileMenu.classList.toggle('open', isOpen);
+    if (header) header.classList.toggle('menu-open', isOpen);
     if (lenis) isOpen ? lenis.stop() : lenis.start();
   });
 
@@ -471,6 +477,7 @@ function initHamburger() {
     link.addEventListener('click', () => {
       hamburger.classList.remove('open');
       mobileMenu.classList.remove('open');
+      if (header) header.classList.remove('menu-open');
       if (lenis) lenis.start();
     });
   });

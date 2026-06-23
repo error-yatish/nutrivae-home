@@ -12,20 +12,20 @@
     <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="home">
 
-    <!-- ===================== HEADER ===================== -->
+        <!-- ===================== HEADER ===================== -->
     <header id="header">
         <div class="header-inner">
-            <a href="index.html" class="logo">
-                <img src="assets/logo.png" alt="Nutrivae Foods">
-            </a>
             <nav class="nav-links" id="nav-links">
-                <a href="index.html" class="nav-link active">Home</a>
+                <a href="index.html" class="nav-link">Home</a>
                 <a href="about.html" class="nav-link">Our Story</a>
                 <a href="products.html" class="nav-link">Products</a>
                 <a href="contact.html" class="nav-link">Contact</a>
             </nav>
+            <a href="index.html" class="logo">
+                <img src="assets/logo.png" alt="Nutrivae Foods" class="logo-img">
+            </a>
             <div class="header-actions">
                 <a href="products.html" class="btn-pill" id="header-cta">Shop Now</a>
                 <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
@@ -58,10 +58,40 @@
 
     <main>
 
-        <!-- ===================== HERO ===================== -->
-        <section class="hero" id="hero">
-            <div class="hero-text">
-                <div class="hero-badge" id="hero-badge">
+        <!-- ===================== HERO COVER ===================== -->
+        <section class="hero-cover" id="hero-cover">
+            <div class="hero-cover-bg" id="hero-cover-bg">
+                <img src="assets/hero_lifestyle.png" alt="Wholesome natural food">
+                <div class="hero-cover-overlay"></div>
+            </div>
+            
+            <!-- Floating cards (now positioned over the cover) -->
+            <div class="float-card float-card--tl" id="float-card-1">
+                <div class="float-card-icon">🌱</div>
+                <div>
+                    <strong>100% Natural</strong>
+                    <span>No preservatives added</span>
+                </div>
+            </div>
+            <div class="float-card float-card--br" id="float-card-2">
+                <div class="float-card-icon">⚡</div>
+                <div>
+                    <strong>High Protein</strong>
+                    <span>Plant-powered nutrition</span>
+                </div>
+            </div>
+            
+            <!-- Scroll indicator -->
+            <div class="hero-scroll-cue">
+                <div class="scroll-line"></div>
+                <span>scroll</span>
+            </div>
+        </section>
+
+        <!-- ===================== INTRO SECTION ===================== -->
+        <section class="intro-section" id="intro-section">
+            <div class="intro-text">
+                <div class="hero-badge" id="hero-badge" data-animate="fade-up">
                     <span class="badge-dot"></span>
                     <span>100% Plant-Based · Clean Label</span>
                 </div>
@@ -69,37 +99,12 @@
                     <span class="h1-line"><span class="word-mask"><span class="word-inner">Everyday</span></span> <span class="word-mask"><span class="word-inner">food,</span></span></span>
                     <span class="h1-line"><em class="highlight-word"><span class="word-mask"><span class="word-inner">honestly</span></span><svg class="underline-svg" viewBox="0 0 220 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path class="underline-path" d="M3,9 C50,3 120,13 218,7" stroke="#c8a84b" stroke-width="3.5" stroke-linecap="round"/></svg></em> <span class="word-mask"><span class="word-inner">nourishing.</span></span></span>
                 </h1>
-                <p id="hero-p">Rooted in agriculture. Guided by nutrition science. Made with care, consistency, and integrity.</p>
-                <div class="hero-btns" id="hero-btns">
+                <p id="hero-p" data-animate="fade-up" data-delay="100">Rooted in agriculture. Guided by nutrition science. Made with care, consistency, and integrity.</p>
+                <div class="hero-btns" id="hero-btns" data-animate="fade-up" data-delay="200">
                     <a href="products.html" class="btn-primary magnetic" id="hero-explore">Explore Products</a>
                     <a href="about.html" class="btn-ghost" id="hero-story">Our Story ↗</a>
                 </div>
             </div>
-
-            <div class="hero-visual" id="hero-visual">
-                <div class="hero-img-wrap" id="hero-img-wrap">
-                    <img src="assets/hero_lifestyle.png" alt="Wholesome natural food" class="hero-main-img" id="hero-img">
-                    <!-- Floating card 1 -->
-                    <div class="float-card float-card--tl" id="float-card-1">
-                        <div class="float-card-icon">🌱</div>
-                        <div>
-                            <strong>100% Natural</strong>
-                            <span>No preservatives added</span>
-                        </div>
-                    </div>
-                    <!-- Floating card 2 -->
-                    <div class="float-card float-card--br" id="float-card-2">
-                        <div class="float-card-icon">⚡</div>
-                        <div>
-                            <strong>High Protein</strong>
-                            <span>Plant-powered nutrition</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Organic blob decoration -->
-                <div class="hero-blob"></div>
-            </div>
-
         </section>
 
 
@@ -306,7 +311,7 @@
         </section>
 
         <!-- ===================== CTA BANNER ===================== -->
-        <section class="cta-banner" data-animate="fade-up">
+        <section class="cta-banner">
             <div class="cta-banner-inner">
                 <div class="cta-banner-text">
                     <span class="section-tag light">Simple Nutrition</span>
@@ -366,3 +371,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+

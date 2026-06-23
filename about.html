@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story | Nutrivae Foods</title>
+    <meta name="description" content="Nutrivae was created with a simple belief that everyday food should nourish the body honestly and naturally.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Lenis smooth scroll -->
+    <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+        <link rel="stylesheet" href="styles.css">
+    <style>
+        .page-hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            padding: 10rem 5% 5rem;
+            background: var(--cream);
+            position: relative;
+            overflow: hidden;
+        }
+        .page-hero-inner { max-width: 800px; }
+        .page-hero h1 { font-size: clamp(3rem, 5vw, 5rem); color: var(--green); margin-bottom: 1.5rem; }
+        .page-hero p { font-size: 1.25rem; color: var(--text-muted); line-height: 1.8; max-width: 620px; }
+        .page-hero-blob {
+            position: absolute; right: -10%; top: 10%;
+            width: 500px; height: 500px;
+            background: radial-gradient(ellipse, rgba(74,124,95,0.1) 0%, transparent 70%);
+            border-radius: 60% 40% 70% 30%;
+            animation: blobMorph 8s ease-in-out infinite;
+        }
+        .story-content-section { padding: 5rem 5%; max-width: 1200px; margin: 0 auto; }
+        .story-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-bottom: 6rem; }
+        .story-two-col.reverse { direction: rtl; }
+        .story-two-col.reverse > * { direction: ltr; }
+        .story-col-img { border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-soft); }
+        .story-col-img img { width: 100%; height: 420px; object-fit: cover; display: block; }
+        .story-col-text h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); color: var(--green); margin-bottom: 1rem; }
+        .story-col-text p { font-size: 1rem; color: var(--text-muted); line-height: 1.85; margin-bottom: 1.2rem; }
+        .story-values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; padding: 5rem 5%; background: var(--green); }
+        .story-val-card { padding: 2.5rem; border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-lg); }
+        .story-val-card .val-icon { font-size: 2rem; margin-bottom: 1rem; }
+        .story-val-card h3 { font-size: 1.3rem; color: var(--white); margin-bottom: 0.7rem; }
+        .story-val-card p { font-size: 0.92rem; color: rgba(255,255,255,0.6); line-height: 1.7; }
+        @media (max-width: 900px) {
+            .story-two-col { grid-template-columns: 1fr; direction: ltr !important; gap: 2.5rem; }
+            .story-values { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursor-follower"></div>
+
+    <header id="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo"><img src="assets/logo.png" alt="Nutrivae Foods"></a>
+            <nav class="nav-links" id="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link active">Our Story</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+            <div class="header-actions">
+                <a href="products.html" class="btn-pill">Shop Now</a>
+                <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="index.html">Home</a>
+        <a href="about.html">Our Story</a>
+        <a href="products.html">Products</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <main>
+
+        <section class="page-hero">
+            <div class="page-hero-inner">
+                <span class="section-tag" data-animate="fade-up">About Nutrivae</span>
+                <h1 data-animate="fade-up" data-delay="100">A simple <em>belief.</em></h1>
+                <p data-animate="fade-up" data-delay="200">Everyday food should nourish the body honestly and naturally. That's the belief Nutrivae was built on — and everything we do flows from it.</p>
+            </div>
+            <div class="page-hero-blob"></div>
+        </section>
+
+        <section class="story-content-section">
+            <div class="story-two-col" data-animate="fade-up">
+                <div class="story-col-img">
+                    <img src="assets/farm_field.png" alt="Our farm roots">
+                </div>
+                <div class="story-col-text">
+                    <span class="section-tag">Our Roots</span>
+                    <h2>Rooted in <em>agriculture.</em></h2>
+                    <p>Nutrivae was born from a deep respect for the land and the people who work it. We believe food is most powerful when it is closest to its natural form — minimally processed, honestly grown, and thoughtfully brought to your table.</p>
+                    <p>We work directly with farmers who share our values of quality, sustainability, and integrity. Every ingredient is chosen with intention and purpose.</p>
+                </div>
+            </div>
+
+            <div class="story-two-col reverse" data-animate="fade-up">
+                <div class="story-col-img">
+                    <img src="assets/ingredients_flat.png" alt="Our ingredients">
+                </div>
+                <div class="story-col-text">
+                    <span class="section-tag">Our Science</span>
+                    <h2>Guided by <em>nutrition science.</em></h2>
+                    <p>We don't guess at nutrition. Every product is developed with input from nutrition science — understanding how plant-based proteins, fibers, and micronutrients work together to support a healthy, active life.</p>
+                    <p>From sourcing quality raw materials to modern processing, every step is designed to preserve natural goodness and deliver reliable nutrition you can count on.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="story-values">
+            <div class="story-val-card" data-animate="fade-up" data-delay="0">
+                <div class="val-icon">🌱</div>
+                <h3>Pure</h3>
+                <p>No preservatives, no artificial additives. Just clean, wholesome ingredients the way nature made them.</p>
+            </div>
+            <div class="story-val-card" data-animate="fade-up" data-delay="100">
+                <div class="val-icon">🤝</div>
+                <h3>Accessible</h3>
+                <p>Great nutrition shouldn't be a luxury. We bring honest, affordable food to every household.</p>
+            </div>
+            <div class="story-val-card" data-animate="fade-up" data-delay="200">
+                <div class="val-icon">⚡</div>
+                <h3>Trustworthy</h3>
+                <p>Consistent quality in every pack, every time. Nutrivae — simple nutrition you can trust.</p>
+            </div>
+        </section>
+
+        <section class="cta-banner" data-animate="fade-up">
+            <div class="cta-banner-inner">
+                <div class="cta-banner-text">
+                    <span class="section-tag light">Simple Nutrition</span>
+                    <h2>Ready to eat <em>better?</em></h2>
+                    <p>Explore our clean, plant-based products crafted with honesty and care.</p>
+                    <a href="products.html" class="btn-primary light">Explore Products</a>
+                </div>
+                <div class="cta-banner-img">
+                    <img src="assets/hero_lifestyle.png" alt="Nutrivae Products">
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <img src="assets/logo.png" alt="Nutrivae" class="footer-logo">
+                <p>Simple nutrition you can trust. Clean, plant-based foods made with care, consistency, and integrity.</p>
+                <div class="footer-socials">
+                    <a href="#" aria-label="Instagram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                    </a>
+                    <a href="#" aria-label="Facebook">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-links-group">
+                <h4>Company</h4>
+                <a href="about.html">Our Story</a>
+                <a href="products.html">Products</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="footer-links-group">
+                <h4>Products</h4>
+                <a href="products.html">Toor Daal</a>
+                <a href="products.html">Moong Daal</a>
+                <a href="products.html">Mungfali</a>
+            </div>
+            <div class="footer-links-group">
+                <h4>Contact</h4>
+                <a href="mailto:info@nutrivaefoods.com">info@nutrivaefoods.com</a>
+                <span>India</span>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 Nutrivae Foods. All rights reserved.</span>
+            <span>Simple nutrition you can trust.</span>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

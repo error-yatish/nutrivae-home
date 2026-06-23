@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrivae Foods | Simple Nutrition You Can Trust</title>
+    <meta name="description" content="Nutrivae focuses on clean, plant-based foods made with care, consistency, and integrity. Pure, accessible, and trustworthy nutrition for everyday life.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Lenis smooth scroll -->
+    <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ===================== HEADER ===================== -->
+    <header id="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.png" alt="Nutrivae Foods">
+            </a>
+            <nav class="nav-links" id="nav-links">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="about.html" class="nav-link">Our Story</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+            <div class="header-actions">
+                <a href="products.html" class="btn-pill" id="header-cta">Shop Now</a>
+                <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="index.html">Home</a>
+        <a href="about.html">Our Story</a>
+        <a href="products.html">Products</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- ===================== PAGE LOADER ===================== -->
+    <div class="page-loader" id="page-loader">
+        <div class="loader-logo">
+            <img src="assets/logo.png" alt="Nutrivae">
+        </div>
+        <div class="loader-bar-wrap"><div class="loader-bar" id="loader-bar"></div></div>
+        <span class="loader-label" id="loader-label">0%</span>
+    </div>
+
+    <!-- Custom cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursor-follower"></div>
+
+    <main>
+
+        <!-- ===================== HERO ===================== -->
+        <section class="hero" id="hero">
+            <div class="hero-text">
+                <div class="hero-badge" id="hero-badge">
+                    <span class="badge-dot"></span>
+                    <span>100% Plant-Based · Clean Label</span>
+                </div>
+                <h1 id="hero-h1">
+                    <span class="h1-line"><span class="word-mask"><span class="word-inner">Everyday</span></span> <span class="word-mask"><span class="word-inner">food,</span></span></span>
+                    <span class="h1-line"><em class="highlight-word"><span class="word-mask"><span class="word-inner">honestly</span></span><svg class="underline-svg" viewBox="0 0 220 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path class="underline-path" d="M3,9 C50,3 120,13 218,7" stroke="#c8a84b" stroke-width="3.5" stroke-linecap="round"/></svg></em> <span class="word-mask"><span class="word-inner">nourishing.</span></span></span>
+                </h1>
+                <p id="hero-p">Rooted in agriculture. Guided by nutrition science. Made with care, consistency, and integrity.</p>
+                <div class="hero-btns" id="hero-btns">
+                    <a href="products.html" class="btn-primary magnetic" id="hero-explore">Explore Products</a>
+                    <a href="about.html" class="btn-ghost" id="hero-story">Our Story ↗</a>
+                </div>
+            </div>
+
+            <div class="hero-visual" id="hero-visual">
+                <div class="hero-img-wrap" id="hero-img-wrap">
+                    <img src="assets/hero_lifestyle.png" alt="Wholesome natural food" class="hero-main-img" id="hero-img">
+                    <!-- Floating card 1 -->
+                    <div class="float-card float-card--tl" id="float-card-1">
+                        <div class="float-card-icon">🌱</div>
+                        <div>
+                            <strong>100% Natural</strong>
+                            <span>No preservatives added</span>
+                        </div>
+                    </div>
+                    <!-- Floating card 2 -->
+                    <div class="float-card float-card--br" id="float-card-2">
+                        <div class="float-card-icon">⚡</div>
+                        <div>
+                            <strong>High Protein</strong>
+                            <span>Plant-powered nutrition</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Organic blob decoration -->
+                <div class="hero-blob"></div>
+            </div>
+
+        </section>
+
+
+        <!-- ===================== BRAND SECTION ===================== -->
+        <section class="brand-section" id="brand-section">
+            <!-- Canvas: living particle background -->
+            <canvas id="brand-canvas"></canvas>
+
+            <!-- Animated gradient orbs -->
+            <div class="brand-orb brand-orb-1"></div>
+            <div class="brand-orb brand-orb-2"></div>
+            <div class="brand-orb brand-orb-3"></div>
+
+            <!-- SVG draw-path decoration (top-left) -->
+            <svg class="brand-drawpath brand-drawpath--tl" viewBox="0 0 300 260" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path class="dp" d="M20,200 C60,120 140,160 180,80"/>
+                <path class="dp" d="M60,240 C100,170 160,200 220,130"/>
+                <path class="dp" d="M10,260 C80,200 160,230 260,160"/>
+            </svg>
+
+            <!-- SVG draw-path decoration (bottom-right) -->
+            <svg class="brand-drawpath brand-drawpath--br" viewBox="0 0 300 260" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path class="dp" d="M280,60 C240,140 160,100 120,180"/>
+                <path class="dp" d="M240,20 C200,90 140,60 80,130"/>
+                <path class="dp" d="M290,10 C220,60 140,30 40,100"/>
+            </svg>
+
+            <div class="brand-content">
+                <!-- Brand name: letters animate in one by one -->
+                <div class="brand-name" id="brand-name" aria-label="NUTRIVAE">
+                    <span class="bl">N</span><span class="bl">U</span><span class="bl">T</span><span class="bl">R</span><span class="bl">I</span><span class="bl">V</span><span class="bl">A</span><span class="bl">E</span>
+                </div>
+
+                <!-- Animated rule line -->
+                <div class="brand-rule-wrap">
+                    <div class="brand-rule" id="brand-rule"></div>
+                </div>
+
+                <p class="brand-tagline" id="brand-tagline">Simple Nutrition You Can Trust</p>
+
+                <div class="brand-pills" id="brand-pills">
+                    <span>Clean Label</span>
+                    <span class="brand-pill-dot">✦</span>
+                    <span>Plant-Based</span>
+                    <span class="brand-pill-dot">✦</span>
+                    <span>Honest</span>
+                </div>
+            </div>
+
+            <!-- Scroll cue -->
+            <div class="brand-scroll-cue" id="brand-scroll-cue">
+                <div class="scroll-line"></div>
+                <span>scroll</span>
+            </div>
+        </section>
+
+
+        <!-- ===================== PHILOSOPHY ===================== -->
+        <section class="philosophy" id="philosophy">
+            <div class="philosophy-header" data-animate="fade-up">
+                <span class="section-tag">Our Philosophy</span>
+                <h2>Nutrition doesn't need<br>to be <em>complicated.</em></h2>
+            </div>
+            <div class="philosophy-grid">
+                <div class="phil-card" data-animate="fade-up" data-delay="0">
+                    <div class="phil-number">01</div>
+                    <div class="phil-icon">🌾</div>
+                    <h3>Farm Rooted</h3>
+                    <p>We work directly with farmers who share our commitment to sustainable, responsible agriculture. Every ingredient has a story.</p>
+                </div>
+                <div class="phil-card" data-animate="fade-up" data-delay="100">
+                    <div class="phil-number">02</div>
+                    <div class="phil-icon">✦</div>
+                    <h3>Purely Processed</h3>
+                    <p>Modern facilities designed to preserve natural goodness. Minimal intervention, maximum nutrition — the way nature intended.</p>
+                </div>
+                <div class="phil-card" data-animate="fade-up" data-delay="200">
+                    <div class="phil-number">03</div>
+                    <div class="phil-icon">🛡</div>
+                    <h3>Simply Trusted</h3>
+                    <p>Pure, accessible, and trustworthy. Nutrivae brings traditional food values into modern lifestyles without compromise.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== STORYTELLING ===================== -->
+        <section class="story-section" id="story-section">
+            <!-- Tall outer div creates the scroll space (3 screens) -->
+            <div class="story-scroll-space">
+                <!-- Sticky panel stays pinned while user scrolls through the space -->
+                <div class="story-sticky">
+                    <div class="story-left">
+                        <div class="story-step-text active" data-step="0">
+                            <span class="section-tag light">From Farm</span>
+                            <h2>Sourced with<br><em>intention.</em></h2>
+                            <p>We partner with farmers across India who grow using responsible practices. Every seed, every harvest is chosen with care for quality and the earth.</p>
+                        </div>
+                        <div class="story-step-text" data-step="1">
+                            <span class="section-tag light">To Factory</span>
+                            <h2>Crafted with<br><em>precision.</em></h2>
+                            <p>Our modern processing ensures the natural goodness of every grain is preserved. No artificial additives. No shortcuts. Just clean, honest food.</p>
+                        </div>
+                        <div class="story-step-text" data-step="2">
+                            <span class="section-tag light">To You</span>
+                            <h2>Delivered with<br><em>trust.</em></h2>
+                            <p>From our hands to your table, Nutrivae promises simple nutrition you can rely on. Every pack, every time — consistently wholesome.</p>
+                        </div>
+                        <!-- Step dots -->
+                        <div class="story-dots">
+                            <button class="story-dot active" data-dot="0"></button>
+                            <button class="story-dot" data-dot="1"></button>
+                            <button class="story-dot" data-dot="2"></button>
+                        </div>
+                    </div>
+                    <div class="story-right">
+                        <img src="assets/farm_field.png" alt="Farm fields" class="story-img active" data-step="0">
+                        <img src="assets/ingredients_flat.png" alt="Processing" class="story-img" data-step="1">
+                        <img src="assets/hero_lifestyle.png" alt="Delivered to you" class="story-img" data-step="2">
+                        <!-- Progress bar -->
+                        <div class="story-progress">
+                            <div class="story-progress-bar" id="story-progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== PRODUCTS ===================== -->
+        <section class="products-section" id="products">
+            <div class="products-header" data-animate="fade-up">
+                <span class="section-tag">What We Make</span>
+                <h2>Simple foods,<br><em>trusted nutrition.</em></h2>
+                <a href="products.html" class="btn-text-link">View all products ↗</a>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card" data-animate="fade-up" data-delay="0" id="product-toor">
+                    <div class="product-card-img">
+                        <img src="assets/toor_daal.png" alt="Toor Daal">
+                        <div class="product-tag">Bestseller</div>
+                    </div>
+                    <div class="product-card-info">
+                        <h3>Toor Daal</h3>
+                        <p>High Protein · 100% Vegetarian</p>
+                        <div class="product-meta">
+                            <span class="product-badge">🌱 Clean Label</span>
+                            <a href="products.html" class="product-cta" id="toor-cta">View Details →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card featured" data-animate="fade-up" data-delay="100" id="product-moong">
+                    <div class="product-card-img">
+                        <img src="assets/moong_daal.png" alt="Moong Daal">
+                        <div class="product-tag">Popular</div>
+                    </div>
+                    <div class="product-card-info">
+                        <h3>Moong Daal</h3>
+                        <p>High Protein · 100% Vegetarian</p>
+                        <div class="product-meta">
+                            <span class="product-badge">🌱 Clean Label</span>
+                            <a href="products.html" class="product-cta" id="moong-cta">View Details →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-animate="fade-up" data-delay="200" id="product-mungfali">
+                    <div class="product-card-img">
+                        <img src="assets/mungfali.png" alt="Mungfali">
+                    </div>
+                    <div class="product-card-info">
+                        <h3>Mungfali</h3>
+                        <p>High Protein · 100% Vegetarian</p>
+                        <div class="product-meta">
+                            <span class="product-badge">🌱 Clean Label</span>
+                            <a href="products.html" class="product-cta" id="mungfali-cta">View Details →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== STATS BAND ===================== -->
+        <section class="stats-band" data-animate="fade-up">
+            <div class="stat-item">
+                <div class="stat-number" data-count="100">0</div>
+                <div class="stat-label">% Plant-Based</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="0">0</div>
+                <div class="stat-label">Preservatives Added</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="3">0</div>
+                <div class="stat-label">Products & Growing</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-number" data-count="100">0</div>
+                <div class="stat-label">% Honest Ingredients</div>
+            </div>
+        </section>
+
+        <!-- ===================== CTA BANNER ===================== -->
+        <section class="cta-banner" data-animate="fade-up">
+            <div class="cta-banner-inner">
+                <div class="cta-banner-text">
+                    <span class="section-tag light">Simple Nutrition</span>
+                    <h2>Ready to eat <em>better?</em></h2>
+                    <p>Join thousands of families who trust Nutrivae for clean, honest, plant-based nutrition every day.</p>
+                    <a href="products.html" class="btn-primary light" id="cta-shop">Shop Products</a>
+                </div>
+                <div class="cta-banner-img">
+                    <img src="assets/ingredients_flat.png" alt="Nutrivae Products">
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <img src="assets/logo.png" alt="Nutrivae" class="footer-logo">
+                <p>Simple nutrition you can trust. Clean, plant-based foods made with care, consistency, and integrity.</p>
+                <div class="footer-socials">
+                    <a href="#" aria-label="Instagram" id="social-ig">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                    </a>
+                    <a href="#" aria-label="Facebook" id="social-fb">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-links-group">
+                <h4>Company</h4>
+                <a href="about.html">Our Story</a>
+                <a href="products.html">Products</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="footer-links-group">
+                <h4>Products</h4>
+                <a href="products.html">Toor Daal</a>
+                <a href="products.html">Moong Daal</a>
+                <a href="products.html">Mungfali</a>
+            </div>
+            <div class="footer-links-group">
+                <h4>Contact</h4>
+                <a href="mailto:info@nutrivaefoods.com">info@nutrivaefoods.com</a>
+                <span>India</span>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 Nutrivae Foods. All rights reserved.</span>
+            <span>Simple nutrition you can trust.</span>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

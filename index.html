@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nutrivae Foods | Simple Nutrition You Can Trust</title>
-    <meta name="description" content="Nutrivae focuses on clean, plant-based foods made with care, consistency, and integrity. Pure, accessible, and trustworthy nutrition for everyday life.">
+    <meta name="description"
+        content="Nutrivae focuses on clean, plant-based foods made with care, consistency, and integrity. Pure, accessible, and trustworthy nutrition for everyday life.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <!-- Lenis smooth scroll -->
     <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body class="home">
 
-        <!-- ===================== HEADER ===================== -->
+    <!-- ===================== HEADER ===================== -->
     <header id="header">
         <div class="header-inner">
             <nav class="nav-links" id="nav-links">
@@ -48,13 +53,33 @@
         <div class="loader-logo">
             <img src="assets/logo.png" alt="Nutrivae">
         </div>
-        <div class="loader-bar-wrap"><div class="loader-bar" id="loader-bar"></div></div>
+        <div class="loader-bar-wrap">
+            <div class="loader-bar" id="loader-bar"></div>
+        </div>
         <span class="loader-label" id="loader-label">0%</span>
     </div>
 
     <!-- Custom cursor -->
     <div class="cursor" id="cursor"></div>
-    <div class="cursor-follower" id="cursor-follower"></div>
+    <div class="cursor-follower" id="cursor-follower">
+        <svg width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <mask id="leaf-mask">
+                    <rect width="24" height="24" fill="white" />
+                    <path d="M 12.5,15 C 15,11 18,8 21,7" fill="none" stroke="black" stroke-width="0.8"
+                        stroke-linecap="round" />
+                    <path d="M 10.5,14.5 C 8,12 5.5,10 4,9" fill="none" stroke="black" stroke-width="0.6"
+                        stroke-linecap="round" />
+                </mask>
+            </defs>
+            <g mask="url(#leaf-mask)">
+                <path d="M 12,17 C 12,8 18,2 23,2 C 23,12 16,17 12,17 Z" fill="#88b04b" />
+                <path d="M 11.5,16 C 10,10 6,5 2,6 C 2,13 8,16 11.5,16 Z" fill="#88b04b" />
+                <path d="M 11,22 C 11.2,20 11.8,18 12,17" fill="none" stroke="#88b04b" stroke-width="1.5"
+                    stroke-linecap="round" />
+            </g>
+        </svg>
+    </div>
 
     <main>
 
@@ -64,7 +89,7 @@
                 <img src="assets/hero_lifestyle.png" alt="Wholesome natural food">
                 <div class="hero-cover-overlay"></div>
             </div>
-            
+
             <!-- Floating cards (now positioned over the cover) -->
             <div class="float-card float-card--tl" id="float-card-1">
                 <div class="float-card-icon">🌱</div>
@@ -80,7 +105,7 @@
                     <span>Plant-powered nutrition</span>
                 </div>
             </div>
-            
+
             <!-- Scroll indicator -->
             <div class="hero-scroll-cue">
                 <div class="scroll-line"></div>
@@ -96,10 +121,18 @@
                     <span>100% Plant-Based · Clean Label</span>
                 </div>
                 <h1 id="hero-h1">
-                    <span class="h1-line"><span class="word-mask"><span class="word-inner">Everyday</span></span> <span class="word-mask"><span class="word-inner">food,</span></span></span>
-                    <span class="h1-line"><em class="highlight-word"><span class="word-mask"><span class="word-inner">honestly</span></span><svg class="underline-svg" viewBox="0 0 220 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path class="underline-path" d="M3,9 C50,3 120,13 218,7" stroke="#c8a84b" stroke-width="3.5" stroke-linecap="round"/></svg></em> <span class="word-mask"><span class="word-inner">nourishing.</span></span></span>
+                    <span class="h1-line"><span class="word-mask"><span class="word-inner">Everyday</span></span> <span
+                            class="word-mask"><span class="word-inner">food,</span></span></span>
+                    <span class="h1-line"><em class="highlight-word"><span class="word-mask"><span
+                                    class="word-inner">honestly</span></span><svg class="underline-svg"
+                                viewBox="0 0 220 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path class="underline-path" d="M3,9 C50,3 120,13 218,7" stroke="#c8a84b"
+                                    stroke-width="3.5" stroke-linecap="round" />
+                            </svg></em> <span class="word-mask"><span
+                                class="word-inner">nourishing.</span></span></span>
                 </h1>
-                <p id="hero-p" data-animate="fade-up" data-delay="100">Rooted in agriculture. Guided by nutrition science. Made with care, consistency, and integrity.</p>
+                <p id="hero-p" data-animate="fade-up" data-delay="100">Rooted in agriculture. Guided by nutrition
+                    science. Made with care, consistency, and integrity.</p>
                 <div class="hero-btns" id="hero-btns" data-animate="fade-up" data-delay="200">
                     <a href="products.html" class="btn-primary magnetic" id="hero-explore">Explore Products</a>
                     <a href="about.html" class="btn-ghost" id="hero-story">Our Story ↗</a>
@@ -119,23 +152,27 @@
             <div class="brand-orb brand-orb-3"></div>
 
             <!-- SVG draw-path decoration (top-left) -->
-            <svg class="brand-drawpath brand-drawpath--tl" viewBox="0 0 300 260" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path class="dp" d="M20,200 C60,120 140,160 180,80"/>
-                <path class="dp" d="M60,240 C100,170 160,200 220,130"/>
-                <path class="dp" d="M10,260 C80,200 160,230 260,160"/>
+            <svg class="brand-drawpath brand-drawpath--tl" viewBox="0 0 300 260" fill="none"
+                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path class="dp" d="M20,200 C60,120 140,160 180,80" />
+                <path class="dp" d="M60,240 C100,170 160,200 220,130" />
+                <path class="dp" d="M10,260 C80,200 160,230 260,160" />
             </svg>
 
             <!-- SVG draw-path decoration (bottom-right) -->
-            <svg class="brand-drawpath brand-drawpath--br" viewBox="0 0 300 260" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path class="dp" d="M280,60 C240,140 160,100 120,180"/>
-                <path class="dp" d="M240,20 C200,90 140,60 80,130"/>
-                <path class="dp" d="M290,10 C220,60 140,30 40,100"/>
+            <svg class="brand-drawpath brand-drawpath--br" viewBox="0 0 300 260" fill="none"
+                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path class="dp" d="M280,60 C240,140 160,100 120,180" />
+                <path class="dp" d="M240,20 C200,90 140,60 80,130" />
+                <path class="dp" d="M290,10 C220,60 140,30 40,100" />
             </svg>
 
             <div class="brand-content">
                 <!-- Brand name: letters animate in one by one -->
                 <div class="brand-name" id="brand-name" aria-label="NUTRIVAE">
-                    <span class="bl">N</span><span class="bl">U</span><span class="bl">T</span><span class="bl">R</span><span class="bl">I</span><span class="bl">V</span><span class="bl">A</span><span class="bl">E</span>
+                    <span class="bl">N</span><span class="bl">U</span><span class="bl">T</span><span
+                        class="bl">R</span><span class="bl">I</span><span class="bl">V</span><span
+                        class="bl">A</span><span class="bl">E</span>
                 </div>
 
                 <!-- Animated rule line -->
@@ -173,62 +210,112 @@
                     <div class="phil-number">01</div>
                     <div class="phil-icon">🌾</div>
                     <h3>Farm Rooted</h3>
-                    <p>We work directly with farmers who share our commitment to sustainable, responsible agriculture. Every ingredient has a story.</p>
+                    <p>We work directly with farmers who share our commitment to sustainable, responsible agriculture.
+                        Every ingredient has a story.</p>
                 </div>
                 <div class="phil-card" data-animate="fade-up" data-delay="100">
                     <div class="phil-number">02</div>
                     <div class="phil-icon">✦</div>
                     <h3>Purely Processed</h3>
-                    <p>Modern facilities designed to preserve natural goodness. Minimal intervention, maximum nutrition — the way nature intended.</p>
+                    <p>Modern facilities designed to preserve natural goodness. Minimal intervention, maximum nutrition
+                        — the way nature intended.</p>
                 </div>
                 <div class="phil-card" data-animate="fade-up" data-delay="200">
                     <div class="phil-number">03</div>
                     <div class="phil-icon">🛡</div>
                     <h3>Simply Trusted</h3>
-                    <p>Pure, accessible, and trustworthy. Nutrivae brings traditional food values into modern lifestyles without compromise.</p>
+                    <p>Pure, accessible, and trustworthy. Nutrivae brings traditional food values into modern lifestyles
+                        without compromise.</p>
                 </div>
             </div>
         </section>
 
         <!-- ===================== STORYTELLING ===================== -->
-        <section class="story-section" id="story-section">
-            <!-- Tall outer div creates the scroll space (3 screens) -->
-            <div class="story-scroll-space">
-                <!-- Sticky panel stays pinned while user scrolls through the space -->
-                <div class="story-sticky">
-                    <div class="story-left">
-                        <div class="story-step-text active" data-step="0">
-                            <span class="section-tag light">From Farm</span>
-                            <h2>Sourced with<br><em>intention.</em></h2>
-                            <p>We partner with farmers across India who grow using responsible practices. Every seed, every harvest is chosen with care for quality and the earth.</p>
-                        </div>
-                        <div class="story-step-text" data-step="1">
-                            <span class="section-tag light">To Factory</span>
-                            <h2>Crafted with<br><em>precision.</em></h2>
-                            <p>Our modern processing ensures the natural goodness of every grain is preserved. No artificial additives. No shortcuts. Just clean, honest food.</p>
-                        </div>
-                        <div class="story-step-text" data-step="2">
-                            <span class="section-tag light">To You</span>
-                            <h2>Delivered with<br><em>trust.</em></h2>
-                            <p>From our hands to your table, Nutrivae promises simple nutrition you can rely on. Every pack, every time — consistently wholesome.</p>
-                        </div>
-                        <!-- Step dots -->
-                        <div class="story-dots">
-                            <button class="story-dot active" data-dot="0"></button>
-                            <button class="story-dot" data-dot="1"></button>
-                            <button class="story-dot" data-dot="2"></button>
-                        </div>
+        <!-- ===================== STORYTELLING (SVG TIMELINE) ===================== -->
+        <section class="timeline-section" id="timeline-section">
+            <!-- SVG Path spanning the section -->
+            <div class="timeline-svg-wrapper">
+                <svg viewBox="0 0 100 1000" preserveAspectRatio="none" width="100%" height="100%">
+                    <defs>
+                        <!-- The soft tapered brush gradient for the drawing edge -->
+                        <linearGradient id="draw-gradient" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="white" />
+                            <stop offset="70%" stop-color="white" />
+                            <stop offset="100%" stop-color="transparent" />
+                        </linearGradient>
+                        <mask id="draw-mask">
+                            <!-- GSAP will animate the height of this rect from 0 to 1000 -->
+                            <rect id="draw-mask-rect" x="0" y="0" width="100" height="0" fill="url(#draw-gradient)" />
+                        </mask>
+                    </defs>
+
+                    <!-- Faint background waves (always visible) -->
+                    <g class="waves-bg">
+                        <path class="wave-path" d="M 30 0 C 80 150, -20 350, 70 500 C 120 650, -10 850, 40 950" />
+                        <path class="wave-path" d="M 70 0 C -10 200, 110 400, 30 600 C -30 800, 90 950, 70 1000" />
+                        <path class="wave-path" d="M 50 0 C 30 250, 70 450, 50 700 C 30 800, 80 850, 60 880" />
+                    </g>
+
+                    <!-- Glowing foreground waves (revealed by the moving mask) -->
+                    <g class="waves-fg" mask="url(#draw-mask)">
+                        <path class="wave-path fg-1" d="M 30 0 C 80 150, -20 350, 70 500 C 120 650, -10 850, 40 950" />
+                        <path class="wave-path fg-2" d="M 70 0 C -10 200, 110 400, 30 600 C -30 800, 90 950, 70 1000" />
+                        <path class="wave-path fg-3" d="M 50 0 C 30 250, 70 450, 50 700 C 30 800, 80 850, 60 880" />
+                    </g>
+                </svg>
+            </div>
+
+            <!-- Content items -->
+            <div class="timeline-container">
+
+                <!-- Item 1 -->
+                <div class="timeline-item">
+                    <div class="tl-content tl-text" data-animate="fade-up">
+                        <span class="section-tag">From Farm</span>
+                        <h2>Sourced with<br><em>intention.</em></h2>
+                        <p>We partner with farmers across India who grow using responsible practices. Every seed, every
+                            harvest is chosen with care for quality and the earth.</p>
                     </div>
-                    <div class="story-right">
-                        <img src="assets/farm_field.png" alt="Farm fields" class="story-img active" data-step="0">
-                        <img src="assets/ingredients_flat.png" alt="Processing" class="story-img" data-step="1">
-                        <img src="assets/hero_lifestyle.png" alt="Delivered to you" class="story-img" data-step="2">
-                        <!-- Progress bar -->
-                        <div class="story-progress">
-                            <div class="story-progress-bar" id="story-progress-bar"></div>
-                        </div>
+                    <div class="tl-node">
+                        <div class="tl-dot"></div>
+                    </div>
+                    <div class="tl-content tl-img" data-animate="fade-up" data-delay="100">
+                        <img src="assets/farm_field.png" alt="Farm fields">
                     </div>
                 </div>
+
+                <!-- Item 2 -->
+                <div class="timeline-item item-reverse">
+                    <div class="tl-content tl-text" data-animate="fade-up">
+                        <span class="section-tag">To Factory</span>
+                        <h2>Crafted with<br><em>precision.</em></h2>
+                        <p>Our modern processing ensures the natural goodness of every grain is preserved. No artificial
+                            additives. No shortcuts. Just clean, honest food.</p>
+                    </div>
+                    <div class="tl-node">
+                        <div class="tl-dot"></div>
+                    </div>
+                    <div class="tl-content tl-img" data-animate="fade-up" data-delay="100">
+                        <img src="assets/ingredients_flat.png" alt="Processing">
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="timeline-item">
+                    <div class="tl-content tl-text" data-animate="fade-up">
+                        <span class="section-tag">To You</span>
+                        <h2>Delivered with<br><em>trust.</em></h2>
+                        <p>From our hands to your table, Nutrivae promises simple nutrition you can rely on. Every pack,
+                            every time — consistently wholesome.</p>
+                    </div>
+                    <div class="tl-node">
+                        <div class="tl-dot"></div>
+                    </div>
+                    <div class="tl-content tl-img" data-animate="fade-up" data-delay="100">
+                        <img src="assets/hero_lifestyle.png" alt="Delivered to you">
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -284,6 +371,82 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Black Till -->
+                <div class="product-card" data-animate="fade-up" data-delay="300" id="product-black-till">
+                    <div class="product-card-img">
+                        <img src="assets/black_till.jpg" alt="Black Till">
+                    </div>
+                    <div class="product-card-info">
+                        <h3>Black Till</h3>
+                        <p>High Protein · 100% Vegetarian</p>
+                        <div class="product-meta">
+                            <span class="product-badge">🌱 Clean Label</span>
+                            <a href="products.html" class="product-cta">View Details →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Whole Mung -->
+                <div class="product-card" data-animate="fade-up" data-delay="400" id="product-whole-mung">
+                    <div class="product-card-img">
+                        <img src="assets/whole_mung.jpg" alt="Whole Mung">
+                    </div>
+                    <div class="product-card-info">
+                        <h3>Whole Mung</h3>
+                        <p>High Protein · 100% Vegetarian</p>
+                        <div class="product-meta">
+                            <span class="product-badge">🌱 Clean Label</span>
+                            <a href="products.html" class="product-cta">View Details →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Basmati Rice -->
+                <div class="product-card" data-animate="fade-up" data-delay="500" id="product-basmati">
+                    <div class="product-card-img">
+                        <img src="assets/basmati_rice.jpg" alt="Basmati Rice">
+                    </div>
+                    <div class="product-card-info">
+                        <h3>Basmati Rice</h3>
+                        <p>1000 Vegetarian</p>
+                        <div class="product-meta">
+                            <span class="product-badge">🌱 Clean Label</span>
+                            <a href="products.html" class="product-cta">View Details →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- White Till -->
+                <div class="product-card" data-animate="fade-up" data-delay="600" id="product-white-till">
+                    <div class="product-card-img">
+                        <img src="assets/white_till.jpg" alt="White Till">
+                    </div>
+                    <div class="product-card-info">
+                        <h3>White Till</h3>
+                        <p>100% Vegetarian</p>
+                        <div class="product-meta">
+                            <span class="product-badge">🌱 Clean Label</span>
+                            <a href="products.html" class="product-cta">View Details →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Whole Wheat -->
+                <div class="product-card" data-animate="fade-up" data-delay="700" id="product-wheat">
+                    <div class="product-card-img">
+                        <img src="assets/whole_wheat.jpg" alt="Whole Wheat">
+                    </div>
+                    <div class="product-card-info">
+                        <h3>Whole Wheat</h3>
+                        <p>High Protein · 100% Vegetarian</p>
+                        <div class="product-meta">
+                            <span class="product-badge">🌱 Clean Label</span>
+                            <a href="products.html" class="product-cta">View Details →</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -309,6 +472,218 @@
                 <div class="stat-label">% Honest Ingredients</div>
             </div>
         </section>
+        <!-- ===================== CUSTOMER REVIEWS ===================== -->
+        <section class="reviews-section" id="reviews">
+            <div class="reviews-header" data-animate="fade-up">
+                <span class="section-tag">Loved by Many</span>
+                <h2>What our <em>customers say</em></h2>
+            </div>
+
+            <div class="reviews-grid">
+                <!-- Review 1 -->
+                <div class="review-card" data-animate="fade-up" data-delay="0">
+                    <div class="review-stars">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent)">
+                            <path
+                                d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                        </svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent)">
+                            <path
+                                d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                        </svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent)">
+                            <path
+                                d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                        </svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent)">
+                            <path
+                                d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                        </svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent)">
+                            <path
+                                d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                        </svg>
+                    </div>
+                    <blockquote class="review-text">"The quality of their lentils and spice blends is genuinely
+                        unmatched. It’s rare to find a brand that takes ethical sourcing this seriously. Truly a staple
+                        in my pantry now."</blockquote>
+                    <div class="review-author">
+                        <div class="author-avatar">P</div>
+                        <div class="author-info">
+                            <strong>Priya M.</strong>
+                            <span>Verified Buyer</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="review-card" data-animate="fade-up" data-delay="100">
+                    <div class="review-stars">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent)">
+                            <path
+                                d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                        </svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent)">
+                            <path
+                                d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                        </svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent)">
+                            <path
+                                d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                        </svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent)">
+                            <path
+                                d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                        </svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent)">
+                            <path
+                                d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                        </svg>
+                    </div>
+                    <blockquote class="review-text">"I’ve tried many plant-based brands, but Nutrivae stands out. The
+                        flavors are authentic and knowing there are zero preservatives or fillers gives me absolute
+                        peace of mind."</blockquote>
+                    <div class="review-author">
+                        <div class="author-avatar">A</div>
+                        <div class="author-info">
+                            <strong>Arjun R.</strong>
+                            <span>Verified Buyer</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="review-card" data-animate="fade-up" data-delay="200">
+                    <div class="review-stars">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent)">
+                            <path
+                                d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                        </svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent)">
+                            <path
+                                d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                        </svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent)">
+                            <path
+                                d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                        </svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent)">
+                            <path
+                                d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                        </svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent)">
+                            <path
+                                d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                        </svg>
+                    </div>
+                    <blockquote class="review-text">"Their entire range of grains and snacks is incredibly fresh. You
+                        can genuinely taste the difference when food is minimally processed. I highly recommend them to
+                        everyone."</blockquote>
+                    <div class="review-author">
+                        <div class="author-avatar">S</div>
+                        <div class="author-info">
+                            <strong>Sarah K.</strong>
+                            <span>Verified Buyer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== FAQ SECTION ===================== -->
+        <section class="faq-section" id="faq">
+            <div class="faq-header" data-animate="fade-up">
+                <span class="section-tag">Got Questions?</span>
+                <h2>Frequently Asked <em>Questions</em></h2>
+            </div>
+
+            <div class="faq-accordion" data-animate="fade-up" data-delay="100">
+                <!-- FAQ Item 1 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Are all Nutrivae products 100% plant-based?
+                        <span class="faq-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>Yes, absolutely. Our entire diverse range of grains, lentils, spice blends, and healthy
+                                snacks is 100% vegetarian and plant-based, sourced directly from trusted farming
+                                partners.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Do you use any preservatives or artificial additives?
+                        <span class="faq-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>No. We believe in keeping food as close to its natural state as possible. None of our
+                                products contain artificial preservatives, artificial colors, synthetic flavors, or
+                                unnecessary fillers.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Where do you source your ingredients?
+                        <span class="faq-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>We work directly with a network of ethical, sustainable farmers across prime agricultural
+                                regions. This ensures we get the highest quality, freshest crops while directly
+                                supporting local farming communities.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        How long is the shelf life without preservatives?
+                        <span class="faq-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>Because we don't use chemical preservatives, our products are sealed using advanced
+                                protective packaging technology to lock in freshness naturally. Most of our lentils,
+                                grains, and spices maintain optimal freshness for 6-12 months when stored properly in a
+                                cool, dry place.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- ===================== CTA BANNER ===================== -->
         <section class="cta-banner">
@@ -316,7 +691,8 @@
                 <div class="cta-banner-text">
                     <span class="section-tag light">Simple Nutrition</span>
                     <h2>Ready to eat <em>better?</em></h2>
-                    <p>Join thousands of families who trust Nutrivae for clean, honest, plant-based nutrition every day.</p>
+                    <p>Join thousands of families who trust Nutrivae for clean, honest, plant-based nutrition every day.
+                    </p>
                     <a href="products.html" class="btn-primary light" id="cta-shop">Shop Products</a>
                 </div>
                 <div class="cta-banner-img">
@@ -332,13 +708,22 @@
         <div class="footer-top">
             <div class="footer-brand">
                 <img src="assets/logo.png" alt="Nutrivae" class="footer-logo">
-                <p>Simple nutrition you can trust. Clean, plant-based foods made with care, consistency, and integrity.</p>
+                <p>Simple nutrition you can trust. Clean, plant-based foods made with care, consistency, and integrity.
+                </p>
                 <div class="footer-socials">
                     <a href="#" aria-label="Instagram" id="social-ig">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <circle cx="12" cy="12" r="4" />
+                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                        </svg>
                     </a>
                     <a href="#" aria-label="Facebook" id="social-fb">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                        </svg>
                     </a>
                 </div>
             </div>
@@ -370,5 +755,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
 </body>
-</html>
 
+</html>

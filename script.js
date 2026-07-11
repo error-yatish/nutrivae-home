@@ -1,5 +1,5 @@
 /* =====================================================================
-   Nutrivae Foods — Premium Animation Script
+   Nutrivae Foods - Premium Animation Script
    Inspired by voldogfood.com design language
    ===================================================================== */
 
@@ -99,7 +99,7 @@ function animateHero() {
 }
 
 // ══════════════════════════════════════════════════════════════════════
-// 5. BRAND SECTION — canvas + letters + SVG draw-paths
+// 5. BRAND SECTION - canvas + letters + SVG draw-paths
 // ══════════════════════════════════════════════════════════════════════
 function initBrandSection() {
   const section = document.getElementById('brand-section');
@@ -189,7 +189,7 @@ function initBrandCanvas() {
   resize();
   window.addEventListener('resize', resize, { passive: true });
 
-  // Particle pool — small circles + occasional larger rings
+  // Particle pool - small circles + occasional larger rings
   const count = Math.min(80, Math.floor(canvas.width / 18));
   const particles = Array.from({ length: count }, () => createParticle(canvas));
 

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Nutrivae Foods</title>
+    <meta name="description"
+        content="Read the latest articles from Nutrivae Foods on plant-based nutrition, sustainable farming, and healthy recipes.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- Lenis smooth scroll -->
+    <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .page-hero {
+            min-height: 40vh;
+            display: flex;
+            align-items: center;
+            padding: 10rem 5% 3rem;
+            background: var(--cream);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero-inner {
+            max-width: 700px;
+        }
+
+        .page-hero h1 {
+            font-size: clamp(3rem, 5vw, 5rem);
+            color: var(--green);
+            margin-bottom: 1rem;
+        }
+
+        .page-hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+        }
+
+        .page-hero-blob {
+            position: absolute;
+            right: -10%;
+            top: 10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(ellipse, rgba(74, 124, 95, 0.1) 0%, transparent 70%);
+            border-radius: 60% 40% 70% 30%;
+            animation: blobMorph 8s ease-in-out infinite;
+        }
+
+        /* Contact layout */
+        .contact-section {
+            padding: 5rem 5%;
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 5rem;
+            align-items: start;
+        }
+
+        /* Info side */
+        .contact-info h2 {
+            font-size: 2.2rem;
+            color: var(--green);
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .contact-item-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(46, 94, 70, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .contact-item-text h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-item-text p {
+            font-size: 1rem;
+            color: var(--green);
+            font-weight: 500;
+        }
+
+        .contact-socials {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 2rem;
+        }
+
+        .contact-social-btn {
+            display: flex;
+            align-items: center;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .blog-card {
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .blog-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-card h3 {
+            font-size: 1.5rem;
+            color: var(--green);
+            margin-bottom: 1rem;
+        }
+
+        .blog-card p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .btn-text-link {
+            font-weight: 600;
+            color: var(--green);
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Custom cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursor-follower">
+        <svg width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <mask id="leaf-mask">
+                    <rect width="24" height="24" fill="white" />
+                    <path d="M 12.5,15 C 15,11 18,8 21,7" fill="none" stroke="black" stroke-width="0.8"
+                        stroke-linecap="round" />
+                    <path d="M 10.5,14.5 C 8,12 5.5,10 4,9" fill="none" stroke="black" stroke-width="0.6"
+                        stroke-linecap="round" />
+                </mask>
+            </defs>
+            <g mask="url(#leaf-mask)">
+                <path d="M 12,17 C 12,8 18,2 23,2 C 23,12 16,17 12,17 Z" fill="#88b04b" />
+                <path d="M 11.5,16 C 10,10 6,5 2,6 C 2,13 8,16 11.5,16 Z" fill="#88b04b" />
+                <path d="M 11,22 C 11.2,20 11.8,18 12,17" fill="none" stroke="#88b04b" stroke-width="1.5"
+                    stroke-linecap="round" />
+            </g>
+        </svg>
+    </div>
+
+    <header id="header">
+        <div class="header-inner">
+            <nav class="nav-links" id="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">Our Story</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="journeys.html" class="nav-link">Journeys</a>
+                <a href="process.html" class="nav-link">How We Grow</a>
+                <a href="blogs.html" class="nav-link active">Blog</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+            <a href="index.html" class="logo">
+                <img src="assets/logo.svg" alt="Nutrivae Foods" class="logo-img">
+            </a>
+            <div class="header-actions">
+                <a href="products.html" class="btn-pill" id="header-cta">Shop Now</a>
+                <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="index.html">Home</a>
+        <a href="about.html">Our Story</a>
+        <a href="products.html">Products</a>
+        <a href="journeys.html">Journeys</a>
+        <a href="process.html">How We Grow</a>
+        <a href="blogs.html">Blog</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <main>
+        <section class="page-hero">
+            <div class="page-hero-inner">
+                <span class="section-tag" data-animate="fade-up">Our Blog</span>
+                <h1 data-animate="fade-up" data-delay="100">Thoughts &<br><em>Insights.</em></h1>
+                <p data-animate="fade-up" data-delay="200">Articles on plant-based nutrition, sustainable sourcing, and wholesome recipes.</p>
+            </div>
+            <div class="page-hero-blob"></div>
+        </section>
+
+        <section class="blog-preview">
+            <div class="blog-grid">
+                <article class="blog-card" data-animate="fade-up">
+                    <img src="assets/ingredients_flat.png" alt="Plant-based nutrition" />
+                    <h3>Plant-based nutrition myths</h3>
+                    <p>Debunking common misconceptions about plant foods.</p>
+                    <a href="blog-post.html" class="btn-text-link">Read more →</a>
+                </article>
+                <article class="blog-card" data-animate="fade-up" data-delay="100">
+                    <img src="assets/farm_field.png" alt="Farm field" />
+                    <h3>Sustainable sourcing explained</h3>
+                    <p>How we ensure responsible farming practices.</p>
+                    <a href="blogs.html" class="btn-text-link">Read more →</a>
+                </article>
+                <article class="blog-card" data-animate="fade-up" data-delay="200">
+                    <img src="assets/harvesting.png" alt="Harvesting crops" />
+                    <h3>Cooking with Nutrivae</h3>
+                    <p>Simple recipes to incorporate our products.</p>
+                    <a href="blogs.html" class="btn-text-link">Read more →</a>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <img src="assets/logo.svg" alt="Nutrivae" class="footer-logo">
+                <p>Thoughtfully Grown, Carefully Crafted. Clean, plant-based foods made with care, consistency, and integrity.
+                </p>
+                <div class="footer-socials">
+                    <a href="https://www.instagram.com/nutrivae.official/?hl=en" target="_blank" aria-label="Instagram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <circle cx="12" cy="12" r="4" />
+                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                        </svg>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61588123586823" target="_blank" aria-label="Facebook">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-links-group">
+                <h4>Company</h4>
+                <a href="about.html">Our Story</a>
+                <a href="products.html">Products</a>
+                <a href="journeys.html">Journeys</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="footer-links-group">
+                <h4>Products</h4>
+                <a href="products.html">Toor Daal</a>
+                <a href="products.html">Moong Daal</a>
+                <a href="products.html">Mungfali</a>
+            </div>
+            <div class="footer-links-group">
+                <h4>Contact</h4>
+                <a href="https://wa.me/919824664973?text=Hi,%20I%20need%20help%20with%20nutrivae%20products" target="_blank" style="text-decoration:none;">+91 98246-64973 ↗</a>
+                <span>India</span>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 Nutrivae Foods. All rights reserved.</span>
+            <span>Thoughtfully Grown, Carefully Crafted.</span>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Form submission
+        const form = document.getElementById('contact-form');
+        const formArea = document.getElementById('contact-form-area');
+        const formSuccess = document.getElementById('form-success');
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = document.getElementById('form-submit-btn');
+                btn.textContent = 'Sending…';
+                btn.disabled = true;
+                setTimeout(() => {
+                    formArea.style.display = 'none';
+                    formSuccess.style.display = 'block';
+                }, 1200);
+            });
+        }
+    </script>
+</body>
+
+</html>

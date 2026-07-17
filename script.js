@@ -509,5 +509,43 @@ function initFaq() {
 // ══════════════════════════════════════════════════════════════════════
 // BOOT
 // ══════════════════════════════════════════════════════════════════════
+function initContactForm() {
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const firstName = document.getElementById('first-name').value;
+      const lastName = document.getElementById('last-name').value;
+      const email = document.getElementById('email').value;
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message').value;
+      
+      if (!firstName || !lastName || !email || !message) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+      
+      const waPhone = "919824664973"; // Placeholder WhatsApp Number
+      let waText = `Hello Nutrivae team,\n\nI am ${firstName} ${lastName}.\n\n`;
+      if (subject) waText += `Subject: ${subject}\n`;
+      waText += `Email: ${email}\n\n`;
+      waText += `Message:\n${message}`;
+      
+      const waUrl = `https://wa.me/${waPhone}?text=${encodeURIComponent(waText)}`;
+      window.open(waUrl, '_blank');
+      
+      // Show success message
+      const formArea = document.getElementById('contact-form-area');
+      const successArea = document.getElementById('form-success');
+      if (formArea && successArea) {
+        formArea.style.display = 'none';
+        successArea.style.display = 'block';
+      }
+    });
+  }
+}
+
 initLoader();
 initFaq();
+initContactForm();

@@ -109,7 +109,7 @@
 
         .prod-img {
             background: var(--cream-dark);
-            height: 300px;
+            height: 200px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -118,7 +118,7 @@
         }
 
         .prod-img img {
-            max-height: 260px;
+            max-height: 180px;
             max-width: 80%;
             object-fit: contain;
             transition: transform 0.6s ease;
@@ -134,6 +134,7 @@
             left: 1rem;
             display: flex;
             gap: 0.5rem;
+            z-index: 2;
         }
 
         .prod-label {
@@ -156,11 +157,11 @@
         }
 
         .prod-info {
-            padding: 1.8rem 2rem 2rem;
+            padding: 1.2rem 1.5rem 1.5rem;
         }
 
         .prod-info h3 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--green);
             margin-bottom: 0.35rem;
         }
@@ -168,14 +169,14 @@
         .prod-info .prod-sub {
             font-size: 0.9rem;
             color: var(--text-muted);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .prod-specs {
             display: flex;
             gap: 0.6rem;
             flex-wrap: wrap;
-            margin-bottom: 1.8rem;
+            margin-bottom: 1.2rem;
         }
 
         .spec-tag {
@@ -271,6 +272,352 @@
                 grid-template-columns: 1fr;
             }
         }
+        /* Journey Modal Styles */
+        .journey-modal-body::-webkit-scrollbar {
+            width: 8px;
+        }
+        .journey-modal-body::-webkit-scrollbar-track {
+            background: rgba(28, 61, 46, 0.05);
+            border-radius: 4px;
+        }
+        .journey-modal-body::-webkit-scrollbar-thumb {
+            background: rgba(28, 61, 46, 0.2);
+            border-radius: 4px;
+        }
+        .journey-modal-body::-webkit-scrollbar-thumb:hover {
+            background: rgba(28, 61, 46, 0.4);
+        }
+
+        /* Lightbox Styles */
+        #lightbox-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            cursor: zoom-out;
+        }
+        #lightbox-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        #lightbox-img {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: scale(0.95);
+        }
+        #lightbox-overlay.active #lightbox-img {
+            transform: scale(1);
+        }
+        .journey-modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+        .journey-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .journey-modal-content {
+            background: var(--cream);
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            border-radius: var(--radius-lg);
+            position: relative;
+            transform: translateY(30px);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            overflow: hidden; /* Clips the scrollbar to the border radius */
+        }
+        .journey-modal-body {
+            padding: 3rem;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: var(--radius-lg);
+            box-sizing: border-box;
+            overscroll-behavior: contain;
+        }
+        .journey-modal-overlay.active .journey-modal-content {
+            transform: translateY(0);
+        }
+        .journey-modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            line-height: 1;
+            color: var(--green);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .journey-modal-close:hover {
+            color: var(--accent);
+        }
+        .journey-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .journey-header h2 {
+            font-size: 2rem;
+            color: var(--green);
+            margin: 0.5rem 0;
+        }
+        .journey-meta {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+        .journey-meta strong {
+            color: var(--text);
+        }
+        .timeline-container {
+            position: relative;
+            padding-left: 2rem;
+        }
+        .timeline-line {
+            position: absolute;
+            left: 5px;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background: rgba(28, 61, 46, 0.1);
+        }
+        .timeline-step {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        .timeline-step:last-child {
+            margin-bottom: 0;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -2rem;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 3px solid var(--cream);
+            box-shadow: 0 0 0 2px rgba(28, 61, 46, 0.1);
+            z-index: 2;
+        }
+        .timeline-content h4 {
+            font-size: 1.1rem;
+            color: var(--green);
+            margin-bottom: 0.3rem;
+        }
+        .timeline-content p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Journey Button */
+        .btn-journey {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.65rem 1rem;
+            background: transparent;
+            color: var(--green);
+            border: 1.5px solid rgba(28, 61, 46, 0.2);
+            border-radius: 99px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        .btn-journey:hover {
+            border-color: var(--green);
+            background: rgba(28, 61, 46, 0.04);
+        }
+        .prod-foot-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .prod-foot {
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .prod-foot .prod-nutrition {
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+    
+        /* Products Layout (Sidebar + Grid) */
+        .products-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            padding: 4rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: start;
+        }
+
+        /* Filter Sidebar */
+        .filter-sidebar { max-height: calc(100vh - 120px); overflow-y: auto;
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(28, 61, 46, 0.07);
+            padding: 2rem;
+            position: sticky;
+            top: 100px;
+        }
+
+        .filter-group {
+            margin-bottom: 2rem;
+        }
+
+        .filter-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .filter-group h4 {
+            font-size: 1.1rem;
+            color: var(--green);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(28, 61, 46, 0.07);
+        }
+
+        .filter-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .filter-list label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        .filter-list input[type="checkbox"] {
+            accent-color: var(--green);
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .filter-group .filter-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.6rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+
+        /* Main content */
+        .products-main {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .products-search-bar {
+            width: 100%;
+        }
+
+        .products-search-bar input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border-radius: 99px;
+            border: 1px solid rgba(28, 61, 46, 0.15);
+            font-size: 1rem;
+            font-family: inherit;
+            color: var(--text);
+            background: var(--white);
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .products-search-bar input:focus {
+            border-color: var(--green);
+            box-shadow: 0 0 0 3px rgba(46, 94, 70, 0.1);
+        }
+
+        .full-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 1px solid rgba(28, 61, 46, 0.15);
+            background: transparent;
+            color: var(--text);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .page-btn.active {
+            background: var(--green);
+            color: var(--white);
+            border-color: var(--green);
+        }
+
+        .page-btn:hover:not(.active) {
+            background: rgba(28, 61, 46, 0.05);
+        }
+
+        @media (max-width: 1024px) {
+            .full-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .products-layout {
+                grid-template-columns: 1fr;
+            }
+            .filter-sidebar { max-height: calc(100vh - 120px); overflow-y: auto;
+                position: static;
+                margin-bottom: 2rem;
+            }
+            .full-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
     </style>
 </head>
 
@@ -302,7 +649,9 @@
             <nav class="nav-links" id="nav-links">
                 <a href="index.html" class="nav-link">Home</a>
                 <a href="about.html" class="nav-link">Our Story</a>
-                <a href="products.html" class="nav-link">Products</a>
+                <a href="products.html" class="nav-link active">Products</a>
+                <a href="journeys.html" class="nav-link">Journeys</a>
+                <a href="process.html" class="nav-link">How We Grow</a>
                 <a href="contact.html" class="nav-link">Contact</a>
             </nav>
             <a href="index.html" class="logo">
@@ -321,6 +670,8 @@
         <a href="index.html">Home</a>
         <a href="about.html">Our Story</a>
         <a href="products.html">Products</a>
+        <a href="journeys.html">Journeys</a>
+        <a href="process.html">How We Grow</a>
         <a href="contact.html">Contact</a>
     </div>
 
@@ -336,19 +687,54 @@
             <div class="page-hero-blob"></div>
         </section>
 
-        <!-- Filter bar -->
-        <div class="filter-bar">
-            <button class="filter-btn active" data-filter="all">All Products</button>
-            <button class="filter-btn" data-filter="daal">Daals</button>
-            <button class="filter-btn" data-filter="grains">Grains</button>
-            <button class="filter-btn" data-filter="seeds">Seeds</button>
-            <button class="filter-btn" data-filter="nuts">Nuts</button>
-            <button class="filter-btn" data-filter="protein">High Protein</button>
-        </div>
+        <!-- Products Layout -->
+        <div class="products-layout">
+            <!-- Filter Sidebar -->
+            <aside class="filter-sidebar" data-lenis-prevent>
+                <div class="filter-group">
+                    <h4>Categories</h4>
+                    <button class="filter-btn active" data-filter="all">All Products</button>
+                    <button class="filter-btn" data-filter="daal">Daals</button>
+                    <button class="filter-btn" data-filter="grains">Grains</button>
+                    <button class="filter-btn" data-filter="seeds">Seeds</button>
+                    <button class="filter-btn" data-filter="nuts">Nuts</button>
+                    <button class="filter-btn" data-filter="flour">Flours</button>
+                    <button class="filter-btn" data-filter="spices">Spices</button>
+                </div>
+                <div class="filter-group">
+                    <h4>Size</h4>
+                    <div class="filter-list">
+                        <label><input type="checkbox" checked> 500g</label>
+                        <label><input type="checkbox" checked> 1kg</label>
+                        <label><input type="checkbox" checked> 5kg</label>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <h4>Price Range</h4>
+                    <div class="filter-list">
+                        <label><input type="checkbox" checked> Under ₹100</label>
+                        <label><input type="checkbox" checked> ₹100 - ₹300</label>
+                        <label><input type="checkbox" checked> Above ₹300</label>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <h4>Farm Source</h4>
+                    <div class="filter-list">
+                        <label><input type="checkbox" checked> Gujarat</label>
+                        <label><input type="checkbox" checked> Maharashtra</label>
+                        <label><input type="checkbox" checked> Rajasthan</label>
+                    </div>
+                </div>
+            </aside>
 
-        <!-- Products Grid -->
-        <div class="full-products">
-            <div class="full-grid">
+            <!-- Main Content -->
+            <div class="products-main">
+                <div class="products-search-bar">
+                    <input type="text" id="productSearch" placeholder="Search products...">
+                </div>
+                
+                <!-- Products Grid -->
+                <div class="full-grid" id="products-grid">
 
                 <!-- Toor Daal -->
                 <div class="prod-item" data-animate="fade-up" data-delay="0" data-category="daal protein">
@@ -369,7 +755,10 @@
                             <span class="spec-tag">🚫 No Preservatives</span>
                         </div>
                         <div class="prod-foot">
-                            <a href="https://wa.me/910000000000?text=Hi,%20I%20am%20interested%20in%20buying%20Toor%20Daal" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <div class="prod-foot-actions">
+                                <a href="https://wa.me/910000000000?text=Hi,%20I%20am%20interested%20in%20buying%20Toor%20Daal" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                                <button class="btn-journey" data-journey="true" data-product="Toor Daal" data-farmer="Ramesh Patel" data-location="Gujarat, India" data-times="June 2025|July 2025|Nov 2025|Jan 2026|Feb 2026" data-images="||assets/farm_field.png|assets/ingredients_flat.png,assets/toor_daal.png|">View Journey</button>
+                            </div>
                             <span class="prod-nutrition">~22g protein / 100g</span>
                         </div>
                     </div>
@@ -393,7 +782,10 @@
                             <span class="spec-tag">🚫 No Preservatives</span>
                         </div>
                         <div class="prod-foot">
-                            <a href="https://wa.me/910000000000?text=Hi,%20I%20am%20interested%20in%20buying%20Moong%20Daal" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <div class="prod-foot-actions">
+                                <a href="https://wa.me/910000000000?text=Hi,%20I%20am%20interested%20in%20buying%20Moong%20Daal" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                                <button class="btn-journey" data-journey="true" data-product="Moong Daal" data-farmer="Sunita Devi" data-location="Rajasthan, India" data-times="May 2025|June 2025|Oct 2025|Dec 2025|Jan 2026" data-images="|||assets/ingredients_flat.png|">View Journey</button>
+                            </div>
                             <span class="prod-nutrition">~24g protein / 100g</span>
                         </div>
                     </div>
@@ -426,7 +818,7 @@
                 <!-- Black Till -->
                 <div class="prod-item" data-animate="fade-up" data-delay="300" data-category="seeds protein">
                     <div class="prod-img">
-                        <img src="assets/black_till.jpg" alt="Black Till">
+                        <img src="assets/black_till.png" alt="Black Till">
                     </div>
                     <div class="prod-info">
                         <h3>Black Till</h3>
@@ -446,7 +838,7 @@
                 <!-- Whole Mung -->
                 <div class="prod-item" data-animate="fade-up" data-delay="400" data-category="daal protein">
                     <div class="prod-img">
-                        <img src="assets/whole_mung.jpg" alt="Whole Mung">
+                        <img src="assets/whole_mung.png" alt="Whole Mung">
                     </div>
                     <div class="prod-info">
                         <h3>Whole Mung</h3>
@@ -466,7 +858,7 @@
                 <!-- Basmati Rice -->
                 <div class="prod-item" data-animate="fade-up" data-delay="500" data-category="grains">
                     <div class="prod-img">
-                        <img src="assets/basmati_rice.jpg" alt="Basmati Rice">
+                        <img src="assets/basmati_rice.png" alt="Basmati Rice">
                     </div>
                     <div class="prod-info">
                         <h3>Basmati Rice</h3>
@@ -485,7 +877,7 @@
                 <!-- White Till -->
                 <div class="prod-item" data-animate="fade-up" data-delay="600" data-category="seeds protein">
                     <div class="prod-img">
-                        <img src="assets/white_till.jpg" alt="White Till">
+                        <img src="assets/white_till.png" alt="White Till">
                     </div>
                     <div class="prod-info">
                         <h3>White Till</h3>
@@ -502,14 +894,14 @@
                     </div>
                 </div>
 
-                <!-- Whole Wheat -->
+                <!-- Whole Bajra -->
                 <div class="prod-item" data-animate="fade-up" data-delay="700" data-category="grains">
                     <div class="prod-img">
-                        <img src="assets/whole_wheat.jpg" alt="Whole Wheat">
+                        <img src="assets/bajra.png" alt="Bajra">
                     </div>
                     <div class="prod-info">
-                        <h3>Whole Wheat</h3>
-                        <p class="prod-sub">Premium Whole Wheat Grains</p>
+                        <h3>Whole Bajra</h3>
+                        <p class="prod-sub">Premium Whole Bajra</p>
                         <div class="prod-specs">
                             <span class="spec-tag">🌱 Plant-Based</span>
                             <span class="spec-tag">💪 High Fiber</span>
@@ -522,6 +914,279 @@
                     </div>
                 </div>
 
+                
+                <!-- Bajra Flour -->
+                <div class="prod-item" data-animate="fade-up" data-category="flour">
+                    <div class="prod-img">
+                        <img src="assets/bajra-flour.png" alt="Bajra Flour">
+                    </div>
+                    <div class="prod-info">
+                        <h3>Bajra Flour</h3>
+                        <p class="prod-sub">Premium Bajra Flour</p>
+                        <div class="prod-specs">
+                            <span class="spec-tag">🌱 Plant-Based</span>
+                            <span class="spec-tag">💪 Nutritious</span>
+                            <span class="spec-tag">✦ Clean Label</span>
+                        </div>
+                        <div class="prod-foot">
+                            <a href="https://wa.me/910000000000?text=Hi,%20I%20am%20interested%20in%20buying%20Bajra%20Flour" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <span class="prod-nutrition">100% Natural</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Black Chana -->
+                <div class="prod-item" data-animate="fade-up" data-category="pulses">
+                    <div class="prod-img">
+                        <img src="assets/black-chana.png" alt="Black Chana">
+                    </div>
+                    <div class="prod-info">
+                        <h3>Black Chana</h3>
+                        <p class="prod-sub">Premium Black Chana</p>
+                        <div class="prod-specs">
+                            <span class="spec-tag">🌱 Plant-Based</span>
+                            <span class="spec-tag">💪 Nutritious</span>
+                            <span class="spec-tag">✦ Clean Label</span>
+                        </div>
+                        <div class="prod-foot">
+                            <a href="https://wa.me/910000000000?text=Hi,%20I%20am%20interested%20in%20buying%20Black%20Chana" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <span class="prod-nutrition">100% Natural</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Brown Chana -->
+                <div class="prod-item" data-animate="fade-up" data-category="pulses">
+                    <div class="prod-img">
+                        <img src="assets/brown-chana.png" alt="Brown Chana">
+                    </div>
+                    <div class="prod-info">
+                        <h3>Brown Chana</h3>
+                        <p class="prod-sub">Premium Brown Chana</p>
+                        <div class="prod-specs">
+                            <span class="spec-tag">🌱 Plant-Based</span>
+                            <span class="spec-tag">💪 Nutritious</span>
+                            <span class="spec-tag">✦ Clean Label</span>
+                        </div>
+                        <div class="prod-foot">
+                            <a href="https://wa.me/910000000000?text=Hi,%20I%20am%20interested%20in%20buying%20Brown%20Chana" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <span class="prod-nutrition">100% Natural</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Carom Seeds -->
+                <div class="prod-item" data-animate="fade-up" data-category="spices">
+                    <div class="prod-img">
+                        <img src="assets/carom.png" alt="Carom Seeds">
+                    </div>
+                    <div class="prod-info">
+                        <h3>Carom Seeds</h3>
+                        <p class="prod-sub">Premium Carom Seeds</p>
+                        <div class="prod-specs">
+                            <span class="spec-tag">🌱 Plant-Based</span>
+                            <span class="spec-tag">💪 Nutritious</span>
+                            <span class="spec-tag">✦ Clean Label</span>
+                        </div>
+                        <div class="prod-foot">
+                            <a href="https://wa.me/910000000000?text=Hi,%20I%20am%20interested%20in%20buying%20Carom%20Seeds" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <span class="prod-nutrition">100% Natural</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Chana Dal -->
+                <div class="prod-item" data-animate="fade-up" data-category="pulses">
+                    <div class="prod-img">
+                        <img src="assets/chana-dal.png" alt="Chana Dal">
+                    </div>
+                    <div class="prod-info">
+                        <h3>Chana Dal</h3>
+                        <p class="prod-sub">Premium Chana Dal</p>
+                        <div class="prod-specs">
+                            <span class="spec-tag">🌱 Plant-Based</span>
+                            <span class="spec-tag">💪 Nutritious</span>
+                            <span class="spec-tag">✦ Clean Label</span>
+                        </div>
+                        <div class="prod-foot">
+                            <a href="https://wa.me/910000000000?text=Hi,%20I%20am%20interested%20in%20buying%20Chana%20Dal" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <span class="prod-nutrition">100% Natural</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Coriander Powder -->
+                <div class="prod-item" data-animate="fade-up" data-category="spices">
+                    <div class="prod-img">
+                        <img src="assets/coriander-powder.png" alt="Coriander Powder">
+                    </div>
+                    <div class="prod-info">
+                        <h3>Coriander Powder</h3>
+                        <p class="prod-sub">Premium Coriander Powder</p>
+                        <div class="prod-specs">
+                            <span class="spec-tag">🌱 Plant-Based</span>
+                            <span class="spec-tag">💪 Nutritious</span>
+                            <span class="spec-tag">✦ Clean Label</span>
+                        </div>
+                        <div class="prod-foot">
+                            <a href="https://wa.me/910000000000?text=Hi,%20I%20am%20interested%20in%20buying%20Coriander%20Powder" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <span class="prod-nutrition">100% Natural</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Cumin Coriander Powder -->
+                <div class="prod-item" data-animate="fade-up" data-category="spices">
+                    <div class="prod-img">
+                        <img src="assets/cumin-coriander-powder.png" alt="Cumin Coriander Powder">
+                    </div>
+                    <div class="prod-info">
+                        <h3>Cumin Coriander Powder</h3>
+                        <p class="prod-sub">Premium Cumin Coriander Powder</p>
+                        <div class="prod-specs">
+                            <span class="spec-tag">🌱 Plant-Based</span>
+                            <span class="spec-tag">💪 Nutritious</span>
+                            <span class="spec-tag">✦ Clean Label</span>
+                        </div>
+                        <div class="prod-foot">
+                            <a href="https://wa.me/910000000000?text=Hi,%20I%20am%20interested%20in%20buying%20Cumin%20Coriander%20Powder" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <span class="prod-nutrition">100% Natural</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Cumin Seeds -->
+                <div class="prod-item" data-animate="fade-up" data-category="spices">
+                    <div class="prod-img">
+                        <img src="assets/cumin.png" alt="Cumin Seeds">
+                    </div>
+                    <div class="prod-info">
+                        <h3>Cumin Seeds</h3>
+                        <p class="prod-sub">Premium Cumin Seeds</p>
+                        <div class="prod-specs">
+                            <span class="spec-tag">🌱 Plant-Based</span>
+                            <span class="spec-tag">💪 Nutritious</span>
+                            <span class="spec-tag">✦ Clean Label</span>
+                        </div>
+                        <div class="prod-foot">
+                            <a href="https://wa.me/910000000000?text=Hi,%20I%20am%20interested%20in%20buying%20Cumin%20Seeds" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <span class="prod-nutrition">100% Natural</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fennel Seeds -->
+                <div class="prod-item" data-animate="fade-up" data-category="spices">
+                    <div class="prod-img">
+                        <img src="assets/fennel.png" alt="Fennel Seeds">
+                    </div>
+                    <div class="prod-info">
+                        <h3>Fennel Seeds</h3>
+                        <p class="prod-sub">Premium Fennel Seeds</p>
+                        <div class="prod-specs">
+                            <span class="spec-tag">🌱 Plant-Based</span>
+                            <span class="spec-tag">💪 Nutritious</span>
+                            <span class="spec-tag">✦ Clean Label</span>
+                        </div>
+                        <div class="prod-foot">
+                            <a href="https://wa.me/910000000000?text=Hi,%20I%20am%20interested%20in%20buying%20Fennel%20Seeds" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <span class="prod-nutrition">100% Natural</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Moong Flour -->
+                <div class="prod-item" data-animate="fade-up" data-category="flour">
+                    <div class="prod-img">
+                        <img src="assets/moong-flour.png" alt="Moong Flour">
+                    </div>
+                    <div class="prod-info">
+                        <h3>Moong Flour</h3>
+                        <p class="prod-sub">Premium Moong Flour</p>
+                        <div class="prod-specs">
+                            <span class="spec-tag">🌱 Plant-Based</span>
+                            <span class="spec-tag">💪 Nutritious</span>
+                            <span class="spec-tag">✦ Clean Label</span>
+                        </div>
+                        <div class="prod-foot">
+                            <a href="https://wa.me/910000000000?text=Hi,%20I%20am%20interested%20in%20buying%20Moong%20Flour" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <span class="prod-nutrition">100% Natural</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Red Chilli Powder -->
+                <div class="prod-item" data-animate="fade-up" data-category="spices">
+                    <div class="prod-img">
+                        <img src="assets/red-chilli-powder.png" alt="Red Chilli Powder">
+                    </div>
+                    <div class="prod-info">
+                        <h3>Red Chilli Powder</h3>
+                        <p class="prod-sub">Premium Red Chilli Powder</p>
+                        <div class="prod-specs">
+                            <span class="spec-tag">🌱 Plant-Based</span>
+                            <span class="spec-tag">💪 Nutritious</span>
+                            <span class="spec-tag">✦ Clean Label</span>
+                        </div>
+                        <div class="prod-foot">
+                            <a href="https://wa.me/910000000000?text=Hi,%20I%20am%20interested%20in%20buying%20Red%20Chilli%20Powder" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <span class="prod-nutrition">100% Natural</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Soyabean -->
+                <div class="prod-item" data-animate="fade-up" data-category="pulses">
+                    <div class="prod-img">
+                        <img src="assets/soyabean.png" alt="Soyabean">
+                    </div>
+                    <div class="prod-info">
+                        <h3>Soyabean</h3>
+                        <p class="prod-sub">Premium Soyabean</p>
+                        <div class="prod-specs">
+                            <span class="spec-tag">🌱 Plant-Based</span>
+                            <span class="spec-tag">💪 Nutritious</span>
+                            <span class="spec-tag">✦ Clean Label</span>
+                        </div>
+                        <div class="prod-foot">
+                            <a href="https://wa.me/910000000000?text=Hi,%20I%20am%20interested%20in%20buying%20Soyabean" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <span class="prod-nutrition">100% Natural</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Whole Coriander -->
+                <div class="prod-item" data-animate="fade-up" data-category="spices">
+                    <div class="prod-img">
+                        <img src="assets/whole-coriander.png" alt="Whole Coriander">
+                    </div>
+                    <div class="prod-info">
+                        <h3>Whole Coriander</h3>
+                        <p class="prod-sub">Premium Whole Coriander</p>
+                        <div class="prod-specs">
+                            <span class="spec-tag">🌱 Plant-Based</span>
+                            <span class="spec-tag">💪 Nutritious</span>
+                            <span class="spec-tag">✦ Clean Label</span>
+                        </div>
+                        <div class="prod-foot">
+                            <a href="https://wa.me/910000000000?text=Hi,%20I%20am%20interested%20in%20buying%20Whole%20Coriander" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <span class="prod-nutrition">100% Natural</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Whole Wheat -->
+                <div class="prod-item" data-animate="fade-up" data-category="grains">
+                    <div class="prod-img">
+                        <img src="assets/whole_wheat.jpg" alt="Whole Wheat">
+                    </div>
+                    <div class="prod-info">
+                        <h3>Whole Wheat</h3>
+                        <p class="prod-sub">Premium Whole Wheat</p>
+                        <div class="prod-specs">
+                            <span class="spec-tag">🌱 Plant-Based</span>
+                            <span class="spec-tag">💪 Nutritious</span>
+                            <span class="spec-tag">✦ Clean Label</span>
+                        </div>
+                        <div class="prod-foot">
+                            <a href="https://wa.me/910000000000?text=Hi,%20I%20am%20interested%20in%20buying%20Whole%20Wheat" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <span class="prod-nutrition">100% Natural</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                
+                <!-- Pagination -->
+                <div class="pagination" id="pagination-controls">
+                    <!-- JS generated -->
+                </div>
             </div>
         </div>
 
@@ -566,6 +1231,68 @@
             </div>
         </section>
 
+        <!-- Journey Modal -->
+        <div class="journey-modal-overlay" id="journey-modal">
+            <div class="journey-modal-content">
+                <button class="journey-modal-close" id="journey-modal-close">&times;</button>
+                <div class="journey-modal-body" data-lenis-prevent>
+                    <div class="journey-header">
+                        <span class="section-tag">Product Journey</span>
+                        <h2 id="journey-title">Product Name</h2>
+                        <p class="journey-meta">Farmer: <strong id="journey-farmer"></strong> &nbsp;&bull;&nbsp; Location: <a id="journey-location-link" href="#" target="_blank" style="color: var(--green); text-decoration: underline;"><strong id="journey-location"></strong></a></p>
+                    </div>
+                    <div class="timeline-container" id="journey-timeline">
+                        <div class="timeline-line"></div>
+                        <div class="timeline-step">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>Soil Preparation <span class="step-time" style="font-size: 0.85em; font-weight: normal; color: var(--text-muted); float: right;"></span></h4>
+                                <p>Rich, nutrient-dense soil prepared using natural methods.</p>
+                                <div class="step-gallery" style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
+                            </div>
+                        </div>
+                        <div class="timeline-step">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>Planting <span class="step-time" style="font-size: 0.85em; font-weight: normal; color: var(--text-muted); float: right;"></span></h4>
+                                <p>Sourced heirloom seeds planted with care and intention.</p>
+                                <div class="step-gallery" style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
+                            </div>
+                        </div>
+                        <div class="timeline-step">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>Harvesting <span class="step-time" style="font-size: 0.85em; font-weight: normal; color: var(--text-muted); float: right;"></span></h4>
+                                <p>Hand-picked at peak ripeness to ensure maximum flavor and nutrition.</p>
+                                <div class="step-gallery" style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
+                            </div>
+                        </div>
+                        <div class="timeline-step">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>Processing <span class="step-time" style="font-size: 0.85em; font-weight: normal; color: var(--text-muted); float: right;"></span></h4>
+                                <p>Cleaned and naturally processed without harsh chemicals.</p>
+                                <div class="step-gallery" style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
+                            </div>
+                        </div>
+                        <div class="timeline-step">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>Packaging <span class="step-time" style="font-size: 0.85em; font-weight: normal; color: var(--text-muted); float: right;"></span></h4>
+                                <p>Sealed fresh in eco-conscious packaging for your pantry.</p>
+                                <div class="step-gallery" style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lightbox -->
+        <div id="lightbox-overlay">
+            <img id="lightbox-img" src="" alt="Expanded View">
+        </div>
+
     </main>
 
     <footer>
@@ -595,6 +1322,7 @@
                 <h4>Company</h4>
                 <a href="about.html">Our Story</a>
                 <a href="products.html">Products</a>
+                <a href="journeys.html">Journeys</a>
                 <a href="contact.html">Contact Us</a>
             </div>
             <div class="footer-links-group">
@@ -619,23 +1347,170 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
     <script>
-        // Filter functionality
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const prodItems = document.querySelectorAll('.prod-item');
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                const filter = btn.dataset.filter;
-                prodItems.forEach(item => {
-                    const cats = item.dataset.category || '';
-                    const show = filter === 'all' || cats.includes(filter);
-                    item.style.opacity = show ? '1' : '0.3';
-                    item.style.transform = show ? '' : 'scale(0.97)';
-                    item.style.pointerEvents = show ? '' : 'none';
-                });
+        try {
+            // Custom Cursor
+            const cursor = document.getElementById('cursor');
+            const follower = document.getElementById('cursor-follower');
+            
+            document.addEventListener('mousemove', (e) => {
+                if (cursor && cursor.style) {
+                    cursor.style.left = e.clientX + 'px';
+                    cursor.style.top = e.clientY + 'px';
+                }
+                
+                setTimeout(() => {
+                    if (follower && follower.style) {
+                        follower.style.left = e.clientX + 'px';
+                        follower.style.top = e.clientY + 'px';
+                    }
+                }, 100);
             });
-        });
+        } catch (e) {
+            console.error("Cursor error", e);
+        }
+
+        try {
+            // Initialize Lenis
+            if (typeof Lenis !== 'undefined') {
+                const lenis = new Lenis({
+                    autoRaf: true,
+                });
+            }
+        } catch (e) {
+            console.error("Lenis error", e);
+        }
+
+        try {
+            // Intersection Observer for animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, entry.target.dataset.delay || 0);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            function observeElements() {
+                document.querySelectorAll('[data-animate="fade-up"]').forEach(el => {
+                    observer.observe(el);
+                });
+            }
+            observeElements();
+        } catch (e) {
+            console.error("Observer error", e);
+        }
+
+        try {
+            // --- Pagination and Filtering Logic ---
+            const ITEMS_PER_PAGE = 9;
+            let currentPage = 1;
+            
+            // Convert NodeList to Array to keep track of all original products
+            const products = Array.from(document.querySelectorAll('.prod-item'));
+            const grid = document.getElementById('products-grid');
+            const paginationControls = document.getElementById('pagination-controls');
+            const searchInput = document.getElementById('productSearch');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+
+            let currentCategory = 'all';
+            let searchQuery = '';
+
+            window.renderProducts = function() {
+                if (!grid || !paginationControls) return;
+
+                // Filter products
+                const filteredProducts = products.filter(product => {
+                    const category = (product.getAttribute('data-category') || '').toLowerCase();
+                    const h3 = product.querySelector('h3');
+                    const title = h3 ? h3.textContent.toLowerCase() : '';
+                    
+                    const matchesCategory = currentCategory === 'all' || category.includes(currentCategory);
+                    const matchesSearch = title.includes(searchQuery.toLowerCase());
+                    
+                    return matchesCategory && matchesSearch;
+                });
+
+                // Pagination calculation
+                const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
+                
+                if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
+                if (currentPage < 1) currentPage = 1;
+
+                const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+                const endIndex = startIndex + ITEMS_PER_PAGE;
+                
+                const productsToShow = filteredProducts.slice(startIndex, endIndex);
+
+                // Clear grid and append filtered elements
+                grid.innerHTML = '';
+                
+                if (filteredProducts.length === 0) {
+                    grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding: 4rem; color: var(--text-muted);">No products found matching your search.</div>';
+                } else {
+                    productsToShow.forEach((p, index) => {
+                        // Reset animation states so they animate in again if desired,
+                        // or just make them visible. We'll ensure they are visible.
+                        p.style.display = 'block';
+                        p.style.opacity = '1';
+                        p.style.transform = 'translateY(0)';
+                        grid.appendChild(p);
+                    });
+                }
+
+                // Render Pagination UI
+                paginationControls.innerHTML = '';
+                if (totalPages > 1) {
+                    for (let i = 1; i <= totalPages; i++) {
+                        const btn = document.createElement('button');
+                        btn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+                        btn.textContent = i;
+                        btn.onclick = () => {
+                            currentPage = i;
+                            window.renderProducts();
+                            // Smooth scroll to top of grid
+                            const layout = document.querySelector('.products-layout');
+                            if (layout) {
+                                window.scrollTo({ top: layout.offsetTop - 100, behavior: 'smooth' });
+                            }
+                        };
+                        paginationControls.appendChild(btn);
+                    }
+                }
+            };
+
+            // Event Listeners for Category Filters
+            if(filterBtns) {
+                filterBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        filterBtns.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        currentCategory = btn.getAttribute('data-filter');
+                        currentPage = 1; // Reset to page 1
+                        window.renderProducts();
+                    });
+                });
+            }
+
+            // Event Listener for Search
+            if(searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    searchQuery = e.target.value;
+                    currentPage = 1; // Reset to page 1
+                    window.renderProducts();
+                });
+            }
+
+            // Initial Render
+            window.renderProducts();
+
+        } catch (e) {
+            console.error("Pagination error", e);
+        }
     </script>
 </body>
 

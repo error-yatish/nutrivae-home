@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | Nutrivae Foods</title>
+    <meta name="description"
+        content="Explore Nutrivae's clean, plant-based products - Coriander Seeds, Till, Mungfali and many more. High protein, 100% vegetarian, no preservatives.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- Lenis smooth scroll -->
+    <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .page-header-minimal {
+            padding: 8rem 5% 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .page-header-minimal h1 {
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            color: var(--green);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .page-header-minimal p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .process-section {
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .process-title {
+            font-size: 2.5rem;
+            color: var(--green);
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        /* Process List */
+        .process-list {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 5% 4rem;
+        }
+
+        .process-list-item {
+            margin-bottom: 5rem;
+            padding-bottom: 5rem;
+            border-bottom: 1px solid rgba(28, 61, 46, 0.1);
+        }
+
+        .process-list-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: baseline;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .step-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            opacity: 0.9;
+            line-height: 1;
+        }
+
+        .step-header h3 {
+            font-size: 2.5rem;
+            color: var(--green);
+            margin: 0;
+        }
+
+        .step-body {
+            display: flex;
+            gap: 4rem;
+            align-items: flex-start;
+        }
+
+        .step-text {
+            flex: 1;
+        }
+
+        .step-desc {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .step-text ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .step-text li {
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .step-text li strong {
+            color: var(--text);
+            display: block;
+            margin-bottom: 0.2rem;
+            font-size: 1.15rem;
+        }
+
+        .step-text li::before {
+            content: '✓';
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.4rem;
+            margin-top: -0.2rem;
+        }
+
+        .step-image {
+            width: 450px;
+            flex-shrink: 0;
+        }
+
+        .step-image img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            transition: transform 0.5s ease;
+        }
+
+        .step-image:hover img {
+            transform: scale(1.02);
+        }
+
+        /* Mobile Layout */
+        @media (max-width: 900px) {
+            .step-body {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            .step-image {
+                width: 100%;
+            }
+            .step-image img {
+                height: 250px;
+            }
+            .step-header {
+                gap: 1rem;
+            }
+            .step-number {
+                font-size: 2.5rem;
+            }
+            .step-header h3 {
+                font-size: 2rem;
+            }
+        }
+
+        .promise-section {
+            background: var(--cream-dark);
+            padding: 5rem 5%;
+            margin-top: 4rem;
+        }
+
+        .promise-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .promise-item {
+            padding: 2rem;
+        }
+
+        .promise-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .promise-item h4 {
+            font-size: 1.2rem;
+            color: var(--green);
+            margin-bottom: 0.5rem;
+        }
+
+        .promise-item p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .model-section {
+            padding: 6rem 5%;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .model-section h2 {
+            font-size: 2.5rem;
+            color: var(--green);
+            margin-bottom: 1.5rem;
+        }
+
+        .model-section p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Custom cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursor-follower">
+        <svg width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <mask id="leaf-mask">
+                    <rect width="24" height="24" fill="white" />
+                    <path d="M 12.5,15 C 15,11 18,8 21,7" fill="none" stroke="black" stroke-width="0.8"
+                        stroke-linecap="round" />
+                    <path d="M 10.5,14.5 C 8,12 5.5,10 4,9" fill="none" stroke="black" stroke-width="0.6"
+                        stroke-linecap="round" />
+                </mask>
+            </defs>
+            <g mask="url(#leaf-mask)">
+                <path d="M 12,17 C 12,8 18,2 23,2 C 23,12 16,17 12,17 Z" fill="#88b04b" />
+                <path d="M 11.5,16 C 10,10 6,5 2,6 C 2,13 8,16 11.5,16 Z" fill="#88b04b" />
+                <path d="M 11,22 C 11.2,20 11.8,18 12,17" fill="none" stroke="#88b04b" stroke-width="1.5"
+                    stroke-linecap="round" />
+            </g>
+        </svg>
+    </div>
+
+    <header id="header">
+        <div class="header-inner">
+            <nav class="nav-links" id="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">Our Story</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="journeys.html" class="nav-link active">Journeys</a>
+                <a href="process.html" class="nav-link">How We Grow</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+            <a href="index.html" class="logo">
+                <img src="assets/logo.svg" alt="Nutrivae Foods" class="logo-img">
+            </a>
+            <div class="header-actions">
+                <a href="products.html" class="btn-pill" id="header-cta">Shop Now</a>
+                <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="index.html">Home</a>
+        <a href="about.html">Our Story</a>
+        <a href="products.html">Products</a>
+        <a href="journeys.html">Journeys</a>
+        <a href="process.html">How We Grow</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <main>
+        <div class="page-header-minimal">
+            <span class="section-tag" data-animate="fade-up">Our Process</span>
+            <h1 data-animate="fade-up" data-delay="100">How We Grow</h1>
+            <p data-animate="fade-up" data-delay="200">From seed to table, every step is carefully managed to ensure purity, freshness, and fairness.</p>
+        </div>
+
+        <section class="process-section">
+            <h2 class="process-title" data-animate="fade-up">The Farming Journey</h2>
+            
+            <div class="process-list">
+                
+                <!-- Step 1 -->
+                <div class="process-list-item" data-animate="fade-up">
+                    <div class="step-header">
+                        <span class="step-number">01</span>
+                        <h3>Soil Preparation</h3>
+                    </div>
+                    <div class="step-body">
+                        <div class="step-text">
+                            <p class="step-desc">The foundation of natural farming begins with healthy, chemical-free soil. We invest significant time restoring the earth's natural balance before planting.</p>
+                            <ul>
+                                <li>
+                                    <div>
+                                        <strong>Cleaning the field</strong>
+                                        Thoroughly removing remnants of previous crops and debris naturally.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <strong>Leveling the ground</strong>
+                                        Ensuring a perfectly flat surface for even, efficient water distribution.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <strong>Comprehensive Soil Testing</strong>
+                                        Analyzing micro and macro nutrients to determine the soil's natural needs.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <strong>Natural Manuring</strong>
+                                        Enriching the earth using organic compost and cow dung instead of synthetic chemicals.
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="step-image">
+                            <img src="assets/soil_prep.png" alt="Soil Preparation">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="process-list-item" data-animate="fade-up">
+                    <div class="step-header">
+                        <span class="step-number">02</span>
+                        <h3>Sowing</h3>
+                    </div>
+                    <div class="step-body">
+                        <div class="step-text">
+                            <p class="step-desc">A bountiful harvest requires the highest quality seeds planted at precisely the right moment in the season.</p>
+                            <ul>
+                                <li>
+                                    <div>
+                                        <strong>Careful Seed Selection</strong>
+                                        Hand-picking only the healthiest, non-GMO seeds for cultivation.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <strong>Precision Planting</strong>
+                                        Sowing seeds in accurately spaced rows to ensure optimal sunlight and growth space.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <strong>Seasonal Timing</strong>
+                                        Aligning our planting schedule closely with natural weather cycles and monsoons.
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="step-image">
+                            <img src="assets/sowing.png" alt="Sowing Seeds">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="process-list-item" data-animate="fade-up">
+                    <div class="step-header">
+                        <span class="step-number">03</span>
+                        <h3>Irrigation & Care</h3>
+                    </div>
+                    <div class="step-body">
+                        <div class="step-text">
+                            <p class="step-desc">We nurture our crops through traditional, sustainable methods that protect both the plants and the local ecosystem.</p>
+                            <ul>
+                                <li>
+                                    <div>
+                                        <strong>Sustainable Watering</strong>
+                                        Utilizing efficient water channels to hydrate crops deeply without wasting resources.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <strong>Natural Weeding</strong>
+                                        Removing competitive weeds by hand or traditional tools rather than harmful herbicides.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <strong>Toxin-Free Protection</strong>
+                                        Defending against pests using natural repellents like neem oil and crop rotation.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <strong>Health Monitoring</strong>
+                                        Daily manual inspections of the fields to ensure crops are thriving naturally.
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="step-image">
+                            <img src="assets/irrigation.png" alt="Irrigation and Care">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="process-list-item" data-animate="fade-up">
+                    <div class="step-header">
+                        <span class="step-number">04</span>
+                        <h3>Harvesting</h3>
+                    </div>
+                    <div class="step-body">
+                        <div class="step-text">
+                            <p class="step-desc">The culmination of months of hard work, we harvest only when the crop reaches peak maturity and flavor.</p>
+                            <ul>
+                                <li>
+                                    <div>
+                                        <strong>Perfect Timing</strong>
+                                        Waiting for the exact moment when nutritional value and natural taste are highest.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <strong>Careful Collection</strong>
+                                        Hand-harvesting delicate crops by local farmers to prevent bruising and damage.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <strong>Optimal Storage</strong>
+                                        Transferring produce immediately to climate-controlled, dry environments.
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="step-image">
+                            <img src="assets/harvesting.png" alt="Harvesting Crops">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="process-list-item" data-animate="fade-up">
+                    <div class="step-header">
+                        <span class="step-number">05</span>
+                        <h3>Packaging & Distribution</h3>
+                    </div>
+                    <div class="step-body">
+                        <div class="step-text">
+                            <p class="step-desc">We maintain our commitment to nature all the way to your doorstep through eco-conscious packaging and direct delivery.</p>
+                            <ul>
+                                <li>
+                                    <div>
+                                        <strong>Grading and Sorting</strong>
+                                        Meticulously cleaning and sorting the harvest to ensure only premium quality reaches you.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <strong>Eco-Friendly Packaging</strong>
+                                        Using sustainable, breathable materials like burlap and brown paper to eliminate plastic waste.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <strong>Transparent Labelling</strong>
+                                        Providing clear information about the farm, the harvest date, and the farmer's name.
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <strong>Direct Distribution</strong>
+                                        Bypassing middlemen to deliver fresh produce directly from our farm to your kitchen.
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="step-image">
+                            <img src="assets/packaging.png" alt="Packaging">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="promise-section">
+            <div class="promise-grid">
+                <div class="promise-item" data-animate="fade-up" data-delay="0">
+                    <div class="promise-icon">🚫</div>
+                    <h4>No Chemicals</h4>
+                    <p>We use natural farming methods to protect the soil and your health.</p>
+                </div>
+                <div class="promise-item" data-animate="fade-up" data-delay="100">
+                    <div class="promise-icon">🛡️</div>
+                    <h4>No Preservatives</h4>
+                    <p>Our foods are fresh and natural, exactly as nature intended.</p>
+                </div>
+                <div class="promise-item" data-animate="fade-up" data-delay="200">
+                    <div class="promise-icon">🎨</div>
+                    <h4>No Artificial Colors</h4>
+                    <p>100% natural appearance, taste, and nutrition.</p>
+                </div>
+                <div class="promise-item" data-animate="fade-up" data-delay="300">
+                    <div class="promise-icon">🚜</div>
+                    <h4>Farm Fresh</h4>
+                    <p>Delivered directly from the farm to ensure maximum freshness.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="model-section">
+            <span class="section-tag" data-animate="fade-up">Our Model</span>
+            <h2 data-animate="fade-up" data-delay="100">Empowering Farmers</h2>
+            <p data-animate="fade-up" data-delay="200">
+                Nutrivae Foods is built on a direct-to-consumer philosophy. Initially, we are proudly selling products directly from our own farm. This gives us absolute control over quality, ensuring that every grain and pulse meets our rigorous standards of being chemical-free and farm-fresh.
+            </p>
+            <p data-animate="fade-up" data-delay="300">
+                By cutting out the middlemen, we maximize the profits that stay with the farmers. As we grow, this model will empower other local farmers to join our network, guaranteeing them a fair and profitable return for their hard work while providing you with the purest food possible.
+            </p>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <img src="assets/logo.svg" alt="Nutrivae" class="footer-logo">
+                <p>Thoughtfully Grown, Carefully Crafted. Clean, plant-based foods made with care, consistency, and integrity.
+                </p>
+                <div class="footer-socials">
+                    <a href="#" aria-label="Instagram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <circle cx="12" cy="12" r="4" />
+                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Facebook">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-links-group">
+                <h4>Company</h4>
+                <a href="about.html">Our Story</a>
+                <a href="products.html">Products</a>
+                <a href="journeys.html">Journeys</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="footer-links-group">
+                <h4>Products</h4>
+                <a href="products.html">Toor Daal</a>
+                <a href="products.html">Moong Daal</a>
+                <a href="products.html">Mungfali</a>
+            </div>
+            <div class="footer-links-group">
+                <h4>Contact</h4>
+                <a href="mailto:info@nutrivaefoods.com">info@nutrivaefoods.com</a>
+                <span>India</span>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 Nutrivae Foods. All rights reserved.</span>
+            <span>Thoughtfully Grown, Carefully Crafted.</span>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Filter functionality
+        
+            });
+        });
+
+        // Journey Modal Functionality
+        
+                                gallery.appendChild(img);
+                            });
+                        }
+                    }
+                });
+
+                journeyModal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            });
+        });
+
+        const lightboxOverlay = document.getElementById('lightbox-overlay');
+        if (lightboxOverlay) {
+            lightboxOverlay.addEventListener('click', () => {
+                lightboxOverlay.classList.remove('active');
+            });
+        }
+
+        journeyClose.addEventListener('click', () => {
+            journeyModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        journeyModal.addEventListener('click', (e) => {
+            if (e.target === journeyModal) {
+                journeyModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+</body>
+
+</html>

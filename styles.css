@@ -329,6 +329,7 @@ img { display: block; max-width: 100%; }
   color: var(--green);
   position: relative;
   transition: var(--transition);
+  white-space: nowrap;
 }
 .nav-link::after {
   content: '';

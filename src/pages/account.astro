@@ -1,0 +1,91 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="My Account | Nutrivae" currentPath="/account">
+  <main class="account-page">
+    <div class="account-container">
+      <h2>My Account</h2>
+      <p id="welcome-message">Welcome back!</p>
+      
+      <div class="account-details">
+         <h3>Profile</h3>
+         <p><strong>Username:</strong> <span id="user-name">Loading...</span></p>
+         <p><strong>Email:</strong> <span id="user-email">Loading...</span></p>
+      </div>
+
+      <button id="logout-btn" class="btn-primary" style="margin-top: 20px;">Log Out</button>
+    </div>
+  </main>
+
+  <style>
+    .account-page {
+      padding: 150px 20px 80px;
+      min-height: 80vh;
+      background: var(--bg-color);
+    }
+    .account-container {
+      background: white;
+      padding: 40px;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      border: 1px solid var(--cream-dark);
+    }
+    .account-container h2 {
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+    .account-details {
+      margin-top: 30px;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 8px;
+    }
+    .account-details p {
+       margin-bottom: 10px;
+    }
+  </style>
+
+  <script>
+    import { getUser, logout } from '../services/auth';
+
+    async function initAccount() {
+        const token = localStorage.getItem('jwt');
+        if (!token) {
+            window.location.href = '/login';
+            return;
+        }
+
+        try {
+            const user = await getUser(token);
+            if (user) {
+                const nameEl = document.getElementById('user-name');
+                const emailEl = document.getElementById('user-email');
+                if (nameEl) nameEl.textContent = user.username;
+                if (emailEl) emailEl.textContent = user.email;
+            } else {
+                logout();
+                window.location.href = '/login';
+            }
+        } catch(err) {
+            console.error(err);
+            logout();
+            window.location.href = '/login';
+        }
+    }
+
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            logout();
+            window.location.href = '/login';
+        });
+    }
+
+    // Run on load
+    initAccount();
+  </script>
+</Layout>

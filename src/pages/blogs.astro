@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getBlogs } from '../services/api';
+
+const allPosts = await getBlogs();
+---
+
+<Layout title="Blog | Nutrivae Foods" currentPath="/blogs">
+<main>
+        <section class="page-hero">
+            <div class="page-hero-inner">
+                <span class="section-tag" data-animate="fade-up">Our Blog</span>
+                <h1 data-animate="fade-up" data-delay="100">Thoughts &<br><em>Insights.</em></h1>
+                <p data-animate="fade-up" data-delay="200">Articles on plant-based nutrition, sustainable sourcing, and wholesome recipes.</p>
+            </div>
+            <div class="page-hero-blob"></div>
+        </section>
+
+        <section class="blog-preview">
+            <div class="blog-grid">
+                {allPosts.map((post, index) => (
+                    <article class="blog-card" data-animate="fade-up" data-delay={index * 100}>
+                        <img src={post.data.image} alt={post.data.title} />
+                        <h3>{post.data.title}</h3>
+                        <p>{post.data.description}</p>
+                        <a href={`/blog/${post.slug}`} class="btn-text-link">Read more →</a>
+                    </article>
+                ))}
+            </div>
+        </section>
+    </main>
+</Layout>

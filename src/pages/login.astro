@@ -1,0 +1,116 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Login | Nutrivae" currentPath="/login">
+  <main class="auth-page">
+    <div class="auth-container">
+      <h2>Welcome Back</h2>
+      <p>Log in to manage your orders and account.</p>
+      
+      <form id="login-form">
+        <div class="input-group">
+          <label for="identifier">Email</label>
+          <input type="email" id="identifier" name="identifier" required placeholder="you@example.com" />
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <div id="error-message" style="color: red; display: none; margin-bottom: 1rem;"></div>
+        <button type="submit" class="btn-primary" style="width: 100%;">Log In</button>
+      </form>
+      
+      <p class="auth-link">Don't have an account? <a href="/signup">Sign up here</a></p>
+    </div>
+  </main>
+
+  <style>
+    .auth-page {
+      padding: 150px 20px 80px;
+      min-height: 80vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--bg-color);
+    }
+    .auth-container {
+      background: white;
+      padding: 40px;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+      width: 100%;
+      max-width: 450px;
+      border: 1px solid var(--cream-dark);
+    }
+    .auth-container h2 {
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+    .auth-container p {
+      color: var(--text-muted);
+      margin-bottom: 30px;
+    }
+    .input-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--text-color);
+    }
+    .input-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    .auth-link {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .auth-link a {
+      color: var(--green);
+      text-decoration: underline;
+    }
+  </style>
+
+  <script>
+    import { login } from '../services/auth';
+    
+    if (localStorage.getItem('jwt')) {
+        window.location.href = '/account';
+    }
+
+    const loginForm = document.getElementById('login-form');
+    const errorMessage = document.getElementById('error-message');
+    
+    if (loginForm) {
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const identifier = (document.getElementById('identifier') as HTMLInputElement).value;
+        const password = (document.getElementById('password') as HTMLInputElement).value;
+        
+        try {
+          const data = await login(identifier, password);
+          if (data && data.jwt) {
+             window.location.href = '/account';
+          } else {
+             if(errorMessage) {
+                 errorMessage.textContent = 'Invalid credentials';
+                 errorMessage.style.display = 'block';
+             }
+          }
+        } catch(err) {
+            console.error(err);
+            if(errorMessage) {
+                 errorMessage.textContent = 'Network Error. Please try again.';
+                 errorMessage.style.display = 'block';
+            }
+        }
+      });
+    }
+  </script>
+</Layout>

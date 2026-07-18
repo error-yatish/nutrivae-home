@@ -1,0 +1,121 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Sign Up | Nutrivae" currentPath="/signup">
+  <main class="auth-page">
+    <div class="auth-container">
+      <h2>Create an Account</h2>
+      <p>Join Nutrivae to track your clean food journey.</p>
+      
+      <form id="signup-form">
+        <div class="input-group">
+          <label for="username">Name</label>
+          <input type="text" id="username" name="username" required placeholder="Your Name" />
+        </div>
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="you@example.com" />
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <div id="error-message" style="color: red; display: none; margin-bottom: 1rem;"></div>
+        <button type="submit" class="btn-primary" style="width: 100%;">Sign Up</button>
+      </form>
+      
+      <p class="auth-link">Already have an account? <a href="/login">Log in here</a></p>
+    </div>
+  </main>
+
+  <style>
+    .auth-page {
+      padding: 150px 20px 80px;
+      min-height: 80vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--bg-color);
+    }
+    .auth-container {
+      background: white;
+      padding: 40px;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+      width: 100%;
+      max-width: 450px;
+      border: 1px solid var(--cream-dark);
+    }
+    .auth-container h2 {
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+    .auth-container p {
+      color: var(--text-muted);
+      margin-bottom: 30px;
+    }
+    .input-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--text-color);
+    }
+    .input-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    .auth-link {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .auth-link a {
+      color: var(--green);
+      text-decoration: underline;
+    }
+  </style>
+
+  <script>
+    import { register } from '../services/auth';
+    
+    if (localStorage.getItem('jwt')) {
+        window.location.href = '/account';
+    }
+
+    const signupForm = document.getElementById('signup-form');
+    const errorMessage = document.getElementById('error-message');
+    
+    if (signupForm) {
+      signupForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const username = (document.getElementById('username') as HTMLInputElement).value;
+        const email = (document.getElementById('email') as HTMLInputElement).value;
+        const password = (document.getElementById('password') as HTMLInputElement).value;
+        
+        try {
+          const data = await register(username, email, password);
+          if (data && data.jwt) {
+             window.location.href = '/account';
+          } else {
+             if(errorMessage) {
+                 errorMessage.textContent = 'Registration failed';
+                 errorMessage.style.display = 'block';
+             }
+          }
+        } catch(err) {
+            console.error(err);
+            if(errorMessage) {
+                 errorMessage.textContent = 'Network Error. Please try again.';
+                 errorMessage.style.display = 'block';
+            }
+        }
+      });
+    }
+  </script>
+</Layout>

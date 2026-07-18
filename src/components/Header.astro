@@ -1,0 +1,74 @@
+---
+const { currentPath } = Astro.props;
+---
+<header id="header">
+    <div class="header-inner">
+        <a href="/" class="logo">
+            <img src="/assets/logo.svg" alt="Nutrivae Foods" class="logo-img">
+        </a>
+        <nav class="nav-links" id="nav-links">
+            <a href="/" class={currentPath === '/' ? "nav-link active" : "nav-link"}>Home</a>
+            <a href="/about" class={currentPath === '/about' ? "nav-link active" : "nav-link"}>Our Story</a>
+            <a href="/products" class={currentPath === '/products' ? "nav-link active" : "nav-link"}>Products</a>
+            <a href="/journeys" class={currentPath === '/journeys' ? "nav-link active" : "nav-link"}>Journeys</a>
+            <a href="/process" class={currentPath === '/process' ? "nav-link active" : "nav-link"}>How We Grow</a>
+            <a href="/blogs" class={currentPath === '/blogs' || currentPath.startsWith('/blog/') ? "nav-link active" : "nav-link"}>Blog</a>
+            <a href="/contact" class={currentPath === '/contact' ? "nav-link active" : "nav-link"}>Contact</a>
+        </nav>
+        <div class="header-actions">
+            <a href="/login" id="header-account-link" class="nav-link" title="My Account" style="margin-right: 10px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </a>
+            <button id="header-cart-btn" class="nav-link" title="Shopping Cart" style="background: none; border: none; cursor: pointer; position: relative; margin-right: 15px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                <span id="cart-badge" style="position: absolute; top: -8px; right: -8px; background: var(--green); color: white; font-size: 0.7rem; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; opacity: 0;">0</span>
+            </button>
+            <a href="/products" class="btn-pill" id="header-cta">Shop Now</a>
+            <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<script>
+    import { cartItems } from '../store/cartStore.js';
+    
+    const cartBtn = document.getElementById('header-cart-btn');
+    const badge = document.getElementById('cart-badge');
+    
+    if (cartBtn) {
+        cartBtn.addEventListener('click', () => {
+            window.dispatchEvent(new Event('open-cart'));
+        });
+    }
+
+    cartItems.subscribe(items => {
+        if (!badge) return;
+        const totalItems = Object.values(items).reduce((acc, item) => acc + item.quantity, 0);
+        if (totalItems > 0) {
+            badge.textContent = totalItems.toString();
+            badge.style.opacity = '1';
+        } else {
+            badge.style.opacity = '0';
+        }
+    });
+
+    const accountLink = document.getElementById('header-account-link');
+    if (accountLink) {
+        if (localStorage.getItem('jwt')) {
+            accountLink.setAttribute('href', '/account');
+        }
+    }
+</script>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+    <a href="/" class={currentPath === '/' ? "active" : ""}>Home</a>
+    <a href="/about" class={currentPath === '/about' ? "active" : ""}>Our Story</a>
+    <a href="/products" class={currentPath === '/products' ? "active" : ""}>Products</a>
+    <a href="/journeys" class={currentPath === '/journeys' ? "active" : ""}>Journeys</a>
+    <a href="/process" class={currentPath === '/process' ? "active" : ""}>How We Grow</a>
+    <a href="/blogs" class={currentPath === '/blogs' || currentPath.startsWith('/blog/') ? "active" : ""}>Blog</a>
+    <a href="/contact" class={currentPath === '/contact' ? "active" : ""}>Contact</a>
+</div>

@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "journeys",
+  "info": {
+    "singularName": "journey",
+    "pluralName": "journeys",
+    "displayName": "Journey"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "image": {
+      "type": "string"
+    },
+    "farmer": {
+      "type": "string",
+      "required": true
+    },
+    "location": {
+      "type": "string"
+    },
+    "productStatus": {
+      "type": "string"
+    },
+    "nextHarvest": {
+      "type": "string"
+    },
+    "whatsappLink": {
+      "type": "string"
+    },
+    "times": {
+      "type": "text"
+    },
+    "images": {
+      "type": "text"
+    }
+  }
+}

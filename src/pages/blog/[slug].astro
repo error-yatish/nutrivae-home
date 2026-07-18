@@ -1,0 +1,62 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog');
+  return blogEntries.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const formattedDate = entry.data.date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<Layout title={`${entry.data.title} | Nutrivae Blog`} description={entry.data.description} currentPath={`/blog/${entry.slug}`}>
+    <main style="padding-top: 100px;">
+        <article class="article-container" data-animate="fade-up">
+            <a href="/blogs" class="back-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Back to Blogs
+            </a>
+            <div class="article-header">
+                <div class="article-meta">{entry.data.category} • {formattedDate}</div>
+                <h1 class="article-title">{entry.data.title}</h1>
+            </div>
+            
+            <img src={entry.data.image} alt={entry.data.title} class="article-hero">
+            
+            <div class="article-body">
+                <Content />
+            </div>
+        </article>
+
+        <section class="related-articles">
+            <h2>Read Next</h2>
+            <div class="blog-grid" style="max-width: 1200px; margin: 0 auto;">
+                <article class="blog-card" data-animate="fade-up">
+                    <img src="/assets/farm_field.png" alt="Farm field" />
+                    <h3>Sustainable sourcing explained</h3>
+                    <p>How we ensure responsible farming practices.</p>
+                    <a href="#" class="btn-text-link">Read more →</a>
+                </article>
+                <article class="blog-card" data-animate="fade-up" data-delay="100">
+                    <img src="/assets/harvesting.png" alt="Harvesting crops" />
+                    <h3>Cooking with Nutrivae</h3>
+                    <p>Simple recipes to incorporate our products.</p>
+                    <a href="#" class="btn-text-link">Read more →</a>
+                </article>
+            </div>
+        </section>
+    </main>
+</Layout>

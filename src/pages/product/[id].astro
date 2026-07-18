@@ -1,0 +1,447 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getProducts } from '../../services/api';
+
+const { id } = Astro.params;
+
+// Fetch all products (in SSR mode, this happens on every request)
+const allProducts = await getProducts();
+const product = allProducts.find(p => p.data.id === id);
+
+// Return 404 if product doesn't exist
+if (!product) {
+    return new Response(null, {
+        status: 404,
+        statusText: 'Not found'
+    });
+}
+
+// Ensure images and times arrays are parsed correctly for the journey
+let journeyTimes = [];
+let journeyImages = [];
+if (product.data.journey) {
+    journeyTimes = product.data.journey.times ? product.data.journey.times.split('|') : [];
+    journeyImages = product.data.journey.images ? product.data.journey.images.split('|') : [];
+}
+---
+
+<Layout title={`${product.data.name} | Nutrivae Foods`} currentPath="/products">
+    <main class="product-detail-page">
+        <!-- Hero Section with Breadcrumbs -->
+        <div class="breadcrumb-container">
+            <a href="/products">← Back to Products</a>
+        </div>
+
+        <section class="product-hero">
+            <div class="product-image-container">
+                {product.data.isNew && <span class="prod-badge">New Arrival</span>}
+                <img src={`/${product.data.image.replace(/^\/?/, '')}`} alt={product.data.name} class="main-image" />
+            </div>
+
+            <div class="product-info-container">
+                <span class="category-tag">{product.data.category.toUpperCase()}</span>
+                <h1 class="product-title">{product.data.name}</h1>
+                <p class="product-subtitle">{product.data.subtitle}</p>
+                
+                {product.data.description && (
+                    <div class="product-description">
+                        <p>{product.data.description}</p>
+                    </div>
+                )}
+
+                <div class="specs-list">
+                    {product.data.specs.map(spec => (
+                        <span class="spec-item">{spec}</span>
+                    ))}
+                </div>
+
+                {product.data.nutrition && (
+                    <div class="nutrition-box">
+                        <h3>Nutritional Profile</h3>
+                        <p>{product.data.nutrition}</p>
+                    </div>
+                )}
+
+                <div class="action-box">
+                    <button id="add-to-cart-btn" class="btn-primary" data-product={JSON.stringify(product.data)}>Add to Cart - ₹{product.data.price}</button>
+                    <p class="shipping-note">Free shipping on orders over ₹500</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Inline Journey Section -->
+        {product.data.journey && (
+            <section class="product-journey-section">
+                <div class="journey-header">
+                    <h2>The Farm Journey</h2>
+                    <p>Trace the origins of your <strong>{product.data.name}</strong> back to the source.</p>
+                    <div class="farm-meta">
+                        <span class="meta-item">🧑‍🌾 Farmer: <strong>{product.data.journey.farmer}</strong></span>
+                        <span class="meta-item">📍 Location: <a href={`https://maps.google.com/?q=${encodeURIComponent(product.data.journey.location)}`} target="_blank">{product.data.journey.location}</a></span>
+                    </div>
+                </div>
+
+                <div class="timeline-container">
+                    <div class="timeline-line"></div>
+
+                    {['Soil Preparation', 'Planting', 'Harvesting', 'Processing', 'Packaging'].map((stepName, idx) => (
+                        <div class="timeline-step">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>{stepName} <span class="step-time">{journeyTimes[idx]?.trim()}</span></h4>
+                                
+                                {journeyImages[idx] && journeyImages[idx].trim() !== '' && (
+                                    <div class="step-gallery">
+                                        {journeyImages[idx].split(',').map(imgSrc => (
+                                            imgSrc.trim() && <img src={`/${imgSrc.trim().replace(/^\/?/, '')}`} alt={`${stepName} Image`} />
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+        )}
+    </main>
+</Layout>
+
+<style>
+    .product-detail-page {
+        padding-top: 100px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-bottom: 80px;
+    }
+
+    .breadcrumb-container {
+        padding: 20px;
+    }
+    .breadcrumb-container a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+    }
+    .breadcrumb-container a:hover {
+        color: var(--green);
+    }
+
+    /* Hero Section */
+    .product-hero {
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+        padding: 40px 20px;
+    }
+
+    @media (min-width: 900px) {
+        .product-hero {
+            flex-direction: row;
+            align-items: center;
+        }
+    }
+
+    .product-image-container {
+        flex: 1;
+        position: relative;
+        background: #f8f6f0;
+        border-radius: 20px;
+        padding: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .prod-badge {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: var(--green);
+        color: white;
+        padding: 6px 16px;
+        border-radius: 30px;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    .main-image {
+        max-width: 100%;
+        max-height: 500px;
+        object-fit: contain;
+        filter: drop-shadow(0 20px 30px rgba(0,0,0,0.1));
+    }
+
+    .product-info-container {
+        flex: 1;
+    }
+
+    .category-tag {
+        color: var(--accent);
+        font-weight: 700;
+        letter-spacing: 1px;
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+        display: inline-block;
+    }
+
+    .product-title {
+        font-size: 3.5rem;
+        font-family: var(--font-heading);
+        color: var(--text-dark);
+        margin-bottom: 10px;
+        line-height: 1.1;
+    }
+
+    .product-subtitle {
+        font-size: 1.4rem;
+        color: var(--text-muted);
+        margin-bottom: 20px;
+    }
+
+    .product-description {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: var(--text-color);
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .specs-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 40px;
+    }
+
+    .spec-item {
+        background: rgba(136, 176, 75, 0.1);
+        color: var(--green);
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 0.95rem;
+    }
+
+    .nutrition-box {
+        background: white;
+        border: 1px solid rgba(0,0,0,0.05);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 40px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    }
+
+    .nutrition-box h3 {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+        color: var(--text-dark);
+    }
+    
+    .nutrition-box p {
+        color: var(--text-muted);
+        font-weight: 500;
+    }
+
+    .action-box {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .btn-primary {
+        background: var(--green);
+        color: white;
+        text-decoration: none;
+        padding: 18px 40px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+        display: inline-block;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(136, 176, 75, 0.3);
+        background: #73963f;
+    }
+
+    .shipping-note {
+        text-align: center;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+    }
+
+    /* Journey Section */
+    .product-journey-section {
+        margin-top: 80px;
+        padding: 60px 20px;
+        background: var(--bg-secondary);
+        border-radius: 30px;
+    }
+
+    .journey-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .journey-header h2 {
+        font-size: 2.5rem;
+        font-family: var(--font-heading);
+        color: var(--text-dark);
+        margin-bottom: 15px;
+    }
+
+    .journey-header p {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        max-width: 600px;
+        margin: 0 auto 25px auto;
+    }
+
+    .farm-meta {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+    }
+
+    .meta-item {
+        background: white;
+        padding: 10px 20px;
+        border-radius: 50px;
+        font-size: 0.95rem;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+    
+    .meta-item a {
+        color: var(--green);
+    }
+
+    /* Timeline Styling */
+    .timeline-container {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px 0;
+    }
+
+    .timeline-line {
+        position: absolute;
+        left: 20px;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: rgba(136, 176, 75, 0.3);
+    }
+
+    @media (min-width: 768px) {
+        .timeline-line {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
+    .timeline-step {
+        position: relative;
+        margin-bottom: 50px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .timeline-dot {
+        position: absolute;
+        left: 20px;
+        transform: translateX(-50%);
+        width: 20px;
+        height: 20px;
+        background: white;
+        border: 4px solid var(--green);
+        border-radius: 50%;
+        z-index: 2;
+    }
+
+    .timeline-content {
+        margin-left: 60px;
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        width: calc(100% - 60px);
+        position: relative;
+    }
+
+    @media (min-width: 768px) {
+        .timeline-step {
+            justify-content: flex-end;
+        }
+        .timeline-step:nth-child(odd) {
+            justify-content: flex-start;
+        }
+        .timeline-dot {
+            left: 50%;
+        }
+        .timeline-content {
+            margin-left: 0;
+            width: 45%;
+        }
+        .timeline-step:nth-child(odd) .timeline-content {
+            text-align: right;
+        }
+    }
+
+    .timeline-content h4 {
+        color: var(--text-dark);
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .step-time {
+        font-size: 0.85rem;
+        color: var(--accent);
+        font-weight: 600;
+        background: rgba(224, 159, 62, 0.1);
+        padding: 4px 10px;
+        border-radius: 20px;
+    }
+
+    .step-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .step-gallery img {
+        width: 100%;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 8px;
+        transition: transform 0.3s;
+    }
+
+    .step-gallery img:hover {
+        transform: scale(1.05);
+    }
+</style>
+
+<script>
+    import { addToCart } from '../../store/cartStore.js';
+    
+    const btn = document.getElementById('add-to-cart-btn');
+    if (btn) {
+        btn.addEventListener('click', () => {
+            const product = JSON.parse(btn.dataset.product);
+            addToCart(product);
+            // Open the cart drawer
+            window.dispatchEvent(new Event('open-cart'));
+        });
+    }
+</script>

@@ -11,7 +11,7 @@ const { currentPath } = Astro.props;
             <a href="/" class={currentPath === '/' ? "nav-link active" : "nav-link"}>Home</a>
             <a href="/about" class={currentPath === '/about' ? "nav-link active" : "nav-link"}>Our Story</a>
             <a href="/products" class={currentPath === '/products' ? "nav-link active" : "nav-link"}>Products</a>
-            <a href="/journeys" class={currentPath === '/journeys' ? "nav-link active" : "nav-link"}>Journeys</a>
+            {FEATURES.enableFarmOrigins && <a href="/farm-origins" class={currentPath === '/farm-origins' ? "nav-link active" : "nav-link"}>Farm Origins</a>}
             <a href="/process" class={currentPath === '/process' ? "nav-link active" : "nav-link"}>How We Grow</a>
             <a href="/blogs" class={currentPath === '/blogs' || currentPath.startsWith('/blog/') ? "nav-link active" : "nav-link"}>Blog</a>
             <a href="/contact" class={currentPath === '/contact' ? "nav-link active" : "nav-link"}>Contact</a>
@@ -72,7 +72,7 @@ const { currentPath } = Astro.props;
     <a href="/" class={currentPath === '/' ? "active" : ""}>Home</a>
     <a href="/about" class={currentPath === '/about' ? "active" : ""}>Our Story</a>
     <a href="/products" class={currentPath === '/products' ? "active" : ""}>Products</a>
-    <a href="/journeys" class={currentPath === '/journeys' ? "active" : ""}>Journeys</a>
+    {FEATURES.enableFarmOrigins && <a href="/farm-origins" class={currentPath === '/farm-origins' ? "active" : ""}>Farm Origins</a>}
     <a href="/process" class={currentPath === '/process' ? "active" : ""}>How We Grow</a>
     <a href="/blogs" class={currentPath === '/blogs' || currentPath.startsWith('/blog/') ? "active" : ""}>Blog</a>
     <a href="/contact" class={currentPath === '/contact' ? "active" : ""}>Contact</a>

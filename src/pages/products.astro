@@ -330,11 +330,18 @@ const allProducts = await getProducts();
         const closeFilterDrawer = document.getElementById("close-filter-drawer");
         const applyFilterBtn = document.getElementById("apply-filter-btn");
 
-        let currentFilter = "all";
-        let currentSort = "default";
-        let currentSearch = "";
-        let currentPage = 1;
+        let currentFilter = sessionStorage.getItem('products_currentFilter') || "all";
+        let currentSort = sessionStorage.getItem('products_currentSort') || "default";
+        let currentSearch = sessionStorage.getItem('products_currentSearch') || "";
+        let currentPage = parseInt(sessionStorage.getItem('products_currentPage')) || 1;
         const itemsPerPage = 12;
+
+        function saveState() {
+          sessionStorage.setItem('products_currentFilter', currentFilter);
+          sessionStorage.setItem('products_currentSort', currentSort);
+          sessionStorage.setItem('products_currentSearch', currentSearch);
+          sessionStorage.setItem('products_currentPage', currentPage);
+        }
         let filteredItems = Array.from(products);
 
         // Sort Toggle
@@ -358,7 +365,7 @@ const allProducts = await getProducts();
               e.target.classList.add("active");
               currentSort = e.target.getAttribute("data-sort");
               sortDropdown.classList.remove("active");
-              applyFilters();
+              applyFilters(true);
             });
           });
         }
@@ -403,6 +410,7 @@ const allProducts = await getProducts();
             btn.style.margin = "0 5px";
             btn.addEventListener("click", () => {
               currentPage = i;
+              saveState();
               updateView();
               const grid = document.querySelector(".full-grid");
               if (grid) {
@@ -439,7 +447,7 @@ const allProducts = await getProducts();
           renderPagination();
         }
 
-        function applyFilters() {
+        function applyFilters(resetPage = true) {
           filteredItems = Array.from(products).filter((p) => {
             const cat = p.getAttribute("data-category") || "";
             const name = p.getAttribute("data-name") || "";
@@ -454,7 +462,8 @@ const allProducts = await getProducts();
             filteredItems.sort((a, b) => parseFloat(b.getAttribute("data-price") || 0) - parseFloat(a.getAttribute("data-price") || 0));
           }
 
-          currentPage = 1;
+          if (resetPage) currentPage = 1;
+          saveState();
           updateView();
         }
 
@@ -464,7 +473,7 @@ const allProducts = await getProducts();
             filterBtns.forEach((b) => b.classList.remove("active"));
             btn.classList.add("active");
             currentFilter = btn.getAttribute("data-filter");
-            applyFilters();
+            applyFilters(true);
           });
         });
 
@@ -472,12 +481,32 @@ const allProducts = await getProducts();
         if (searchInput) {
           searchInput.addEventListener("input", (e) => {
             currentSearch = e.target.value.toLowerCase();
-            applyFilters();
+            applyFilters(true);
           });
         }
         
+        // Sync search input
+        if (searchInput && currentSearch) {
+          searchInput.value = currentSearch;
+        }
+
+        // Sync sort options
+        sortOptions.forEach(opt => {
+          if (opt.getAttribute("data-sort") === currentSort) {
+            opt.classList.add("active");
+          } else {
+            opt.classList.remove("active");
+          }
+        });
+
+        // Sync active state of filter buttons
+        filterBtns.forEach((b) => {
+          if (b.getAttribute("data-filter") === currentFilter) b.classList.add("active");
+          else b.classList.remove("active");
+        });
+        
         // Run immediately
-        applyFilters();
+        applyFilters(false);
       })();
 
     // Journey Modal Functionality (Restored)

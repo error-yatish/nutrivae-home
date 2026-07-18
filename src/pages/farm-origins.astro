@@ -1,48 +1,70 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { getJourneys } from '../services/api';
+import { FEATURES } from '../config';
 
 const allJourneys = await getJourneys();
 ---
 
-<Layout title="Journeys | Nutrivae Foods" currentPath="/journeys">
-  <main>
-    <div class="page-header-minimal">
-      <h1>Farm Journeys</h1>
-      <p>Track the journey of your food from farm to table.</p>
+<Layout title="Farm Origins | Nutrivae Foods" currentPath="/farm-origins">
+  <main style="background: #FFFDFC; padding-top: 100px;">
+    
+    <!-- Header Area -->
+    <div style="max-width: 1300px; margin: 0 auto; padding: 20px;">
+      <!-- Breadcrumbs -->
+      <div style="font-size: 0.85rem; color: #666; margin-bottom: 20px;">
+        <span>Home</span> &gt; <span>Shop</span> &gt; <span style="font-weight: 600; color: #333;">Farm Origins</span>
+      </div>
+      
+      <!-- Title & Filters -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <h1 style="margin: 0; font-size: 1.8rem; font-weight: 700;">Farm Origins</h1>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <div style="position: relative;">
+            <input type="text" id="journeySearch" placeholder="Search origins..." style="padding: 8px 15px 8px 35px; border: 1px solid #ddd; border-radius: 20px; font-size: 0.9rem; outline: none; width: 200px; transition: all 0.2s;">
+            <svg style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #888;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </div>
+          <div style="position: relative;">
+            <button id="sort-btn" style="background: white; border: 1px solid #ddd; padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+              Sort <span>⇅</span>
+            </button>
+            <div id="sort-dropdown" class="sort-dropdown">
+              <button class="sort-option active" data-sort="default">Default</button>
+              <button class="sort-option" data-sort="recent">Most Recent</button>
+            </div>
+          </div>
+          <button id="filter-drawer-btn" style="background: white; border: 1px solid #ddd; padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+            All filters <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+          </button>
+        </div>
+      </div>
     </div>
 
-    <!-- Filter bar -->
-    <div class="filter-bar">
-      <button class="filter-btn active" data-filter="all">All Farms</button>
-      <button class="filter-btn" data-filter="soil">Soil Preparation</button>
-      <button class="filter-btn" data-filter="planting">Planting</button>
-      <button class="filter-btn" data-filter="harvesting">Harvesting</button>
-      <button class="filter-btn" data-filter="ready">Ready for Sale</button>
-    </div>
-
-    <!-- Search Bar -->
-    <div class="products-search-bar" style="margin-top: 2rem;">
-      <input
-        type="text"
-        id="journeySearch"
-        placeholder="Search by product, farmer, or location..."
-      />
+    <!-- Filter Drawer (hidden by default) -->
+    <div id="filter-drawer-overlay" class="filter-drawer-overlay"></div>
+    <div id="filter-drawer" class="filter-drawer">
+      <div class="filter-drawer-header">
+        <h3 style="margin: 0; font-size: 1.2rem;">Filters</h3>
+        <button id="close-filter-drawer" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+      </div>
+      <div class="filter-drawer-body">
+        <div class="filter-group">
+          <h4>Stage</h4>
+          <button class="filter-btn active" data-filter="all">All Farms</button>
+          <button class="filter-btn" data-filter="soil">Soil Preparation</button>
+          <button class="filter-btn" data-filter="planting">Planting</button>
+          <button class="filter-btn" data-filter="harvesting">Harvesting</button>
+          <button class="filter-btn" data-filter="ready">Ready for Sale</button>
+        </div>
+      </div>
+      <div style="padding: 20px; border-top: 1px solid #eee;">
+        <button id="apply-filter-btn" style="width: 100%; padding: 12px; background: var(--green); color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">Show Results</button>
+      </div>
     </div>
 
     <!-- Journey List -->
-    <section class="journey-list-container">
-      <div
-        class="category-header"
-        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;"
-      >
-        <h2
-          id="currentCategoryLabel"
-          style="font-size: 1.5rem; font-style: italic;"
-        >
-          All Farms
-        </h2>
-      </div>
+    <section class="journey-list-container" style="max-width: 1300px; margin: 0 auto; padding: 0 20px;">
+
       <div class="journey-list" id="products-grid">
         {
           allJourneys.map((j) => (
@@ -65,15 +87,32 @@ const allJourneys = await getJourneys();
                 </span>
               </div>
               <div class="jr-availability">
-                {j.data.nextHarvest && (
+                {j.data.nextHarvest && j.data.status !== "Ready for Sale" && j.data.category !== "ready" && (
                   <span class="next-harvest" style="color: var(--accent);">
-                    Next Harvest: {j.data.nextHarvest}
+                    Next Harvest: {j.data.nextHarvest.replace("Next Harvest: ", "")}
                   </span>
                 )}
-                {j.data.whatsappLink && (
-                  <a href={j.data.whatsappLink} target="_blank" class="buy-btn">
-                    Buy via WhatsApp ↗
-                  </a>
+                {j.data.category === 'ready' && (
+                  FEATURES.enableCartAndAuth ? (
+                    <div class="cart-control-container" data-product-id={j.id} data-product-json={JSON.stringify({ id: j.id, name: j.data.name, price: 150, image: j.data.image })} style="display: inline-block; width: 100px; vertical-align: middle; margin-left: 15px;">
+                      <button class="add-init-btn">
+                        ADD
+                      </button>
+                      <div class="qty-control">
+                        <button class="qty-dec-btn qty-btn">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                        <span class="qty-val">1</span>
+                        <button class="qty-inc-btn qty-btn" style="font-size: 1.2rem; line-height: 1;">+</button>
+                      </div>
+                    </div>
+                  ) : (
+                    j.data.whatsappLink && (
+                      <a href={j.data.whatsappLink} target="_blank" class="buy-btn" style="margin-left: 15px; display: inline-block;">
+                        Buy via WhatsApp ↗
+                      </a>
+                    )
+                  )
                 )}
               </div>
               <div class="jr-action">
@@ -413,11 +452,50 @@ const allJourneys = await getJourneys();
     <script is:inline>
       (function () {
         console.log("Init filter & pagination for journeys");
+        const journeyModalOverlay = document.getElementById("journey-modal");
+        if (journeyModalOverlay) {
+            document.body.appendChild(journeyModalOverlay);
+        }
         const filterBtns = document.querySelectorAll(".filter-btn");
         const products = document.querySelectorAll(".journey-row");
         const categoryLabel = document.getElementById("currentCategoryLabel");
         const paginationContainer = document.querySelector(".pagination");
         const searchInput = document.getElementById("journeySearch");
+
+        const sortBtn = document.getElementById("sort-btn");
+        const sortDropdown = document.getElementById("sort-dropdown");
+        const filterDrawerBtn = document.getElementById("filter-drawer-btn");
+        const filterDrawerOverlay = document.getElementById("filter-drawer-overlay");
+        const filterDrawer = document.getElementById("filter-drawer");
+        const closeFilterDrawer = document.getElementById("close-filter-drawer");
+        const applyFilterBtn = document.getElementById("apply-filter-btn");
+
+        if (filterDrawerBtn && filterDrawer && filterDrawerOverlay) {
+          filterDrawerBtn.addEventListener("click", () => {
+            filterDrawer.classList.add("active");
+            filterDrawerOverlay.classList.add("active");
+          });
+          const closeDrawer = () => {
+            filterDrawer.classList.remove("active");
+            filterDrawerOverlay.classList.remove("active");
+          };
+          closeFilterDrawer.addEventListener("click", closeDrawer);
+          filterDrawerOverlay.addEventListener("click", closeDrawer);
+          if (applyFilterBtn) applyFilterBtn.addEventListener("click", closeDrawer);
+        }
+
+        if (sortBtn && sortDropdown) {
+          sortBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            sortDropdown.classList.toggle("active");
+          });
+          document.addEventListener("click", (e) => {
+            if (!sortDropdown.contains(e.target) && e.target !== sortBtn) {
+              sortDropdown.classList.remove("active");
+            }
+          });
+        }
+
 
         let currentFilter = "all";
         let currentSearch = "";
@@ -574,7 +652,10 @@ const allJourneys = await getJourneys();
                                       img.src = srcStr.startsWith('/') ? srcStr : '/' + srcStr;
                                       img.alt = `Gallery Image ${imgIndex + 1}`;
                                       // Responsive grid style for gallery items
-                                      img.style.width = stepImgs.length > 1 ? 'calc(50% - 5px)' : '100%';
+                                      img.style.width = stepImgs.length > 1 ? 'calc(50% - 5px)' : 'auto';
+                                      img.style.maxWidth = '100%';
+                                      img.style.maxHeight = '250px';
+                                      img.style.display = 'block';
                                       img.style.maxHeight = '150px';
                                       img.style.objectFit = 'cover';
                                       img.style.borderRadius = '8px';

@@ -1,0 +1,427 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { FEATURES } from '../../config';
+
+if (!FEATURES.enableCartAndAuth) {
+    return Astro.redirect('/');
+}
+---
+
+<Layout title="Product Management | Admin" currentPath="/admin/products">
+  <main class="admin-page">
+    <div class="admin-container">
+      <div class="admin-header">
+        <h2 style="display: flex; align-items: center;">Product Management <span id="total-count" style="font-size: 1rem; color: #666; font-weight: normal; margin-left: 10px;">(0 total)</span></h2>
+        <button id="add-btn" class="btn-primary">Add Product</button>
+      </div>
+
+      <div class="admin-content">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="products-tbody">
+            <tr>
+              <td colspan="5" style="text-align: center; padding: 20px;">Loading products...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal for Add / Edit -->
+  <div id="product-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-title">Add Product</h3>
+        <button id="modal-close" class="close-btn">&times;</button>
+      </div>
+      <form id="product-form">
+        <input type="hidden" id="p-documentId" />
+        
+        <div class="form-grid">
+          <div class="input-group">
+            <label>Name</label>
+            <input type="text" id="p-name" required />
+          </div>
+          <div class="input-group">
+            <label>Slug (URL ID)</label>
+            <input type="text" id="p-slug" required />
+          </div>
+          <div class="input-group">
+            <label>Subtitle</label>
+            <input type="text" id="p-subtitle" />
+          </div>
+          <div class="input-group">
+            <label>Category</label>
+            <input type="text" id="p-category" />
+          </div>
+          <div class="input-group">
+            <label>Price (₹)</label>
+            <input type="number" id="p-price" step="0.01" />
+          </div>
+          <div class="input-group">
+            <label>Image (Upload or URL)</label>
+            <div style="display: flex; gap: 10px;">
+                <input type="file" id="p-image-upload" accept="image/*" style="flex: 1;" />
+                <input type="text" id="p-image" placeholder="Or enter URL" style="flex: 1;" />
+            </div>
+          </div>
+        </div>
+        
+        <div class="input-group" style="margin-top: 15px;">
+          <label>Description</label>
+          <textarea id="p-description" rows="3"></textarea>
+        </div>
+        
+        <div class="input-group" style="margin-top: 15px;">
+          <label>WhatsApp Link</label>
+          <input type="text" id="p-whatsappLink" />
+        </div>
+        
+        <p id="modal-error" style="color: red; margin-top: 10px; display: none;"></p>
+        
+        <div class="modal-footer" style="margin-top: 20px; text-align: right;">
+          <button type="button" id="modal-cancel" class="btn-secondary" style="margin-right: 10px;">Cancel</button>
+          <button type="submit" id="modal-save" class="btn-primary">Save Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <style is:global>
+    .admin-page {
+      padding: 120px 20px 80px;
+      min-height: 80vh;
+      background: var(--bg-color);
+    }
+    .admin-container {
+      background: white;
+      padding: 30px;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+      max-width: 1000px;
+      margin: 0 auto;
+      border: 1px solid var(--cream-dark);
+    }
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .admin-header h2 { margin: 0; }
+    
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .admin-table th, .admin-table td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #eaeaea;
+      text-align: left;
+    }
+    .admin-table th {
+      background: #f9f9f9;
+      font-weight: bold;
+    }
+    .admin-table img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+    
+    .btn-secondary {
+      background: white;
+      color: var(--green);
+      border: 1px solid var(--green);
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover {
+      background: var(--cream);
+    }
+    
+    .btn-danger {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+    .btn-danger:hover {
+      background: #b02a37;
+    }
+    
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: white;
+      padding: 25px;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    .input-group input, .input-group textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  </style>
+
+  <script>
+    import { getUser, checkIsAdmin } from '../../services/auth';
+    import { getProducts, createProduct, updateProduct, deleteProduct } from '../../services/api';
+
+    let currentProducts = [];
+    let jwtToken = null;
+
+    async function initAdmin() {
+        jwtToken = localStorage.getItem('jwt');
+        if (!jwtToken) {
+            window.location.href = '/login';
+            return;
+        }
+
+        try {
+            const user = await getUser(jwtToken);
+            if (!user) {
+                window.location.href = '/login';
+                return;
+            }
+            const isAdmin = await checkIsAdmin(jwtToken);
+                            
+            if (!isAdmin) {
+                alert("Access Denied: You must be a Store Admin to view this page.");
+                window.location.href = '/account';
+                return;
+            }
+
+            await fetchAndRender();
+        } catch(err) {
+            console.error("Admin Load Error:", err);
+            alert("Permission Denied: Your Strapi user role needs 'me' and 'find' permissions.");
+            window.location.href = '/login';
+        }
+    }
+
+    async function fetchAndRender() {
+        const tbody = document.getElementById('products-tbody');
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 20px;">Loading...</td></tr>`;
+        
+        currentProducts = await getProducts();
+        
+        if (currentProducts.length === 0) {
+            document.getElementById('total-count').textContent = `(0 total)`;
+            tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No products found.</td></tr>';
+            return;
+        }
+        
+        document.getElementById('total-count').textContent = `(${currentProducts.length} total)`;
+
+        tbody.innerHTML = currentProducts.map(p => {
+            const data = p.data;
+            let imageSrc = data.image || '';
+            if (imageSrc && !imageSrc.startsWith('http') && !imageSrc.startsWith('/')) {
+                imageSrc = '/' + imageSrc; // Fix relative path resolving issue
+            }
+            return `
+                <tr>
+                    <td><img src="${imageSrc}" onerror="this.onerror=null;this.src='https://placehold.co/50x50?text=No+Image';" alt="img" /></td>
+                    <td><strong>${data.name}</strong><br/><small>${data.id}</small></td>
+                    <td>${data.category || '-'}</td>
+                    <td>₹${data.price || 0}</td>
+                    <td>
+                        <button class="btn-secondary edit-btn" style="padding: 4px 8px; font-size: 0.8rem; margin-right: 5px;" data-id="${data.documentId}">Edit</button>
+                        <button class="btn-primary delete-btn" style="padding: 4px 8px; font-size: 0.8rem; background: #dc3545;" data-id="${data.documentId}">Delete</button>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+
+        // Attach event listeners to buttons
+        document.querySelectorAll('.edit-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => openModal(e.target.dataset.id));
+        });
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => handleDelete(e.target.dataset.id));
+        });
+    }
+
+    // Modal Logic
+    const modal = document.getElementById('product-modal');
+    const form = document.getElementById('product-form');
+    const modalTitle = document.getElementById('modal-title');
+    const modalError = document.getElementById('modal-error');
+
+    document.getElementById('add-btn').addEventListener('click', () => openModal());
+    document.getElementById('modal-close').addEventListener('click', closeModal);
+    document.getElementById('modal-cancel').addEventListener('click', closeModal);
+
+    function openModal(documentId = null) {
+        modalError.style.display = 'none';
+        form.reset();
+        
+        if (documentId) {
+            modalTitle.textContent = "Edit Product";
+            const product = currentProducts.find(p => p.data.documentId === documentId);
+            if (product) {
+                const data = product.data;
+                document.getElementById('p-documentId').value = data.documentId;
+                document.getElementById('p-name').value = data.name || '';
+                document.getElementById('p-slug').value = data.id || '';
+                document.getElementById('p-subtitle').value = data.subtitle || '';
+                document.getElementById('p-category').value = data.category || '';
+                document.getElementById('p-price').value = data.price || '';
+                document.getElementById('p-image').value = data.image || '';
+                document.getElementById('p-description').value = data.description || '';
+                document.getElementById('p-whatsappLink').value = data.whatsappLink || '';
+            }
+        } else {
+            modalTitle.textContent = "Add Product";
+            document.getElementById('p-documentId').value = "";
+        }
+        
+        modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+        modal.style.display = 'none';
+    }
+
+    document.getElementById('p-image-upload').addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const submitBtn = document.getElementById('modal-save');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Uploading...';
+        
+        const formData = new FormData();
+        formData.append('files', file);
+        try {
+            const STRAPI_URL = import.meta.env.PUBLIC_STRAPI_URL || 'http://127.0.0.1:1337';
+            const res = await fetch(`${STRAPI_URL}/api/upload`, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${jwtToken}` },
+                body: formData
+            });
+            if (res.ok) {
+                const data = await res.json();
+                if (data && data.length > 0) {
+                    const imageUrl = data[0].url;
+                    document.getElementById('p-image').value = imageUrl.startsWith('http') ? imageUrl : STRAPI_URL + imageUrl;
+                }
+            } else {
+                const err = await res.text();
+                alert("Image upload failed: " + err);
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Image upload failed.");
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Save Product';
+        }
+    });
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        modalError.style.display = 'none';
+        const submitBtn = document.getElementById('modal-save');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Saving...';
+
+        const payload = {
+            name: document.getElementById('p-name').value,
+            slug: document.getElementById('p-slug').value,
+            subtitle: document.getElementById('p-subtitle').value,
+            category: document.getElementById('p-category').value,
+            price: parseFloat(document.getElementById('p-price').value),
+            image: document.getElementById('p-image').value,
+            description: document.getElementById('p-description').value,
+            whatsappLink: document.getElementById('p-whatsappLink').value,
+        };
+
+        const docId = document.getElementById('p-documentId').value;
+
+        try {
+            if (docId) {
+                await updateProduct(jwtToken, docId, payload);
+            } else {
+                await createProduct(jwtToken, payload);
+            }
+            closeModal();
+            await fetchAndRender();
+        } catch(err) {
+            console.error(err);
+            modalError.textContent = err.message || "An error occurred.";
+            modalError.style.display = 'block';
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Save Product';
+        }
+    });
+
+    async function handleDelete(documentId) {
+        if (!confirm("Are you sure you want to delete this product?")) return;
+        
+        try {
+            await deleteProduct(jwtToken, documentId);
+            await fetchAndRender();
+        } catch(err) {
+            console.error(err);
+            alert("Failed to delete product: " + err.message);
+        }
+    }
+
+    initAdmin();
+  </script>
+</Layout>

@@ -1,0 +1,303 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { FEATURES } from '../config';
+
+if (!FEATURES.enableCartAndAuth) {
+    return Astro.redirect('/');
+}
+---
+<Layout title="Checkout | Nutrivae" currentPath="/checkout">
+  <main class="checkout-page">
+    <div class="checkout-container">
+      <div class="checkout-form-section">
+        <h2>Shipping & Billing</h2>
+        <form id="checkout-form">
+          <div class="input-row">
+            <div class="input-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" required />
+            </div>
+            <div class="input-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" required />
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" required />
+          </div>
+          <div class="input-group">
+            <label for="address">Street Address</label>
+            <textarea id="address" rows="3" required></textarea>
+          </div>
+          <div class="input-row">
+            <div class="input-group">
+              <label for="city">City</label>
+              <input type="text" id="city" required />
+            </div>
+            <div class="input-group">
+              <label for="pincode">Pincode</label>
+              <input type="text" id="pincode" required />
+            </div>
+          </div>
+          <div class="payment-section">
+            <h3>Payment Method</h3>
+            <div class="payment-option">
+               <input type="radio" id="cod" name="payment" value="cod" checked>
+               <label for="cod">Cash on Delivery (Pay when you receive the order)</label>
+            </div>
+          </div>
+          
+          <div id="checkout-error" style="color: red; margin-top: 15px; display: none;"></div>
+          <button type="submit" class="btn-primary" id="place-order-btn" style="width: 100%; margin-top: 20px;">Place Order</button>
+        </form>
+      </div>
+      
+      <div class="checkout-summary-section">
+        <h2>Order Summary</h2>
+        <div id="checkout-items-list" class="checkout-items">
+           <!-- Rendered via JS -->
+        </div>
+        <div class="checkout-total">
+           <span>Total:</span>
+           <span id="checkout-total-price">₹0</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <style>
+    .checkout-page {
+      padding: 120px 20px 80px;
+      background: var(--bg-color);
+      min-height: 80vh;
+    }
+    .checkout-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    @media (min-width: 768px) {
+      .checkout-container {
+        grid-template-columns: 3fr 2fr;
+      }
+    }
+    .checkout-form-section, .checkout-summary-section {
+      background: white;
+      padding: 30px;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      border: 1px solid var(--cream-dark);
+    }
+    h2 {
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+    .input-row {
+      display: flex;
+      gap: 15px;
+    }
+    .input-row .input-group {
+      flex: 1;
+    }
+    .input-group {
+      margin-bottom: 15px;
+    }
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--text-color);
+    }
+    .input-group input, .input-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-family: inherit;
+    }
+    .payment-section {
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+    .payment-section h3 {
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+    }
+    .payment-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .checkout-items {
+      max-height: 400px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+    }
+    :global(.checkout-item) {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    :global(.checkout-item img) {
+      width: 60px;
+      height: 60px;
+      border-radius: 6px;
+      object-fit: cover;
+      margin-right: 15px;
+    }
+    :global(.checkout-item-info) {
+      flex: 1;
+    }
+    :global(.checkout-item-title) {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    :global(.checkout-item-qty) {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .checkout-total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.3rem;
+      font-weight: bold;
+      padding-top: 15px;
+      border-top: 2px solid #eee;
+    }
+  </style>
+
+  <script>
+    import { cartItems, getCartTotal, clearCart } from '../store/cartStore.js';
+    import { getUser } from '../services/auth.js';
+
+    // Populate user details if logged in
+    async function prefillForm() {
+        const token = localStorage.getItem('jwt');
+        if (token) {
+            const user = await getUser(token);
+            if (user) {
+                const nameEl = document.getElementById('name');
+                const emailEl = document.getElementById('email');
+                if (nameEl && !nameEl.value) nameEl.value = user.username;
+                if (emailEl) {
+                    emailEl.value = user.email;
+                    emailEl.readOnly = true;
+                    emailEl.style.backgroundColor = "#f0f0f0";
+                    emailEl.style.cursor = "not-allowed";
+                }
+            }
+        }
+    }
+    prefillForm();
+
+    const itemsContainer = document.getElementById('checkout-items-list');
+    const totalEl = document.getElementById('checkout-total-price');
+    const form = document.getElementById('checkout-form');
+    const errorEl = document.getElementById('checkout-error');
+    const btn = document.getElementById('place-order-btn');
+
+    function renderSummary() {
+        const items = cartItems.get();
+        const itemsArr = Object.values(items);
+        
+        if (itemsArr.length === 0) {
+            window.location.href = '/products';
+            return;
+        }
+
+        if (itemsContainer) {
+            itemsContainer.innerHTML = '';
+            itemsArr.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'checkout-item';
+                div.innerHTML = `
+                    <img src="/${item.image.replace(/^\/?/, '')}" alt="${item.name}">
+                    <div class="checkout-item-info">
+                        <div class="checkout-item-title">${item.name}</div>
+                        <div class="checkout-item-qty">Qty: ${item.quantity}</div>
+                    </div>
+                    <div class="checkout-item-price">₹${item.price * item.quantity}</div>
+                `;
+                itemsContainer.appendChild(div);
+            });
+        }
+        if (totalEl) {
+            totalEl.textContent = `₹${getCartTotal()}`;
+        }
+    }
+
+    // Subscribe to cart changes
+    cartItems.subscribe(() => {
+        renderSummary();
+    });
+
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (btn) {
+                btn.disabled = true;
+                btn.textContent = 'Processing...';
+            }
+            if (errorEl) errorEl.style.display = 'none';
+
+            const items = cartItems.get();
+            const payload = {
+                data: {
+                    customerName: document.getElementById('name').value,
+                    customerEmail: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    address: document.getElementById('address').value,
+                    city: document.getElementById('city').value,
+                    pincode: document.getElementById('pincode').value,
+                    items: Object.values(items),
+                    totalAmount: getCartTotal(),
+                    status: 'Pending'
+                }
+            };
+
+            const token = localStorage.getItem('jwt');
+            const headers = {
+                'Content-Type': 'application/json'
+            };
+            if (token) {
+                headers['Authorization'] = `Bearer ${token}`;
+            }
+
+            try {
+                // Determine Strapi URL dynamically or fallback
+                const STRAPI_URL = 'http://127.0.0.1:1337';
+                const res = await fetch(`${STRAPI_URL}/api/orders`, {
+                    method: 'POST',
+                    headers,
+                    body: JSON.stringify(payload)
+                });
+                
+                if (res.ok) {
+                    const result = await res.json();
+                    clearCart();
+                    window.location.href = `/order-success?id=${result.data.documentId || result.data.id}`;
+                } else {
+                    const err = await res.json();
+                    throw new Error(err.error?.message || 'Failed to place order');
+                }
+            } catch (err) {
+                console.error(err);
+                if (errorEl) {
+                    errorEl.textContent = err.message;
+                    errorEl.style.display = 'block';
+                }
+                if (btn) {
+                    btn.disabled = false;
+                    btn.textContent = 'Place Order';
+                }
+            }
+        });
+    }
+  </script>
+</Layout>

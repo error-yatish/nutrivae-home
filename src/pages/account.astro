@@ -1,11 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { FEATURES } from '../config';
+
+if (!FEATURES.enableCartAndAuth) {
+    return Astro.redirect('/');
+}
 ---
 
 <Layout title="My Account | Nutrivae" currentPath="/account">
   <main class="account-page">
     <div class="account-container">
-      <h2>My Account</h2>
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h2 style="margin: 0;">My Account</h2>
+        <a href="/admin/products" id="admin-dashboard-btn" class="btn-secondary" style="display: none; text-decoration: none; padding: 8px 16px; border-radius: var(--radius-md);">Store Admin Panel</a>
+      </div>
       <p id="welcome-message">Welcome back!</p>
       
       <div class="account-details">
@@ -14,11 +22,22 @@ import Layout from '../layouts/Layout.astro';
          <p><strong>Email:</strong> <span id="user-email">Loading...</span></p>
       </div>
 
+      <div class="order-history">
+         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+           <h3>Order History</h3>
+           <input type="text" id="order-search" placeholder="Search orders..." style="padding: 8px; border-radius: 4px; border: 1px solid #ccc; width: 200px;" />
+         </div>
+         <div id="orders-list">
+            <p>Loading orders...</p>
+         </div>
+         <div id="order-pagination" style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;"></div>
+      </div>
+
       <button id="logout-btn" class="btn-primary" style="margin-top: 20px;">Log Out</button>
     </div>
   </main>
 
-  <style>
+  <style is:global>
     .account-page {
       padding: 150px 20px 80px;
       min-height: 80vh;
@@ -30,7 +49,7 @@ import Layout from '../layouts/Layout.astro';
       border-radius: var(--radius-lg);
       box-shadow: 0 10px 40px rgba(0,0,0,0.05);
       width: 100%;
-      max-width: 600px;
+      max-width: 800px;
       margin: 0 auto;
       border: 1px solid var(--cream-dark);
     }
@@ -38,7 +57,7 @@ import Layout from '../layouts/Layout.astro';
       margin-bottom: 10px;
       font-size: 2rem;
     }
-    .account-details {
+    .account-details, .order-history {
       margin-top: 30px;
       padding: 20px;
       background: #f9f9f9;
@@ -47,10 +66,34 @@ import Layout from '../layouts/Layout.astro';
     .account-details p {
        margin-bottom: 10px;
     }
+    .order-card {
+      background: white;
+      border: 1px solid #eaeaea;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eaeaea;
+    }
+    .order-status {
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+    .status-Pending { background: #fff3cd; color: #856404; }
+    .status-Processing { background: #cce5ff; color: #004085; }
+    .status-Completed { background: #d4edda; color: #155724; }
+    .status-Cancelled { background: #f8d7da; color: #721c24; }
   </style>
 
   <script>
-    import { getUser, logout } from '../services/auth';
+    import { getUser, getUserOrders, logout, checkIsAdmin } from '../services/auth';
 
     async function initAccount() {
         const token = localStorage.getItem('jwt');
@@ -66,12 +109,108 @@ import Layout from '../layouts/Layout.astro';
                 const emailEl = document.getElementById('user-email');
                 if (nameEl) nameEl.textContent = user.username;
                 if (emailEl) emailEl.textContent = user.email;
+                
+                const isAdmin = await checkIsAdmin(token);
+                
+                if (isAdmin) {
+                    const adminBtn = document.getElementById('admin-dashboard-btn');
+                    if (adminBtn) adminBtn.style.display = 'block';
+                }
+                
+                // Fetch Orders
+                const ordersResponse = await getUserOrders(token);
+                let allOrders = [];
+                if (ordersResponse && ordersResponse.data) {
+                    allOrders = ordersResponse.data;
+                }
+                
+                let currentPage = 1;
+                const itemsPerPage = 3;
+                let filteredOrders = [...allOrders];
+
+                const ordersList = document.getElementById('orders-list');
+                const paginationEl = document.getElementById('order-pagination');
+                const searchInput = document.getElementById('order-search');
+
+                function renderOrders() {
+                    if (filteredOrders.length === 0) {
+                        ordersList.innerHTML = '<p>No orders found.</p>';
+                        if (paginationEl) paginationEl.innerHTML = '';
+                        return;
+                    }
+
+                    const startIndex = (currentPage - 1) * itemsPerPage;
+                    const paginated = filteredOrders.slice(startIndex, startIndex + itemsPerPage);
+
+                    ordersList.innerHTML = paginated.map(order => {
+                        const date = new Date(order.createdAt).toLocaleDateString();
+                        const items = order.items || [];
+                        const itemsSummary = items.map(item => `${item.name} (x${item.quantity})`).join(', ');
+                        
+                        return `
+                        <div class="order-card">
+                            <div class="order-header">
+                                <div><strong>Order #${order.documentId || order.id}</strong> <br/> <small>${date}</small></div>
+                                <div><span class="order-status status-${order.status}">${order.status}</span></div>
+                            </div>
+                            <div class="order-body">
+                                <p style="font-size: 0.9rem; margin-bottom: 5px;"><strong>Items:</strong> ${itemsSummary}</p>
+                                <p style="font-size: 0.95rem;"><strong>Total:</strong> ₹${order.totalAmount}</p>
+                            </div>
+                        </div>
+                        `;
+                    }).join('');
+
+                    renderPagination();
+                }
+
+                function renderPagination() {
+                    if (!paginationEl) return;
+                    const totalPages = Math.ceil(filteredOrders.length / itemsPerPage);
+                    if (totalPages <= 1) {
+                        paginationEl.innerHTML = '';
+                        return;
+                    }
+
+                    let html = '';
+                    if (currentPage > 1) {
+                        html += `<button class="btn-primary" style="padding: 5px 10px; font-size: 0.9rem;" id="prev-page">Prev</button>`;
+                    }
+                    html += `<span style="display: flex; align-items: center;">Page ${currentPage} of ${totalPages}</span>`;
+                    if (currentPage < totalPages) {
+                        html += `<button class="btn-primary" style="padding: 5px 10px; font-size: 0.9rem;" id="next-page">Next</button>`;
+                    }
+                    
+                    paginationEl.innerHTML = html;
+
+                    const prevBtn = document.getElementById('prev-page');
+                    if (prevBtn) prevBtn.addEventListener('click', () => { currentPage--; renderOrders(); });
+                    
+                    const nextBtn = document.getElementById('next-page');
+                    if (nextBtn) nextBtn.addEventListener('click', () => { currentPage++; renderOrders(); });
+                }
+
+                if (searchInput) {
+                    searchInput.addEventListener('input', (e) => {
+                        const term = e.target.value.toLowerCase();
+                        filteredOrders = allOrders.filter(o => 
+                            (o.documentId || o.id).toString().toLowerCase().includes(term) ||
+                            (o.items || []).some(i => i.name.toLowerCase().includes(term)) ||
+                            (o.status || '').toLowerCase().includes(term)
+                        );
+                        currentPage = 1;
+                        renderOrders();
+                    });
+                }
+
+                renderOrders();
             } else {
                 logout();
                 window.location.href = '/login';
             }
         } catch(err) {
-            console.error(err);
+            console.error("Account Load Error:", err);
+            alert("Error loading account data. This usually means your Strapi user role is missing 'find' or 'me' permissions.");
             logout();
             window.location.href = '/login';
         }

@@ -25,6 +25,7 @@ export async function getProducts() {
             // But our Astro expects { data: { id, name, ... } } for each product.
             return json.data.map((p) => ({
                 data: {
+                    documentId: p.documentId || p.id,
                     id: p.slug,
                     name: p.name,
                     subtitle: p.subtitle,
@@ -114,4 +115,41 @@ export async function getBlogs() {
     
     // Fallback if Strapi is completely down
     return [];
+}
+
+export async function createProduct(jwt, payload) {
+    const res = await fetch(`${STRAPI_URL}/api/products`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${jwt}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ data: payload })
+    });
+    if (!res.ok) throw new Error(await res.text());
+    return res.json();
+}
+
+export async function updateProduct(jwt, documentId, payload) {
+    const res = await fetch(`${STRAPI_URL}/api/products/${documentId}`, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `Bearer ${jwt}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ data: payload })
+    });
+    if (!res.ok) throw new Error(await res.text());
+    return res.json();
+}
+
+export async function deleteProduct(jwt, documentId) {
+    const res = await fetch(`${STRAPI_URL}/api/products/${documentId}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${jwt}`
+        }
+    });
+    if (!res.ok) throw new Error(await res.text());
+    return res.json();
 }

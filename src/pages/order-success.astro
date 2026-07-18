@@ -1,0 +1,81 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { FEATURES } from '../config';
+
+if (!FEATURES.enableCartAndAuth) {
+    return Astro.redirect('/');
+}
+---
+<Layout title="Order Successful | Nutrivae Foods" currentPath="">
+  <main class="success-page">
+    <div class="success-container">
+      <div class="success-icon">✓</div>
+      <h1>Order Placed Successfully!</h1>
+      <p>Thank you for choosing Nutrivae Foods.</p>
+      <div class="order-details">
+        <p>Your order reference ID is: <strong id="order-id">Loading...</strong></p>
+        <p>We will process your order soon and you will pay via Cash on Delivery.</p>
+      </div>
+      <a href="/products" class="btn-primary" style="margin-top: 30px; display: inline-block;">Continue Shopping</a>
+    </div>
+  </main>
+
+  <style>
+    .success-page {
+      padding: 150px 20px 80px;
+      min-height: 80vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--bg-color);
+      text-align: center;
+    }
+    .success-container {
+      background: white;
+      padding: 50px;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+      max-width: 600px;
+      width: 100%;
+      border: 1px solid var(--cream-dark);
+    }
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--green);
+      color: white;
+      font-size: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+    h1 {
+      margin-bottom: 10px;
+      color: var(--text-dark);
+    }
+    .order-details {
+      margin-top: 30px;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      color: var(--text-color);
+    }
+  </style>
+
+  <script>
+    import { cartItems } from '../store/cartStore.js';
+    
+    // Clear the cart
+    cartItems.set({});
+
+    // Display order ID from URL
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    const orderIdEl = document.getElementById('order-id');
+    if (orderIdEl) {
+        orderIdEl.textContent = id || 'N/A';
+    }
+  </script>
+</Layout>

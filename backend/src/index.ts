@@ -136,6 +136,25 @@ export default {
           }
         }
       }
+      // --- 4. Auto-grant Order Create Permission ---
+      try {
+        for (const type of ['public', 'authenticated']) {
+          const role = await strapi.query('plugin::users-permissions.role').findOne({ where: { type } });
+          if (role) {
+            const permExists = await strapi.query('plugin::users-permissions.permission').findOne({
+              where: { action: 'api::order.order.create', role: role.id }
+            });
+            if (!permExists) {
+              await strapi.query('plugin::users-permissions.permission').create({
+                data: { action: 'api::order.order.create', role: role.id }
+              });
+              console.log(`[Bootstrap] Granted order create permission to ${type} role.`);
+            }
+          }
+        }
+      } catch (e) {
+        console.error('[Bootstrap] Error setting order permissions:', e);
+      }
     }
   },
 };

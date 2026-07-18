@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import { getBlogs, getProducts, getJourneys } from '../services/api';
 
 const allPosts = await getBlogs();
+const allProducts = await getProducts();
 ---
 
 <Layout title="Nutrivae Foods | Thoughtfully Grown, Carefully Crafted." currentPath="/">
@@ -193,102 +194,74 @@ const allPosts = await getBlogs();
 
         <!-- ===================== PRODUCTS ===================== -->
         <section class="products-section" id="products">
-            <div class="products-header" data-animate="fade-up">
-                <span class="section-tag">What We Make</span>
-                <h2>Simple foods,<br><em>trusted nutrition.</em></h2>
-                <a href="/products" class="btn-text-link">View all products ↗</a>
+            <div class="products-header" data-animate="fade-up" style="text-align: center; display: block;">
+                <span class="section-tag" style="margin: 0 auto;">What We Make</span>
+                <h2 style="margin-top: 15px;">Simple foods,<br><em>trusted nutrition.</em></h2>
             </div>
 
-            <div class="products-grid">
-                <div class="product-card" data-animate="fade-up" data-delay="0" id="product-toor">
-                    <div class="product-card-img">
-                        <img src="assets/toor_daal.png" alt="Toor Daal">
-                        <div class="product-tag">Bestseller</div>
+            
+<div class="full-grid">
+              {
+                allProducts.slice(0, 4).map((p, i) => (
+                  <div
+                    class="prod-item animated"
+                    data-animate="fade-up"
+                    data-delay={(i % 4) * 100}
+                    data-category={p.data.category}
+                    data-price={p.data.price}
+                    style="min-width: 280px; max-width: 300px; flex-shrink: 0;"
+                  >
+                    <div class="prod-img">
+                      <div class="prod-badge-row">
+                        {p.data.isNew ? <span class="prod-label green">Bestseller</span> : null}
+                      </div>
+                      <a href={`/product/${p.data.id}`}>
+                        <img
+                          src={p.data.image}
+                          alt={p.data.name}
+                        />
+                      </a>
                     </div>
-                    <div class="product-card-info">
-                        <h3>Toor Daal</h3>
-                        <p>High Protein · 100% Vegetarian</p>
-                        <div class="product-meta">
-                            <span class="product-badge">🌱 Clean Label</span>
-                            <a href="/product/toor-daal" class="product-cta" id="toor-cta">View Details →</a>
+                    <div class="prod-info" style="padding: 15px; display: flex; flex-direction: column; flex-grow: 1;">
+                      <div style="flex-grow: 1;">
+                        <h3 style="margin: 0 0 5px 0; font-size: 0.95rem; font-weight: 600; line-height: 1.3;">
+                          <a href={`/product/${p.data.id}`} style="color: #333; text-decoration: none;">
+                            {p.data.name}
+                          </a>
+                        </h3>
+                        <p class="prod-sub" style="margin: 0 0 10px 0; color: #888; font-size: 0.8rem;">{p.data.subtitle || "1 Unit"}</p>
+                        
+                        <div style="display: flex; align-items: center; gap: 5px; margin-bottom: 12px; font-size: 0.8rem;">
+                          <span style="color: #00875A;">★★★★☆</span>
+                          <span style="color: #00875A; font-weight: 600;">4.{Math.floor(Math.random() * 5) + 1}</span>
+                          <span style="color: #888;">({Math.floor(Math.random() * 500) + 50})</span>
                         </div>
-                    </div>
-                </div>
-
-                <div class="product-card featured" data-animate="fade-up" data-delay="100" id="product-moong">
-                    <div class="product-card-img">
-                        <img src="assets/moong_daal.png" alt="Moong Daal">
-                        <div class="product-tag">Popular</div>
-                    </div>
-                    <div class="product-card-info">
-                        <h3>Moong Daal</h3>
-                        <p>High Protein · 100% Vegetarian</p>
-                        <div class="product-meta">
-                            <span class="product-badge">🌱 Clean Label</span>
-                            <a href="/product/moong-daal" class="product-cta" id="moong-cta">View Details →</a>
+                      </div>
+                      
+                      <div class="prod-price-action" style="margin-top: auto;">
+                        <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 15px;">
+                          <span style="font-weight: 700; font-size: 1.1rem; color: #333;">₹{p.data.price}</span>
+                          <span style="text-decoration: line-through; color: #888; font-size: 0.85rem;">₹{Math.floor(p.data.price * 1.25)}</span>
+                          <span style="color: #00875A; font-size: 0.8rem; font-weight: 600;">22% off</span>
                         </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-animate="fade-up" data-delay="200" id="product-mungfali">
-                    <div class="product-card-img">
-                        <img src="assets/mungfali.png" alt="Mungfali">
-                    </div>
-                    <div class="product-card-info">
-                        <h3>Mungfali</h3>
-                        <p>High Protein · 100% Vegetarian</p>
-                        <div class="product-meta">
-                            <span class="product-badge">🌱 Clean Label</span>
-                            <a href="/product/mungfali" class="product-cta" id="mungfali-cta">View Details →</a>
+                        
+                        <div class="cart-control-container" data-product-id={p.data.id} data-product-json={JSON.stringify(p.data)}>
+                          <button class="add-init-btn">
+                            ADD
+                          </button>
+                          <div class="qty-control">
+                            <button class="qty-dec-btn qty-btn">
+                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                            </button>
+                            <span class="qty-val">1</span>
+                            <button class="qty-inc-btn qty-btn" style="font-size: 1.2rem; line-height: 1;">+</button>
+                          </div>
                         </div>
+                      </div>
                     </div>
-                </div>
-
-                <!-- Black Till -->
-                <div class="product-card" data-animate="fade-up" data-delay="300" id="product-black-till">
-                    <div class="product-card-img">
-                        <img src="assets/black_till.png" alt="Black Till">
-                    </div>
-                    <div class="product-card-info">
-                        <h3>Black Till</h3>
-                        <p>High Protein · 100% Vegetarian</p>
-                        <div class="product-meta">
-                            <span class="product-badge">🌱 Clean Label</span>
-                            <a href="/product/black-till" class="product-cta">View Details →</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Whole Mung -->
-                <div class="product-card" data-animate="fade-up" data-delay="400" id="product-whole-mung">
-                    <div class="product-card-img">
-                        <img src="assets/whole_mung.png" alt="Whole Mung">
-                    </div>
-                    <div class="product-card-info">
-                        <h3>Whole Mung</h3>
-                        <p>High Protein · 100% Vegetarian</p>
-                        <div class="product-meta">
-                            <span class="product-badge">🌱 Clean Label</span>
-                            <a href="/product/whole-mung" class="product-cta">View Details →</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Basmati Rice -->
-                <div class="product-card" data-animate="fade-up" data-delay="500" id="product-basmati">
-                    <div class="product-card-img">
-                        <img src="assets/basmati_rice.png" alt="Basmati Rice">
-                    </div>
-                    <div class="product-card-info">
-                        <h3>Basmati Rice</h3>
-                        <p>1000 Vegetarian</p>
-                        <div class="product-meta">
-                            <span class="product-badge">🌱 Clean Label</span>
-                            <a href="/product/basmati-rice" class="product-cta">View Details →</a>
-                        </div>
-                    </div>
-                </div>
-
+                  </div>
+                ))
+              }
             </div>
 
             <div class="view-all-container" data-animate="fade-up" style="text-align: center; margin-top: 4rem;">

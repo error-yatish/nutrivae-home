@@ -218,4 +218,16 @@
             totalPriceEl.textContent = `₹${getCartTotal()}`;
         }
     });
+
+    const checkoutBtn = document.getElementById('checkout-btn');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', () => {
+            const items = cartItems.get();
+            if (Object.keys(items).length > 0) {
+                window.location.href = '/checkout';
+            } else {
+                alert('Your cart is empty!');
+            }
+        });
+    }
 </script>

@@ -48,3 +48,7 @@ export function getCartTotal() {
     const items = cartItems.get();
     return Object.values(items).reduce((total, item) => total + (item.price * item.quantity), 0);
 }
+
+export function clearCart() {
+    cartItems.set({});
+}

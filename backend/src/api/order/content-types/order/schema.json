@@ -4,36 +4,55 @@
   "info": {
     "singularName": "order",
     "pluralName": "orders",
-    "displayName": "Order"
+    "displayName": "Order",
+    "description": "Stores customer orders from the checkout"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "user": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.user"
+    "customerName": {
+      "type": "string",
+      "required": true
     },
-    "products": {
-      "type": "json"
+    "customerEmail": {
+      "type": "email",
+      "required": true
+    },
+    "phone": {
+      "type": "string",
+      "required": true
+    },
+    "address": {
+      "type": "text",
+      "required": true
+    },
+    "city": {
+      "type": "string",
+      "required": true
+    },
+    "pincode": {
+      "type": "string",
+      "required": true
+    },
+    "items": {
+      "type": "json",
+      "required": true
     },
     "totalAmount": {
-      "type": "decimal"
+      "type": "decimal",
+      "required": true
     },
     "status": {
       "type": "enumeration",
       "enum": [
-        "pending",
-        "paid",
-        "shipped",
-        "delivered"
+        "Pending",
+        "Processing",
+        "Completed",
+        "Cancelled"
       ],
-      "default": "pending"
-    },
-    "stripeSessionId": {
-      "type": "string"
+      "default": "Pending"
     }
   }
 }

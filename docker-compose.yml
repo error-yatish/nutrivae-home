@@ -1,0 +1,69 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: nutrivae-db
+    environment:
+      POSTGRES_DB: strapi
+      POSTGRES_USER: strapi
+      POSTGRES_PASSWORD: strapisecretpassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U strapi -d strapi"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: nutrivae-backend
+    ports:
+      - "1337:1337"
+    environment:
+      HOST: 0.0.0.0
+      PORT: 1337
+      NODE_ENV: production
+      # Database connection
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_NAME: strapi
+      DATABASE_USERNAME: strapi
+      DATABASE_PASSWORD: strapisecretpassword
+      DATABASE_SSL: "false"
+      # Strapi security secrets (change these for production!)
+      APP_KEYS: "APPKEY1234APPKEY1234,APPKEY5678APPKEY5678"
+      API_TOKEN_SALT: "APITOKENSALT12345"
+      ADMIN_JWT_SECRET: "ADMINJWTSECRET12345"
+      TRANSFER_TOKEN_SALT: "TRANSFERTOKENSALT12345"
+      JWT_SECRET: "JWTSECRET12345"
+      ENCRYPTION_KEY: "ENCRYPTIONKEY12345"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - backend-uploads:/app/public/uploads
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: nutrivae-frontend
+    ports:
+      - "4321:4321"
+    environment:
+      HOST: 0.0.0.0
+      PORT: 4321
+      IS_DOCKER: "true"
+      STRAPI_URL: "http://backend:1337"
+      PUBLIC_STRAPI_URL: "http://localhost:1337"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
+  backend-uploads:

@@ -1,0 +1,12 @@
+node_modules
+dist
+.astro
+.vercel
+.git
+.github
+*.log
+.env
+.env.production
+.env.local
+Dockerfile*
+docker-compose*

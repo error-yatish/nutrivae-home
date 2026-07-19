@@ -21,6 +21,16 @@ export default {
    * run jobs, or perform some special logic.
    */
   async bootstrap({ strapi }: any) {
+    try {
+      const productsCount = await strapi.db.query('api::product.product').count();
+      if (productsCount === 0) {
+        console.log('[Bootstrap] Database is empty. Running seed-db.js script...');
+        const seed = require('../../seed-db.js');
+        await seed({ strapi });
+      }
+    } catch (e) {
+      console.error('[Bootstrap] Error seeding database:', e);
+    }
 
     
     // Path to the frontend Astro content folder

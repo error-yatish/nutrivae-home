@@ -1,4 +1,8 @@
-// import type { Core } from '@strapi/strapi';
+import fs from 'fs';
+import path from 'path';
+
+declare const __dirname: string;
+
 
 export default {
   /**
@@ -17,8 +21,7 @@ export default {
    * run jobs, or perform some special logic.
    */
   async bootstrap({ strapi }: any) {
-    const fs = require('fs');
-    const path = require('path');
+
     
     // Path to the frontend Astro content folder
     // When compiled, this file is in backend/dist/src/index.js

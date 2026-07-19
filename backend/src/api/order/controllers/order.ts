@@ -3,8 +3,8 @@
  */
 import { factories } from '@strapi/strapi';
 
-export default factories.createCoreController('api::order.order', ({ strapi }) => ({
-  async find(ctx) {
+export default factories.createCoreController('api::order.order', ({ strapi }: { strapi: any }) => ({
+  async find(ctx: any) {
     const user = ctx.state.user;
     
     // Only allow fetching if authenticated

@@ -1,5 +1,6 @@
 
 
+import { getCollection } from 'astro:content';
 import { STRAPI_URL, STRAPI_TOKEN } from '../config';
 
 /**
@@ -21,7 +22,7 @@ export async function getProducts() {
             // Map Strapi's response format to match the frontend expectations
             // Strapi returns an array in json.data. Each item has .documentId, .name, etc.
             // But our Astro expects { data: { id, name, ... } } for each product.
-            return json.data.map((p) => ({
+            return json.data.map((p: any) => ({
                 data: {
                     documentId: p.documentId || p.id,
                     id: p.slug,
@@ -355,7 +356,7 @@ export async function getBlogs() {
         if(res.ok) {
             const json = await res.json();
             // Map to Astro collection format { slug, data: { title, ... }, body: content }
-            return json.data.map((b) => ({
+            return json.data.map((b: any) => ({
                 slug: b.slug,
                 data: {
                     title: b.title,
@@ -374,7 +375,7 @@ export async function getBlogs() {
     return [];
 }
 
-export async function createProduct(jwt, payload) {
+export async function createProduct(jwt: string, payload: any) {
     const res = await fetch(`${STRAPI_URL}/api/products`, {
         method: 'POST',
         headers: {
@@ -387,7 +388,7 @@ export async function createProduct(jwt, payload) {
     return res.json();
 }
 
-export async function updateProduct(jwt, documentId, payload) {
+export async function updateProduct(jwt: string, documentId: string, payload: any) {
     const res = await fetch(`${STRAPI_URL}/api/products/${documentId}`, {
         method: 'PUT',
         headers: {
@@ -400,7 +401,7 @@ export async function updateProduct(jwt, documentId, payload) {
     return res.json();
 }
 
-export async function deleteProduct(jwt, documentId) {
+export async function deleteProduct(jwt: string, documentId: string) {
     const res = await fetch(`${STRAPI_URL}/api/products/${documentId}`, {
         method: 'DELETE',
         headers: {

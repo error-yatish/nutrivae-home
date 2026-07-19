@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CartDrawer from '../components/CartDrawer.astro';
+import '../../public/styles.css';
 
 interface Props {
 	title: string;
@@ -28,7 +29,6 @@ const PUBLIC_STRAPI_URL = (typeof globalThis !== 'undefined' && (globalThis as a
         rel="stylesheet">
     <!-- Lenis smooth scroll -->
     <script is:inline src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
-    <link rel="stylesheet" href="/styles.css">
     <script is:inline define:vars={{ PUBLIC_STRAPI_URL }}>
         window.STRAPI_URL = PUBLIC_STRAPI_URL;
     </script>

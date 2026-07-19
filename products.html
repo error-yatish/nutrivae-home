@@ -16,609 +16,41 @@
     <!-- Lenis smooth scroll -->
     <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .page-hero {
-            min-height: 50vh;
-            display: flex;
-            align-items: center;
-            padding: 10rem 5% 4rem;
-            background: var(--cream);
-            position: relative;
-            overflow: hidden;
-        }
 
-        .page-hero-inner {
-            max-width: 700px;
-        }
-
-        .page-hero h1 {
-            font-size: clamp(3rem, 5vw, 5rem);
-            color: var(--green);
-            margin-bottom: 1rem;
-        }
-
-        .page-hero p {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-        }
-
-        .page-hero-blob {
-            position: absolute;
-            right: -10%;
-            top: 10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(ellipse, rgba(74, 124, 95, 0.1) 0%, transparent 70%);
-            border-radius: 60% 40% 70% 30%;
-            animation: blobMorph 8s ease-in-out infinite;
-        }
-
-        /* Filter bar */
-        .filter-bar {
-            display: flex;
-            gap: 0.75rem;
-            padding: 1.5rem 5%;
-            flex-wrap: wrap;
-            border-bottom: 1px solid rgba(28, 61, 46, 0.08);
-        }
-
-        .filter-btn {
-            padding: 0.5rem 1.3rem;
-            border-radius: 99px;
-            border: 1.5px solid rgba(28, 61, 46, 0.18);
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--green);
-            cursor: pointer;
-            background: none;
-            transition: all 0.3s;
-        }
-
-        .filter-btn:hover,
-        .filter-btn.active {
-            background: var(--green);
-            color: var(--white);
-            border-color: var(--green);
-        }
-
-        /* Full products grid */
-        .full-products {
-            padding: 4rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .full-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .prod-item {
-            background: var(--card-bg);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            border: 1px solid rgba(28, 61, 46, 0.07);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .prod-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(28, 61, 46, 0.13);
-        }
-
-        .prod-img {
-            background: var(--cream-dark);
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .prod-img img {
-            max-height: 180px;
-            max-width: 80%;
-            object-fit: contain;
-            transition: transform 0.6s ease;
-        }
-
-        .prod-item:hover .prod-img img {
-            transform: scale(1.08) translateY(-5px);
-        }
-
-        .prod-badge-row {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            display: flex;
-            gap: 0.5rem;
-            z-index: 2;
-        }
-
-        .prod-label {
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            padding: 0.3rem 0.8rem;
-            border-radius: 99px;
-        }
-
-        .prod-label.green {
-            background: var(--green);
-            color: var(--white);
-        }
-
-        .prod-label.gold {
-            background: var(--accent);
-            color: var(--white);
-        }
-
-        .prod-info {
-            padding: 1.2rem 1.5rem 1.5rem;
-        }
-
-        .prod-info h3 {
-            font-size: 1.3rem;
-            color: var(--green);
-            margin-bottom: 0.35rem;
-        }
-
-        .prod-info .prod-sub {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-        }
-
-        .prod-specs {
-            display: flex;
-            gap: 0.6rem;
-            flex-wrap: wrap;
-            margin-bottom: 1.2rem;
-        }
-
-        .spec-tag {
-            font-size: 0.78rem;
-            font-weight: 500;
-            color: var(--green-mid);
-            background: rgba(46, 94, 70, 0.08);
-            padding: 0.3rem 0.7rem;
-            border-radius: 99px;
-        }
-
-        .prod-foot {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-top: 1.2rem;
-            border-top: 1px solid rgba(28, 61, 46, 0.07);
-        }
-
-        .prod-cta-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.65rem 1.5rem;
-            background: var(--green);
-            color: var(--white);
-            border-radius: 99px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .prod-cta-btn:hover {
-            background: var(--green-mid);
-            transform: translateX(3px);
-        }
-
-        .prod-nutrition {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        /* Promise strip */
-        .promise-strip {
-            background: var(--cream-dark);
-            padding: 3rem 5%;
-        }
-
-        .promise-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            text-align: center;
-        }
-
-        .promise-item .p-icon {
-            font-size: 2rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .promise-item h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--green);
-            margin-bottom: 0.3rem;
-        }
-
-        .promise-item p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        @media (max-width: 900px) {
-            .full-grid {
-                grid-template-columns: repeat(2, 1fr);
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "ItemList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "Product",
+            "name": "Toor Daal",
+            "description": "High Protein Yellow Split Pigeon Peas, 100% Vegetarian, Plant-Based.",
+            "brand": {
+              "@type": "Brand",
+              "name": "Nutrivae Foods"
             }
-
-            .promise-inner {
-                grid-template-columns: repeat(2, 1fr);
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "Product",
+            "name": "Moong Daal",
+            "description": "High Protein Yellow Split Mung Beans, 100% Vegetarian, Plant-Based.",
+            "brand": {
+              "@type": "Brand",
+              "name": "Nutrivae Foods"
             }
+          }
         }
-
-        @media (max-width: 600px) {
-            .full-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .promise-inner {
-                grid-template-columns: 1fr;
-            }
-        }
-        /* Journey Modal Styles */
-        .journey-modal-body::-webkit-scrollbar {
-            width: 8px;
-        }
-        .journey-modal-body::-webkit-scrollbar-track {
-            background: rgba(28, 61, 46, 0.05);
-            border-radius: 4px;
-        }
-        .journey-modal-body::-webkit-scrollbar-thumb {
-            background: rgba(28, 61, 46, 0.2);
-            border-radius: 4px;
-        }
-        .journey-modal-body::-webkit-scrollbar-thumb:hover {
-            background: rgba(28, 61, 46, 0.4);
-        }
-
-        /* Lightbox Styles */
-        #lightbox-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 10000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            cursor: zoom-out;
-        }
-        #lightbox-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        #lightbox-img {
-            max-width: 90%;
-            max-height: 90vh;
-            border-radius: 4px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            transform: scale(0.95);
-        }
-        #lightbox-overlay.active #lightbox-img {
-            transform: scale(1);
-        }
-        .journey-modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s ease;
-        }
-        .journey-modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .journey-modal-content {
-            background: var(--cream);
-            width: 90%;
-            max-width: 600px;
-            max-height: 90vh;
-            border-radius: var(--radius-lg);
-            position: relative;
-            transform: translateY(30px);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            overflow: hidden; /* Clips the scrollbar to the border radius */
-        }
-        .journey-modal-body {
-            padding: 3rem;
-            max-height: 90vh;
-            overflow-y: auto;
-            border-radius: var(--radius-lg);
-            box-sizing: border-box;
-            overscroll-behavior: contain;
-        }
-        .journey-modal-overlay.active .journey-modal-content {
-            transform: translateY(0);
-        }
-        .journey-modal-close {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: none;
-            border: none;
-            font-size: 2rem;
-            line-height: 1;
-            color: var(--green);
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-        .journey-modal-close:hover {
-            color: var(--accent);
-        }
-        .journey-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        .journey-header h2 {
-            font-size: 2rem;
-            color: var(--green);
-            margin: 0.5rem 0;
-        }
-        .journey-meta {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-        }
-        .journey-meta strong {
-            color: var(--text);
-        }
-        .timeline-container {
-            position: relative;
-            padding-left: 2rem;
-        }
-        .timeline-line {
-            position: absolute;
-            left: 5px;
-            top: 10px;
-            bottom: 10px;
-            width: 2px;
-            background: rgba(28, 61, 46, 0.1);
-        }
-        .timeline-step {
-            position: relative;
-            margin-bottom: 2rem;
-        }
-        .timeline-step:last-child {
-            margin-bottom: 0;
-        }
-        .timeline-dot {
-            position: absolute;
-            left: -2rem;
-            top: 5px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--accent);
-            border: 3px solid var(--cream);
-            box-shadow: 0 0 0 2px rgba(28, 61, 46, 0.1);
-            z-index: 2;
-        }
-        .timeline-content h4 {
-            font-size: 1.1rem;
-            color: var(--green);
-            margin-bottom: 0.3rem;
-        }
-        .timeline-content p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        /* Journey Button */
-        .btn-journey {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.65rem 1rem;
-            background: transparent;
-            color: var(--green);
-            border: 1.5px solid rgba(28, 61, 46, 0.2);
-            border-radius: 99px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            white-space: nowrap;
-        }
-        .btn-journey:hover {
-            border-color: var(--green);
-            background: rgba(28, 61, 46, 0.04);
-        }
-        .prod-foot-actions {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-        .prod-foot {
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-        .prod-foot .prod-nutrition {
-            width: 100%;
-            margin-top: 0.5rem;
-        }
-    
-        /* Products Layout (Sidebar + Grid) */
-        .products-layout {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 2rem;
-            padding: 4rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-            align-items: start;
-        }
-
-        /* Filter Sidebar */
-        .filter-sidebar { max-height: calc(100vh - 120px); overflow-y: auto;
-            background: var(--card-bg);
-            border-radius: var(--radius-lg);
-            border: 1px solid rgba(28, 61, 46, 0.07);
-            padding: 2rem;
-            position: sticky;
-            top: 100px;
-        }
-
-        .filter-group {
-            margin-bottom: 2rem;
-        }
-
-        .filter-group:last-child {
-            margin-bottom: 0;
-        }
-
-        .filter-group h4 {
-            font-size: 1.1rem;
-            color: var(--green);
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(28, 61, 46, 0.07);
-        }
-
-        .filter-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .filter-list label {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.95rem;
-            color: var(--text);
-            cursor: pointer;
-        }
-
-        .filter-list input[type="checkbox"] {
-            accent-color: var(--green);
-            width: 16px;
-            height: 16px;
-            cursor: pointer;
-        }
-
-        .filter-group .filter-btn {
-            display: block;
-            width: 100%;
-            text-align: left;
-            padding: 0.6rem 1rem;
-            margin-bottom: 0.5rem;
-            border-radius: 6px;
-            font-size: 0.95rem;
-        }
-
-        /* Main content */
-        .products-main {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .products-search-bar {
-            width: 100%;
-        }
-
-        .products-search-bar input {
-            width: 100%;
-            padding: 1rem 1.5rem;
-            border-radius: 99px;
-            border: 1px solid rgba(28, 61, 46, 0.15);
-            font-size: 1rem;
-            font-family: inherit;
-            color: var(--text);
-            background: var(--white);
-            outline: none;
-            transition: all 0.3s;
-        }
-
-        .products-search-bar input:focus {
-            border-color: var(--green);
-            box-shadow: 0 0 0 3px rgba(46, 94, 70, 0.1);
-        }
-
-        .full-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        /* Pagination */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 2rem;
-        }
-
-        .page-btn {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            border: 1px solid rgba(28, 61, 46, 0.15);
-            background: transparent;
-            color: var(--text);
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .page-btn.active {
-            background: var(--green);
-            color: var(--white);
-            border-color: var(--green);
-        }
-
-        .page-btn:hover:not(.active) {
-            background: rgba(28, 61, 46, 0.05);
-        }
-
-        @media (max-width: 1024px) {
-            .full-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .products-layout {
-                grid-template-columns: 1fr;
-            }
-            .filter-sidebar { max-height: calc(100vh - 120px); overflow-y: auto;
-                position: static;
-                margin-bottom: 2rem;
-            }
-            .full-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-    </style>
+      ]
+    }
+    </script>
 </head>
 
 <body>
@@ -675,75 +107,56 @@
         <a href="contact.html">Contact</a>
     </div>
 
-    <main>
+    <main style="background: #FFFDFC; padding-top: 100px;">
 
-        <section class="page-hero">
-            <div class="page-hero-inner">
-                <span class="section-tag" data-animate="fade-up">What We Make</span>
-                <h1 data-animate="fade-up" data-delay="100">Simple foods,<br><em>trusted nutrition.</em></h1>
-                <p data-animate="fade-up" data-delay="200">Thoughtfully processed, plant-based staples for every Indian
-                    household.</p>
+        <!-- Header Area -->
+        <div style="max-width: 1300px; margin: 0 auto; padding: 20px;">
+            <!-- Breadcrumbs -->
+            <div style="font-size: 0.85rem; color: #666; margin-bottom: 20px;">
+                <span>Home</span> &gt; <span>Shop</span> &gt; <span style="font-weight: 600; color: #333;">All Products</span>
             </div>
-            <div class="page-hero-blob"></div>
-        </section>
+            
+            <!-- Title & Filters -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                <h1 style="margin: 0; font-size: 1.8rem; font-weight: 700;">All Products</h1>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <div style="position: relative;">
+                        <input type="text" id="search-input" placeholder="Search products..." style="padding: 8px 15px 8px 35px; border: 1px solid #ddd; border-radius: 20px; font-size: 0.9rem; outline: none; width: 200px; transition: all 0.2s;">
+                        <svg style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #888;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    </div>
+                    <div style="position: relative;">
+                        <button id="sort-btn" style="background: white; border: 1px solid #ddd; padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                            Sort <span style="font-size: 0.65rem;">▼</span>
+                        </button>
+                        <div id="sort-dropdown" class="sort-dropdown">
+                            <button class="sort-option active" data-sort="default">Default</button>
+                            <button class="sort-option" data-sort="price-asc">Price: Low to High</button>
+                            <button class="sort-option" data-sort="price-desc">Price: High to Low</button>
+                        </div>
+                    </div>
+                    <button id="filter-drawer-btn" style="background: white; border: 1px solid #ddd; padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                        All filters <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
 
         <!-- Products Layout -->
-        <div class="products-layout">
-            <!-- Filter Sidebar -->
-            <aside class="filter-sidebar" data-lenis-prevent>
-                <div class="filter-group">
-                    <h4>Categories</h4>
-                    <button class="filter-btn active" data-filter="all">All Products</button>
-                    <button class="filter-btn" data-filter="daal">Daals</button>
-                    <button class="filter-btn" data-filter="grains">Grains</button>
-                    <button class="filter-btn" data-filter="seeds">Seeds</button>
-                    <button class="filter-btn" data-filter="nuts">Nuts</button>
-                    <button class="filter-btn" data-filter="flour">Flours</button>
-                    <button class="filter-btn" data-filter="spices">Spices</button>
-                </div>
-                <div class="filter-group">
-                    <h4>Size</h4>
-                    <div class="filter-list">
-                        <label><input type="checkbox" checked> 500g</label>
-                        <label><input type="checkbox" checked> 1kg</label>
-                        <label><input type="checkbox" checked> 5kg</label>
-                    </div>
-                </div>
-                <div class="filter-group">
-                    <h4>Price Range</h4>
-                    <div class="filter-list">
-                        <label><input type="checkbox" checked> Under ₹100</label>
-                        <label><input type="checkbox" checked> ₹100 - ₹300</label>
-                        <label><input type="checkbox" checked> Above ₹300</label>
-                    </div>
-                </div>
-                <div class="filter-group">
-                    <h4>Farm Source</h4>
-                    <div class="filter-list">
-                        <label><input type="checkbox" checked> Gujarat</label>
-                        <label><input type="checkbox" checked> Maharashtra</label>
-                        <label><input type="checkbox" checked> Rajasthan</label>
-                    </div>
-                </div>
-            </aside>
-
+        <div class="products-layout" style="display: block;">
             <!-- Main Content -->
-            <div class="products-main">
-                <div class="products-search-bar">
-                    <input type="text" id="productSearch" placeholder="Search products...">
-                </div>
+            <div class="products-main" style="max-width: 1300px; margin: 0 auto; padding: 0 20px;">
                 
                 <!-- Products Grid -->
                 <div class="full-grid" id="products-grid">
 
                 <!-- Toor Daal -->
-                <div class="prod-item" data-animate="fade-up" data-delay="0" data-category="daal protein">
+                <div class="prod-item" data-animate="fade-up" data-delay="0" data-category="daal protein" data-price="180" data-name="toor daal">
                     <div class="prod-img">
                         <div class="prod-badge-row">
                             <span class="prod-label green">Bestseller</span>
                             <span class="prod-label gold">High Protein</span>
                         </div>
-                        <img src="assets/toor_daal.png" alt="Toor Daal">
+                        <img src="assets/toor_daal.png" alt="Toor Daal" loading="lazy">
                     </div>
                     <div class="prod-info">
                         <h3>Toor Daal</h3>
@@ -754,9 +167,14 @@
                             <span class="spec-tag">✦ Clean Label</span>
                             <span class="spec-tag">🚫 No Preservatives</span>
                         </div>
+                        <div class="prod-price-row">
+                            <span class="prod-price-current">₹180</span>
+                            <span class="prod-price-original">₹225</span>
+                            <span class="prod-price-discount">22% off</span>
+                        </div>
                         <div class="prod-foot">
                             <div class="prod-foot-actions">
-                                <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20Toor%20Daal" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                                <a href="https://wa.me/919824664973?text=Hi%2C%20I%20would%20like%20to%20order%3A%0A%0AProduct%3A%20Toor%20Daal%0APack%20Size%3A%201kg%0AQuantity%3A%201%0A%0APlease%20let%20me%20know%20the%20total%20amount%20and%20payment%20details." target="_blank" class="wa-cta-btn" aria-label="Order Toor Daal on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> Order on WhatsApp</a>
                                 <button class="btn-journey" data-journey="true" data-product="Toor Daal" data-farmer="Ramesh Patel" data-location="Gujarat, India" data-times="June 2025|July 2025|Nov 2025|Jan 2026|Feb 2026" data-images="||assets/farm_field.png|assets/ingredients_flat.png,assets/toor_daal.png|">View Journey</button>
                             </div>
                             <span class="prod-nutrition">~22g protein / 100g</span>
@@ -765,12 +183,12 @@
                 </div>
 
                 <!-- Moong Daal -->
-                <div class="prod-item" data-animate="fade-up" data-delay="100" data-category="daal protein">
+                <div class="prod-item" data-animate="fade-up" data-delay="100" data-category="daal protein" data-price="160" data-name="moong daal">
                     <div class="prod-img" style="background: var(--green);">
                         <div class="prod-badge-row">
                             <span class="prod-label gold">Popular</span>
                         </div>
-                        <img src="assets/moong_daal.png" alt="Moong Daal">
+                        <img src="assets/moong_daal.png" alt="Moong Daal" loading="lazy">
                     </div>
                     <div class="prod-info">
                         <h3>Moong Daal</h3>
@@ -781,9 +199,14 @@
                             <span class="spec-tag">✦ Clean Label</span>
                             <span class="spec-tag">🚫 No Preservatives</span>
                         </div>
+                        <div class="prod-price-row">
+                            <span class="prod-price-current">₹160</span>
+                            <span class="prod-price-original">₹200</span>
+                            <span class="prod-price-discount">22% off</span>
+                        </div>
                         <div class="prod-foot">
                             <div class="prod-foot-actions">
-                                <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20Moong%20Daal" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                                <a href="https://wa.me/919824664973?text=Hi%2C%20I%20would%20like%20to%20order%3A%0A%0AProduct%3A%20Moong%20Daal%0APack%20Size%3A%201kg%0AQuantity%3A%201%0A%0APlease%20let%20me%20know%20the%20total%20amount%20and%20payment%20details." target="_blank" class="wa-cta-btn" aria-label="Order Moong Daal on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> Order on WhatsApp</a>
                                 <button class="btn-journey" data-journey="true" data-product="Moong Daal" data-farmer="Sunita Devi" data-location="Rajasthan, India" data-times="May 2025|June 2025|Oct 2025|Dec 2025|Jan 2026" data-images="|||assets/ingredients_flat.png|">View Journey</button>
                             </div>
                             <span class="prod-nutrition">~24g protein / 100g</span>
@@ -792,12 +215,12 @@
                 </div>
 
                 <!-- Mungfali -->
-                <div class="prod-item" data-animate="fade-up" data-delay="200" data-category="nuts protein">
+                <div class="prod-item" data-animate="fade-up" data-delay="200" data-category="nuts protein" data-price="140" data-name="mungfali">
                     <div class="prod-img">
                         <div class="prod-badge-row">
                             <span class="prod-label green">New</span>
                         </div>
-                        <img src="assets/mungfali.png" alt="Mungfali">
+                        <img src="assets/mungfali.png" alt="Mungfali" loading="lazy">
                     </div>
                     <div class="prod-info">
                         <h3>Mungfali</h3>
@@ -808,17 +231,22 @@
                             <span class="spec-tag">✦ Clean Label</span>
                             <span class="spec-tag">🚫 No Preservatives</span>
                         </div>
+                        <div class="prod-price-row">
+                            <span class="prod-price-current">₹140</span>
+                            <span class="prod-price-original">₹175</span>
+                            <span class="prod-price-discount">22% off</span>
+                        </div>
                         <div class="prod-foot">
-                            <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20Mungfali" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <a href="https://wa.me/919824664973?text=Hi%2C%20I%20would%20like%20to%20order%3A%0A%0AProduct%3A%20Mungfali%0APack%20Size%3A%201kg%0AQuantity%3A%201%0A%0APlease%20let%20me%20know%20the%20total%20amount%20and%20payment%20details." target="_blank" class="wa-cta-btn" aria-label="Order Mungfali on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> Order on WhatsApp</a>
                             <span class="prod-nutrition">~26g protein / 100g</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Black Till -->
-                <div class="prod-item" data-animate="fade-up" data-delay="300" data-category="seeds protein">
+                <div class="prod-item" data-animate="fade-up" data-delay="300" data-category="seeds protein" data-price="220" data-name="black till">
                     <div class="prod-img">
-                        <img src="assets/black_till.png" alt="Black Till">
+                        <img src="assets/black_till.png" alt="Black Till" loading="lazy">
                     </div>
                     <div class="prod-info">
                         <h3>Black Till</h3>
@@ -828,17 +256,22 @@
                             <span class="spec-tag">💪 High Protein</span>
                             <span class="spec-tag">✦ Clean Label</span>
                         </div>
+                        <div class="prod-price-row">
+                            <span class="prod-price-current">₹220</span>
+                            <span class="prod-price-original">₹275</span>
+                            <span class="prod-price-discount">22% off</span>
+                        </div>
                         <div class="prod-foot">
-                            <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20Black%20Till" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <a href="https://wa.me/919824664973?text=Hi%2C%20I%20would%20like%20to%20order%3A%0A%0AProduct%3A%20Black%20Till%0APack%20Size%3A%201kg%0AQuantity%3A%201%0A%0APlease%20let%20me%20know%20the%20total%20amount%20and%20payment%20details." target="_blank" class="wa-cta-btn" aria-label="Order Black Till on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> Order on WhatsApp</a>
                             <span class="prod-nutrition">~18g protein / 100g</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Whole Mung -->
-                <div class="prod-item" data-animate="fade-up" data-delay="400" data-category="daal protein">
+                <div class="prod-item" data-animate="fade-up" data-delay="400" data-category="daal protein" data-price="150" data-name="whole mung">
                     <div class="prod-img">
-                        <img src="assets/whole_mung.png" alt="Whole Mung">
+                        <img src="assets/whole_mung.png" alt="Whole Mung" loading="lazy">
                     </div>
                     <div class="prod-info">
                         <h3>Whole Mung</h3>
@@ -848,17 +281,22 @@
                             <span class="spec-tag">💪 High Protein</span>
                             <span class="spec-tag">✦ Clean Label</span>
                         </div>
+                        <div class="prod-price-row">
+                            <span class="prod-price-current">₹150</span>
+                            <span class="prod-price-original">₹187</span>
+                            <span class="prod-price-discount">22% off</span>
+                        </div>
                         <div class="prod-foot">
-                            <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20Whole%20Mung" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <a href="https://wa.me/919824664973?text=Hi%2C%20I%20would%20like%20to%20order%3A%0A%0AProduct%3A%20Whole%20Mung%0APack%20Size%3A%201kg%0AQuantity%3A%201%0A%0APlease%20let%20me%20know%20the%20total%20amount%20and%20payment%20details." target="_blank" class="wa-cta-btn" aria-label="Order Whole Mung on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> Order on WhatsApp</a>
                             <span class="prod-nutrition">~24g protein / 100g</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Basmati Rice -->
-                <div class="prod-item" data-animate="fade-up" data-delay="500" data-category="grains">
+                <div class="prod-item" data-animate="fade-up" data-delay="500" data-category="grains" data-price="190" data-name="basmati rice">
                     <div class="prod-img">
-                        <img src="assets/basmati_rice.png" alt="Basmati Rice">
+                        <img src="assets/basmati_rice.png" alt="Basmati Rice" loading="lazy">
                     </div>
                     <div class="prod-info">
                         <h3>Basmati Rice</h3>
@@ -867,17 +305,22 @@
                             <span class="spec-tag">🌱 Plant-Based</span>
                             <span class="spec-tag">✦ Clean Label</span>
                         </div>
+                        <div class="prod-price-row">
+                            <span class="prod-price-current">₹190</span>
+                            <span class="prod-price-original">₹237</span>
+                            <span class="prod-price-discount">22% off</span>
+                        </div>
                         <div class="prod-foot">
-                            <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20Basmati%20Rice" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <a href="https://wa.me/919824664973?text=Hi%2C%20I%20would%20like%20to%20order%3A%0A%0AProduct%3A%20Basmati%20Rice%0APack%20Size%3A%201kg%0AQuantity%3A%201%0A%0APlease%20let%20me%20know%20the%20total%20amount%20and%20payment%20details." target="_blank" class="wa-cta-btn" aria-label="Order Basmati Rice on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> Order on WhatsApp</a>
                             <span class="prod-nutrition">Premium Quality</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- White Till -->
-                <div class="prod-item" data-animate="fade-up" data-delay="600" data-category="seeds protein">
+                <div class="prod-item" data-animate="fade-up" data-delay="600" data-category="seeds protein" data-price="210" data-name="white till">
                     <div class="prod-img">
-                        <img src="assets/white_till.png" alt="White Till">
+                        <img src="assets/white_till.png" alt="White Till" loading="lazy">
                     </div>
                     <div class="prod-info">
                         <h3>White Till</h3>
@@ -887,17 +330,22 @@
                             <span class="spec-tag">💪 High Protein</span>
                             <span class="spec-tag">✦ Clean Label</span>
                         </div>
+                        <div class="prod-price-row">
+                            <span class="prod-price-current">₹210</span>
+                            <span class="prod-price-original">₹262</span>
+                            <span class="prod-price-discount">22% off</span>
+                        </div>
                         <div class="prod-foot">
-                            <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20White%20Till" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <a href="https://wa.me/919824664973?text=Hi%2C%20I%20would%20like%20to%20order%3A%0A%0AProduct%3A%20White%20Till%0APack%20Size%3A%201kg%0AQuantity%3A%201%0A%0APlease%20let%20me%20know%20the%20total%20amount%20and%20payment%20details." target="_blank" class="wa-cta-btn" aria-label="Order White Till on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> Order on WhatsApp</a>
                             <span class="prod-nutrition">~18g protein / 100g</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Whole Bajra -->
-                <div class="prod-item" data-animate="fade-up" data-delay="700" data-category="grains">
+                <div class="prod-item" data-animate="fade-up" data-delay="700" data-category="grains" data-price="90" data-name="whole bajra">
                     <div class="prod-img">
-                        <img src="assets/bajra.png" alt="Bajra">
+                        <img src="assets/bajra.png" alt="Bajra" loading="lazy">
                     </div>
                     <div class="prod-info">
                         <h3>Whole Bajra</h3>
@@ -907,8 +355,13 @@
                             <span class="spec-tag">💪 High Fiber</span>
                             <span class="spec-tag">✦ Clean Label</span>
                         </div>
+                        <div class="prod-price-row">
+                            <span class="prod-price-current">₹90</span>
+                            <span class="prod-price-original">₹112</span>
+                            <span class="prod-price-discount">22% off</span>
+                        </div>
                         <div class="prod-foot">
-                            <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20Whole%20Wheat" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <a href="https://wa.me/919824664973?text=Hi%2C%20I%20would%20like%20to%20order%3A%0A%0AProduct%3A%20Whole%20Wheat%0APack%20Size%3A%201kg%0AQuantity%3A%201%0A%0APlease%20let%20me%20know%20the%20total%20amount%20and%20payment%20details." target="_blank" class="wa-cta-btn" aria-label="Order Whole Wheat on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> Order on WhatsApp</a>
                             <span class="prod-nutrition">Rich in Fiber</span>
                         </div>
                     </div>
@@ -916,9 +369,9 @@
 
                 
                 <!-- Bajra Flour -->
-                <div class="prod-item" data-animate="fade-up" data-category="flour">
+                <div class="prod-item" data-animate="fade-up" data-category="flour" data-price="110" data-name="bajra flour">
                     <div class="prod-img">
-                        <img src="assets/bajra-flour.png" alt="Bajra Flour">
+                        <img src="assets/bajra-flour.png" alt="Bajra Flour" loading="lazy">
                     </div>
                     <div class="prod-info">
                         <h3>Bajra Flour</h3>
@@ -928,16 +381,21 @@
                             <span class="spec-tag">💪 Nutritious</span>
                             <span class="spec-tag">✦ Clean Label</span>
                         </div>
+                        <div class="prod-price-row">
+                            <span class="prod-price-current">₹110</span>
+                            <span class="prod-price-original">₹137</span>
+                            <span class="prod-price-discount">22% off</span>
+                        </div>
                         <div class="prod-foot">
-                            <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20Bajra%20Flour" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <a href="https://wa.me/919824664973?text=Hi%2C%20I%20would%20like%20to%20order%3A%0A%0AProduct%3A%20Bajra%20Flour%0APack%20Size%3A%201kg%0AQuantity%3A%201%0A%0APlease%20let%20me%20know%20the%20total%20amount%20and%20payment%20details." target="_blank" class="wa-cta-btn" aria-label="Order Bajra Flour on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> Order on WhatsApp</a>
                             <span class="prod-nutrition">100% Natural</span>
                         </div>
                     </div>
                 </div>
                 <!-- Black Chana -->
-                <div class="prod-item" data-animate="fade-up" data-category="pulses">
+                <div class="prod-item" data-animate="fade-up" data-category="pulses" data-price="120" data-name="black chana">
                     <div class="prod-img">
-                        <img src="assets/black-chana.png" alt="Black Chana">
+                        <img src="assets/black-chana.png" alt="Black Chana" loading="lazy">
                     </div>
                     <div class="prod-info">
                         <h3>Black Chana</h3>
@@ -947,16 +405,21 @@
                             <span class="spec-tag">💪 Nutritious</span>
                             <span class="spec-tag">✦ Clean Label</span>
                         </div>
+                        <div class="prod-price-row">
+                            <span class="prod-price-current">₹120</span>
+                            <span class="prod-price-original">₹150</span>
+                            <span class="prod-price-discount">22% off</span>
+                        </div>
                         <div class="prod-foot">
-                            <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20Black%20Chana" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <a href="https://wa.me/919824664973?text=Hi%2C%20I%20would%20like%20to%20order%3A%0A%0AProduct%3A%20Black%20Chana%0APack%20Size%3A%201kg%0AQuantity%3A%201%0A%0APlease%20let%20me%20know%20the%20total%20amount%20and%20payment%20details." target="_blank" class="wa-cta-btn" aria-label="Order Black Chana on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> Order on WhatsApp</a>
                             <span class="prod-nutrition">100% Natural</span>
                         </div>
                     </div>
                 </div>
                 <!-- Brown Chana -->
-                <div class="prod-item" data-animate="fade-up" data-category="pulses">
+                <div class="prod-item" data-animate="fade-up" data-category="pulses" data-price="115" data-name="brown chana">
                     <div class="prod-img">
-                        <img src="assets/brown-chana.png" alt="Brown Chana">
+                        <img src="assets/brown-chana.png" alt="Brown Chana" loading="lazy">
                     </div>
                     <div class="prod-info">
                         <h3>Brown Chana</h3>
@@ -966,16 +429,21 @@
                             <span class="spec-tag">💪 Nutritious</span>
                             <span class="spec-tag">✦ Clean Label</span>
                         </div>
+                        <div class="prod-price-row">
+                            <span class="prod-price-current">₹115</span>
+                            <span class="prod-price-original">₹143</span>
+                            <span class="prod-price-discount">22% off</span>
+                        </div>
                         <div class="prod-foot">
-                            <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20Brown%20Chana" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <a href="https://wa.me/919824664973?text=Hi%2C%20I%20would%20like%20to%20order%3A%0A%0AProduct%3A%20Brown%20Chana%0APack%20Size%3A%201kg%0AQuantity%3A%201%0A%0APlease%20let%20me%20know%20the%20total%20amount%20and%20payment%20details." target="_blank" class="wa-cta-btn" aria-label="Order Brown Chana on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> Order on WhatsApp</a>
                             <span class="prod-nutrition">100% Natural</span>
                         </div>
                     </div>
                 </div>
                 <!-- Carom Seeds -->
-                <div class="prod-item" data-animate="fade-up" data-category="spices">
+                <div class="prod-item" data-animate="fade-up" data-category="spices" data-price="80" data-name="carom seeds">
                     <div class="prod-img">
-                        <img src="assets/carom.png" alt="Carom Seeds">
+                        <img src="assets/carom.png" alt="Carom Seeds" loading="lazy">
                     </div>
                     <div class="prod-info">
                         <h3>Carom Seeds</h3>
@@ -985,16 +453,21 @@
                             <span class="spec-tag">💪 Nutritious</span>
                             <span class="spec-tag">✦ Clean Label</span>
                         </div>
+                        <div class="prod-price-row">
+                            <span class="prod-price-current">₹80</span>
+                            <span class="prod-price-original">₹100</span>
+                            <span class="prod-price-discount">22% off</span>
+                        </div>
                         <div class="prod-foot">
-                            <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20Carom%20Seeds" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <a href="https://wa.me/919824664973?text=Hi%2C%20I%20would%20like%20to%20order%3A%0A%0AProduct%3A%20Carom%20Seeds%0APack%20Size%3A%201kg%0AQuantity%3A%201%0A%0APlease%20let%20me%20know%20the%20total%20amount%20and%20payment%20details." target="_blank" class="wa-cta-btn" aria-label="Order Carom Seeds on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> Order on WhatsApp</a>
                             <span class="prod-nutrition">100% Natural</span>
                         </div>
                     </div>
                 </div>
                 <!-- Chana Dal -->
-                <div class="prod-item" data-animate="fade-up" data-category="pulses">
+                <div class="prod-item" data-animate="fade-up" data-category="pulses" data-price="130" data-name="chana dal">
                     <div class="prod-img">
-                        <img src="assets/chana-dal.png" alt="Chana Dal">
+                        <img src="assets/chana-dal.png" alt="Chana Dal" loading="lazy">
                     </div>
                     <div class="prod-info">
                         <h3>Chana Dal</h3>
@@ -1004,16 +477,21 @@
                             <span class="spec-tag">💪 Nutritious</span>
                             <span class="spec-tag">✦ Clean Label</span>
                         </div>
+                        <div class="prod-price-row">
+                            <span class="prod-price-current">₹130</span>
+                            <span class="prod-price-original">₹162</span>
+                            <span class="prod-price-discount">22% off</span>
+                        </div>
                         <div class="prod-foot">
-                            <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20Chana%20Dal" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <a href="https://wa.me/919824664973?text=Hi%2C%20I%20would%20like%20to%20order%3A%0A%0AProduct%3A%20Chana%20Dal%0APack%20Size%3A%201kg%0AQuantity%3A%201%0A%0APlease%20let%20me%20know%20the%20total%20amount%20and%20payment%20details." target="_blank" class="wa-cta-btn" aria-label="Order Chana Dal on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> Order on WhatsApp</a>
                             <span class="prod-nutrition">100% Natural</span>
                         </div>
                     </div>
                 </div>
                 <!-- Coriander Powder -->
-                <div class="prod-item" data-animate="fade-up" data-category="spices">
+                <div class="prod-item" data-animate="fade-up" data-category="spices" data-price="70" data-name="coriander powder">
                     <div class="prod-img">
-                        <img src="assets/coriander-powder.png" alt="Coriander Powder">
+                        <img src="assets/coriander-powder.png" alt="Coriander Powder" loading="lazy">
                     </div>
                     <div class="prod-info">
                         <h3>Coriander Powder</h3>
@@ -1023,16 +501,21 @@
                             <span class="spec-tag">💪 Nutritious</span>
                             <span class="spec-tag">✦ Clean Label</span>
                         </div>
+                        <div class="prod-price-row">
+                            <span class="prod-price-current">₹70</span>
+                            <span class="prod-price-original">₹87</span>
+                            <span class="prod-price-discount">22% off</span>
+                        </div>
                         <div class="prod-foot">
-                            <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20Coriander%20Powder" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <a href="https://wa.me/919824664973?text=Hi%2C%20I%20would%20like%20to%20order%3A%0A%0AProduct%3A%20Coriander%20Powder%0APack%20Size%3A%201kg%0AQuantity%3A%201%0A%0APlease%20let%20me%20know%20the%20total%20amount%20and%20payment%20details." target="_blank" class="wa-cta-btn" aria-label="Order Coriander Powder on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> Order on WhatsApp</a>
                             <span class="prod-nutrition">100% Natural</span>
                         </div>
                     </div>
                 </div>
                 <!-- Cumin Coriander Powder -->
-                <div class="prod-item" data-animate="fade-up" data-category="spices">
+                <div class="prod-item" data-animate="fade-up" data-category="spices" data-price="85" data-name="cumin coriander powder">
                     <div class="prod-img">
-                        <img src="assets/cumin-coriander-powder.png" alt="Cumin Coriander Powder">
+                        <img src="assets/cumin-coriander-powder.png" alt="Cumin Coriander Powder" loading="lazy">
                     </div>
                     <div class="prod-info">
                         <h3>Cumin Coriander Powder</h3>
@@ -1042,16 +525,21 @@
                             <span class="spec-tag">💪 Nutritious</span>
                             <span class="spec-tag">✦ Clean Label</span>
                         </div>
+                        <div class="prod-price-row">
+                            <span class="prod-price-current">₹85</span>
+                            <span class="prod-price-original">₹106</span>
+                            <span class="prod-price-discount">22% off</span>
+                        </div>
                         <div class="prod-foot">
-                            <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20Cumin%20Coriander%20Powder" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <a href="https://wa.me/919824664973?text=Hi%2C%20I%20would%20like%20to%20order%3A%0A%0AProduct%3A%20Cumin%20Coriander%20Powder%0APack%20Size%3A%201kg%0AQuantity%3A%201%0A%0APlease%20let%20me%20know%20the%20total%20amount%20and%20payment%20details." target="_blank" class="wa-cta-btn" aria-label="Order Cumin Coriander Powder on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> Order on WhatsApp</a>
                             <span class="prod-nutrition">100% Natural</span>
                         </div>
                     </div>
                 </div>
                 <!-- Cumin Seeds -->
-                <div class="prod-item" data-animate="fade-up" data-category="spices">
+                <div class="prod-item" data-animate="fade-up" data-category="spices" data-price="95" data-name="cumin seeds">
                     <div class="prod-img">
-                        <img src="assets/cumin.png" alt="Cumin Seeds">
+                        <img src="assets/cumin.png" alt="Cumin Seeds" loading="lazy">
                     </div>
                     <div class="prod-info">
                         <h3>Cumin Seeds</h3>
@@ -1061,16 +549,21 @@
                             <span class="spec-tag">💪 Nutritious</span>
                             <span class="spec-tag">✦ Clean Label</span>
                         </div>
+                        <div class="prod-price-row">
+                            <span class="prod-price-current">₹95</span>
+                            <span class="prod-price-original">₹118</span>
+                            <span class="prod-price-discount">22% off</span>
+                        </div>
                         <div class="prod-foot">
-                            <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20Cumin%20Seeds" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <a href="https://wa.me/919824664973?text=Hi%2C%20I%20would%20like%20to%20order%3A%0A%0AProduct%3A%20Cumin%20Seeds%0APack%20Size%3A%201kg%0AQuantity%3A%201%0A%0APlease%20let%20me%20know%20the%20total%20amount%20and%20payment%20details." target="_blank" class="wa-cta-btn" aria-label="Order Cumin Seeds on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> Order on WhatsApp</a>
                             <span class="prod-nutrition">100% Natural</span>
                         </div>
                     </div>
                 </div>
                 <!-- Fennel Seeds -->
-                <div class="prod-item" data-animate="fade-up" data-category="spices">
+                <div class="prod-item" data-animate="fade-up" data-category="spices" data-price="75" data-name="fennel seeds">
                     <div class="prod-img">
-                        <img src="assets/fennel.png" alt="Fennel Seeds">
+                        <img src="assets/fennel.png" alt="Fennel Seeds" loading="lazy">
                     </div>
                     <div class="prod-info">
                         <h3>Fennel Seeds</h3>
@@ -1080,16 +573,21 @@
                             <span class="spec-tag">💪 Nutritious</span>
                             <span class="spec-tag">✦ Clean Label</span>
                         </div>
+                        <div class="prod-price-row">
+                            <span class="prod-price-current">₹75</span>
+                            <span class="prod-price-original">₹93</span>
+                            <span class="prod-price-discount">22% off</span>
+                        </div>
                         <div class="prod-foot">
-                            <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20Fennel%20Seeds" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <a href="https://wa.me/919824664973?text=Hi%2C%20I%20would%20like%20to%20order%3A%0A%0AProduct%3A%20Fennel%20Seeds%0APack%20Size%3A%201kg%0AQuantity%3A%201%0A%0APlease%20let%20me%20know%20the%20total%20amount%20and%20payment%20details." target="_blank" class="wa-cta-btn" aria-label="Order Fennel Seeds on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> Order on WhatsApp</a>
                             <span class="prod-nutrition">100% Natural</span>
                         </div>
                     </div>
                 </div>
                 <!-- Moong Flour -->
-                <div class="prod-item" data-animate="fade-up" data-category="flour">
+                <div class="prod-item" data-animate="fade-up" data-category="flour" data-price="140" data-name="moong flour">
                     <div class="prod-img">
-                        <img src="assets/moong-flour.png" alt="Moong Flour">
+                        <img src="assets/moong-flour.png" alt="Moong Flour" loading="lazy">
                     </div>
                     <div class="prod-info">
                         <h3>Moong Flour</h3>
@@ -1099,16 +597,21 @@
                             <span class="spec-tag">💪 Nutritious</span>
                             <span class="spec-tag">✦ Clean Label</span>
                         </div>
+                        <div class="prod-price-row">
+                            <span class="prod-price-current">₹140</span>
+                            <span class="prod-price-original">₹175</span>
+                            <span class="prod-price-discount">22% off</span>
+                        </div>
                         <div class="prod-foot">
-                            <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20Moong%20Flour" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <a href="https://wa.me/919824664973?text=Hi%2C%20I%20would%20like%20to%20order%3A%0A%0AProduct%3A%20Moong%20Flour%0APack%20Size%3A%201kg%0AQuantity%3A%201%0A%0APlease%20let%20me%20know%20the%20total%20amount%20and%20payment%20details." target="_blank" class="wa-cta-btn" aria-label="Order Moong Flour on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> Order on WhatsApp</a>
                             <span class="prod-nutrition">100% Natural</span>
                         </div>
                     </div>
                 </div>
                 <!-- Red Chilli Powder -->
-                <div class="prod-item" data-animate="fade-up" data-category="spices">
+                <div class="prod-item" data-animate="fade-up" data-category="spices" data-price="100" data-name="red chilli powder">
                     <div class="prod-img">
-                        <img src="assets/red-chilli-powder.png" alt="Red Chilli Powder">
+                        <img src="assets/red-chilli-powder.png" alt="Red Chilli Powder" loading="lazy">
                     </div>
                     <div class="prod-info">
                         <h3>Red Chilli Powder</h3>
@@ -1118,16 +621,21 @@
                             <span class="spec-tag">💪 Nutritious</span>
                             <span class="spec-tag">✦ Clean Label</span>
                         </div>
+                        <div class="prod-price-row">
+                            <span class="prod-price-current">₹100</span>
+                            <span class="prod-price-original">₹125</span>
+                            <span class="prod-price-discount">22% off</span>
+                        </div>
                         <div class="prod-foot">
-                            <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20Red%20Chilli%20Powder" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <a href="https://wa.me/919824664973?text=Hi%2C%20I%20would%20like%20to%20order%3A%0A%0AProduct%3A%20Red%20Chilli%20Powder%0APack%20Size%3A%201kg%0AQuantity%3A%201%0A%0APlease%20let%20me%20know%20the%20total%20amount%20and%20payment%20details." target="_blank" class="wa-cta-btn" aria-label="Order Red Chilli Powder on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> Order on WhatsApp</a>
                             <span class="prod-nutrition">100% Natural</span>
                         </div>
                     </div>
                 </div>
                 <!-- Soyabean -->
-                <div class="prod-item" data-animate="fade-up" data-category="pulses">
+                <div class="prod-item" data-animate="fade-up" data-category="pulses" data-price="105" data-name="soyabean">
                     <div class="prod-img">
-                        <img src="assets/soyabean.png" alt="Soyabean">
+                        <img src="assets/soyabean.png" alt="Soyabean" loading="lazy">
                     </div>
                     <div class="prod-info">
                         <h3>Soyabean</h3>
@@ -1137,16 +645,21 @@
                             <span class="spec-tag">💪 Nutritious</span>
                             <span class="spec-tag">✦ Clean Label</span>
                         </div>
+                        <div class="prod-price-row">
+                            <span class="prod-price-current">₹105</span>
+                            <span class="prod-price-original">₹131</span>
+                            <span class="prod-price-discount">22% off</span>
+                        </div>
                         <div class="prod-foot">
-                            <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20Soyabean" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <a href="https://wa.me/919824664973?text=Hi%2C%20I%20would%20like%20to%20order%3A%0A%0AProduct%3A%20Soyabean%0APack%20Size%3A%201kg%0AQuantity%3A%201%0A%0APlease%20let%20me%20know%20the%20total%20amount%20and%20payment%20details." target="_blank" class="wa-cta-btn" aria-label="Order Soyabean on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> Order on WhatsApp</a>
                             <span class="prod-nutrition">100% Natural</span>
                         </div>
                     </div>
                 </div>
                 <!-- Whole Coriander -->
-                <div class="prod-item" data-animate="fade-up" data-category="spices">
+                <div class="prod-item" data-animate="fade-up" data-category="spices" data-price="65" data-name="whole coriander">
                     <div class="prod-img">
-                        <img src="assets/whole-coriander.png" alt="Whole Coriander">
+                        <img src="assets/whole-coriander.png" alt="Whole Coriander" loading="lazy">
                     </div>
                     <div class="prod-info">
                         <h3>Whole Coriander</h3>
@@ -1156,16 +669,21 @@
                             <span class="spec-tag">💪 Nutritious</span>
                             <span class="spec-tag">✦ Clean Label</span>
                         </div>
+                        <div class="prod-price-row">
+                            <span class="prod-price-current">₹65</span>
+                            <span class="prod-price-original">₹81</span>
+                            <span class="prod-price-discount">22% off</span>
+                        </div>
                         <div class="prod-foot">
-                            <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20Whole%20Coriander" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <a href="https://wa.me/919824664973?text=Hi%2C%20I%20would%20like%20to%20order%3A%0A%0AProduct%3A%20Whole%20Coriander%0APack%20Size%3A%201kg%0AQuantity%3A%201%0A%0APlease%20let%20me%20know%20the%20total%20amount%20and%20payment%20details." target="_blank" class="wa-cta-btn" aria-label="Order Whole Coriander on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> Order on WhatsApp</a>
                             <span class="prod-nutrition">100% Natural</span>
                         </div>
                     </div>
                 </div>
                 <!-- Whole Wheat -->
-                <div class="prod-item" data-animate="fade-up" data-category="grains">
+                <div class="prod-item" data-animate="fade-up" data-category="grains" data-price="80" data-name="whole wheat">
                     <div class="prod-img">
-                        <img src="assets/whole_wheat.jpg" alt="Whole Wheat">
+                        <img src="assets/whole_wheat.jpg" alt="Whole Wheat" loading="lazy">
                     </div>
                     <div class="prod-info">
                         <h3>Whole Wheat</h3>
@@ -1175,8 +693,13 @@
                             <span class="spec-tag">💪 Nutritious</span>
                             <span class="spec-tag">✦ Clean Label</span>
                         </div>
+                        <div class="prod-price-row">
+                            <span class="prod-price-current">₹80</span>
+                            <span class="prod-price-original">₹100</span>
+                            <span class="prod-price-discount">22% off</span>
+                        </div>
                         <div class="prod-foot">
-                            <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20Whole%20Wheat" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
+                            <a href="https://wa.me/919824664973?text=Hi%2C%20I%20would%20like%20to%20order%3A%0A%0AProduct%3A%20Whole%20Wheat%0APack%20Size%3A%201kg%0AQuantity%3A%201%0A%0APlease%20let%20me%20know%20the%20total%20amount%20and%20payment%20details." target="_blank" class="wa-cta-btn" aria-label="Order Whole Wheat on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.8 5.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.82 9.82 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg> Order on WhatsApp</a>
                             <span class="prod-nutrition">100% Natural</span>
                         </div>
                     </div>
@@ -1226,7 +749,7 @@
                     <a href="contact.html" class="btn-primary light">Get in Touch</a>
                 </div>
                 <div class="cta-banner-img">
-                    <img src="assets/ingredients_flat.png" alt="Nutrivae range">
+                    <img src="assets/ingredients_flat.png" alt="Nutrivae range" loading="lazy">
                 </div>
             </div>
         </section>
@@ -1290,7 +813,39 @@
 
         <!-- Lightbox -->
         <div id="lightbox-overlay">
-            <img id="lightbox-img" src="" alt="Expanded View">
+            <img id="lightbox-img" src="" alt="Expanded View" loading="lazy">
+        </div>
+
+        <!-- Filter Drawer -->
+        <div id="filter-drawer-overlay" class="filter-drawer-overlay"></div>
+        <div id="filter-drawer" class="filter-drawer">
+            <div class="filter-drawer-header">
+                <h3 style="margin: 0; font-size: 1.2rem;">All Filters</h3>
+                <button id="close-filter-drawer" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+            </div>
+            <div class="filter-drawer-body">
+                <div class="filter-group">
+                    <h4>Categories</h4>
+                    <button class="filter-btn active" data-filter="all">All Products</button>
+                    <button class="filter-btn" data-filter="daal">Daals</button>
+                    <button class="filter-btn" data-filter="grains">Grains</button>
+                    <button class="filter-btn" data-filter="seeds">Seeds</button>
+                    <button class="filter-btn" data-filter="nuts">Nuts</button>
+                    <button class="filter-btn" data-filter="flour">Flours</button>
+                    <button class="filter-btn" data-filter="spices">Spices</button>
+                </div>
+                <div class="filter-group">
+                    <h4>Size</h4>
+                    <div class="filter-list">
+                        <label><input type="checkbox" checked /> 500g</label>
+                        <label><input type="checkbox" checked /> 1kg</label>
+                        <label><input type="checkbox" checked /> 5kg</label>
+                    </div>
+                </div>
+            </div>
+            <div style="padding: 20px; border-top: 1px solid #eee;">
+                <button id="apply-filter-btn" style="width: 100%; padding: 12px; background: var(--green); color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">Show Results</button>
+            </div>
         </div>
 
     </main>
@@ -1333,12 +888,13 @@
             </div>
             <div class="footer-links-group">
                 <h4>Contact</h4>
-                <a href="https://wa.me/919824664973?text=Hi,%20I%20need%20help%20with%20nutrivae%20products" target="_blank" style="text-decoration:none;">+91 98246-64973 ↗</a>
+                <a href="https://wa.me/919824664973?text=Hi,%20I%20need%20help%20with%20nutrivae%20products" target="_blank" class="footer-contact-link" aria-label="Contact us on WhatsApp">+91 98246-64973 ↗</a>
                 <span>India</span>
             </div>
         </div>
         <div class="footer-bottom">
             <span>&copy; 2026 Nutrivae Foods. All rights reserved.</span>
+            <span class="fssai-placeholder">FSSAI Lic No. XXXXXXXXXXXXXX</span>
             <span>Thoughtfully Grown, Carefully Crafted.</span>
         </div>
     </footer>
@@ -1406,107 +962,196 @@
         }
 
         try {
-            // --- Pagination and Filtering Logic ---
-            const ITEMS_PER_PAGE = 9;
-            let currentPage = 1;
+            // --- Pagination, Filtering, and Sorting Logic ---
+            const filterBtns = document.querySelectorAll(".filter-btn");
+            const products = document.querySelectorAll(".prod-item");
+            const paginationContainer = document.getElementById("pagination-controls");
             
-            // Convert NodeList to Array to keep track of all original products
-            const products = Array.from(document.querySelectorAll('.prod-item'));
-            const grid = document.getElementById('products-grid');
-            const paginationControls = document.getElementById('pagination-controls');
-            const searchInput = document.getElementById('productSearch');
-            const filterBtns = document.querySelectorAll('.filter-btn');
+            const sortBtn = document.getElementById("sort-btn");
+            const sortDropdown = document.getElementById("sort-dropdown");
+            const sortOptions = document.querySelectorAll(".sort-option");
+            
+            const filterDrawerBtn = document.getElementById("filter-drawer-btn");
+            const filterDrawerOverlay = document.getElementById("filter-drawer-overlay");
+            const filterDrawer = document.getElementById("filter-drawer");
+            const closeFilterDrawer = document.getElementById("close-filter-drawer");
+            const applyFilterBtn = document.getElementById("apply-filter-btn");
 
-            let currentCategory = 'all';
-            let searchQuery = '';
+            let currentFilter = sessionStorage.getItem('products_currentFilter') || "all";
+            let currentSort = sessionStorage.getItem('products_currentSort') || "default";
+            let currentSearch = sessionStorage.getItem('products_currentSearch') || "";
+            let currentPage = parseInt(sessionStorage.getItem('products_currentPage')) || 1;
+            const itemsPerPage = 9;
 
-            window.renderProducts = function() {
-                if (!grid || !paginationControls) return;
+            function saveState() {
+                sessionStorage.setItem('products_currentFilter', currentFilter);
+                sessionStorage.setItem('products_currentSort', currentSort);
+                sessionStorage.setItem('products_currentSearch', currentSearch);
+                sessionStorage.setItem('products_currentPage', currentPage);
+            }
+            let filteredItems = Array.from(products);
 
-                // Filter products
-                const filteredProducts = products.filter(product => {
-                    const category = (product.getAttribute('data-category') || '').toLowerCase();
-                    const h3 = product.querySelector('h3');
-                    const title = h3 ? h3.textContent.toLowerCase() : '';
-                    
-                    const matchesCategory = currentCategory === 'all' || category.includes(currentCategory);
-                    const matchesSearch = title.includes(searchQuery.toLowerCase());
-                    
-                    return matchesCategory && matchesSearch;
+            // Sort Toggle
+            if (sortBtn && sortDropdown) {
+                sortBtn.addEventListener("click", () => {
+                    sortDropdown.classList.toggle("active");
                 });
-
-                // Pagination calculation
-                const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
                 
-                if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
-                if (currentPage < 1) currentPage = 1;
-
-                const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-                const endIndex = startIndex + ITEMS_PER_PAGE;
-                
-                const productsToShow = filteredProducts.slice(startIndex, endIndex);
-
-                // Clear grid and append filtered elements
-                grid.innerHTML = '';
-                
-                if (filteredProducts.length === 0) {
-                    grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding: 4rem; color: var(--text-muted);">No products found matching your search.</div>';
-                } else {
-                    productsToShow.forEach((p, index) => {
-                        // Reset animation states so they animate in again if desired,
-                        // or just make them visible. We'll ensure they are visible.
-                        p.style.display = 'block';
-                        p.style.opacity = '1';
-                        p.style.transform = 'translateY(0)';
-                        grid.appendChild(p);
-                    });
-                }
-
-                // Render Pagination UI
-                paginationControls.innerHTML = '';
-                if (totalPages > 1) {
-                    for (let i = 1; i <= totalPages; i++) {
-                        const btn = document.createElement('button');
-                        btn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
-                        btn.textContent = i;
-                        btn.onclick = () => {
-                            currentPage = i;
-                            window.renderProducts();
-                            // Smooth scroll to top of grid
-                            const layout = document.querySelector('.products-layout');
-                            if (layout) {
-                                window.scrollTo({ top: layout.offsetTop - 100, behavior: 'smooth' });
-                            }
-                        };
-                        paginationControls.appendChild(btn);
+                document.addEventListener("click", (e) => {
+                    if (!sortBtn.contains(e.target) && !sortDropdown.contains(e.target)) {
+                        sortDropdown.classList.remove("active");
                     }
-                }
-            };
-
-            // Event Listeners for Category Filters
-            if(filterBtns) {
-                filterBtns.forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        filterBtns.forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        currentCategory = btn.getAttribute('data-filter');
-                        currentPage = 1; // Reset to page 1
-                        window.renderProducts();
+                });
+            }
+            
+            // Sort Selection
+            if (sortOptions.length > 0) {
+                sortOptions.forEach(opt => {
+                    opt.addEventListener("click", (e) => {
+                        sortOptions.forEach(o => o.classList.remove("active"));
+                        e.target.classList.add("active");
+                        currentSort = e.target.getAttribute("data-sort");
+                        sortDropdown.classList.remove("active");
+                        applyFilters(true);
                     });
                 });
             }
+            
+            // Filter Drawer Toggle
+            function openDrawer() {
+                if(filterDrawerOverlay) filterDrawerOverlay.classList.add("active");
+                if(filterDrawer) filterDrawer.classList.add("active");
+                document.body.style.overflow = "hidden";
+            }
+            
+            function closeDrawer() {
+                if(filterDrawerOverlay) filterDrawerOverlay.classList.remove("active");
+                if(filterDrawer) filterDrawer.classList.remove("active");
+                document.body.style.overflow = "";
+            }
 
-            // Event Listener for Search
-            if(searchInput) {
-                searchInput.addEventListener('input', (e) => {
-                    searchQuery = e.target.value;
-                    currentPage = 1; // Reset to page 1
-                    window.renderProducts();
+            if (filterDrawerBtn) filterDrawerBtn.addEventListener("click", openDrawer);
+            if (closeFilterDrawer) closeFilterDrawer.addEventListener("click", closeDrawer);
+            if (filterDrawerOverlay) filterDrawerOverlay.addEventListener("click", closeDrawer);
+            if (applyFilterBtn) {
+                applyFilterBtn.addEventListener("click", () => {
+                    closeDrawer();
                 });
             }
 
-            // Initial Render
-            window.renderProducts();
+            function renderPagination() {
+                if (!paginationContainer) return;
+                const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+                paginationContainer.innerHTML = "";
+
+                if (totalPages <= 1) return;
+
+                for (let i = 1; i <= totalPages; i++) {
+                    const btn = document.createElement("button");
+                    btn.className = "page-btn" + (i === currentPage ? " active" : "");
+                    btn.textContent = i;
+                    btn.style.margin = "0 5px";
+                    btn.addEventListener("click", () => {
+                        currentPage = i;
+                        saveState();
+                        updateView();
+                        const layout = document.querySelector(".products-layout");
+                        if (layout) {
+                            window.scrollTo({ top: layout.offsetTop - 100, behavior: "smooth" });
+                        }
+                    });
+                    paginationContainer.appendChild(btn);
+                }
+            }
+
+            function updateView() {
+                const grid = document.getElementById("products-grid");
+                if (!grid) return;
+
+                // Clear grid and append sorted/filtered elements in order
+                grid.innerHTML = "";
+
+                if (filteredItems.length === 0) {
+                    grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding: 4rem; color: var(--text-muted);">No products found matching your search.</div>';
+                    if (paginationContainer) paginationContainer.innerHTML = "";
+                    return;
+                }
+
+                const start = (currentPage - 1) * itemsPerPage;
+                const end = start + itemsPerPage;
+
+                // Show only paginated items
+                filteredItems.slice(start, end).forEach((p, index) => {
+                    p.style.display = "block";
+                    p.style.opacity = "1";
+                    p.style.transform = "none";
+                    p.style.animation = "none";
+                    grid.appendChild(p);
+                });
+
+                renderPagination();
+            }
+
+            function applyFilters(resetPage = true) {
+                filteredItems = Array.from(products).filter((p) => {
+                    const cat = p.getAttribute("data-category") || "";
+                    const name = p.getAttribute("data-name") || "";
+                    const matchesCat = currentFilter === "all" || cat.includes(currentFilter);
+                    const matchesSearch = currentSearch === "" || name.includes(currentSearch);
+                    return matchesCat && matchesSearch;
+                });
+                
+                if (currentSort === "price-asc") {
+                    filteredItems.sort((a, b) => parseFloat(a.getAttribute("data-price") || 0) - parseFloat(b.getAttribute("data-price") || 0));
+                } else if (currentSort === "price-desc") {
+                    filteredItems.sort((a, b) => parseFloat(b.getAttribute("data-price") || 0) - parseFloat(a.getAttribute("data-price") || 0));
+                }
+
+                if (resetPage) currentPage = 1;
+                saveState();
+                updateView();
+            }
+
+            filterBtns.forEach((btn) => {
+                btn.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    filterBtns.forEach((b) => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    currentFilter = btn.getAttribute("data-filter");
+                    applyFilters(true);
+                });
+            });
+
+            const searchInput = document.getElementById("search-input");
+            if (searchInput) {
+                searchInput.addEventListener("input", (e) => {
+                    currentSearch = e.target.value.toLowerCase();
+                    applyFilters(true);
+                });
+            }
+            
+            // Sync search input
+            if (searchInput && currentSearch) {
+                searchInput.value = currentSearch;
+            }
+
+            // Sync sort options
+            sortOptions.forEach(opt => {
+                if (opt.getAttribute("data-sort") === currentSort) {
+                    opt.classList.add("active");
+                } else {
+                    opt.classList.remove("active");
+                }
+            });
+
+            // Sync active state of filter buttons
+            filterBtns.forEach((b) => {
+                if (b.getAttribute("data-filter") === currentFilter) b.classList.add("active");
+                else b.classList.remove("active");
+            });
+            
+            // Run immediately
+            applyFilters(false);
 
         } catch (e) {
             console.error("Pagination error", e);

@@ -16,226 +16,6 @@
     <!-- Lenis smooth scroll -->
     <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .page-header-minimal {
-            padding: 8rem 5% 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .page-header-minimal h1 {
-            font-size: clamp(2.5rem, 4vw, 4rem);
-            color: var(--green);
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .page-header-minimal p {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .process-section {
-            padding: 4rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .process-title {
-            font-size: 2.5rem;
-            color: var(--green);
-            margin-bottom: 4rem;
-            text-align: center;
-        }
-
-        /* Process List */
-        .process-list {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 5% 4rem;
-        }
-
-        .process-list-item {
-            margin-bottom: 5rem;
-            padding-bottom: 5rem;
-            border-bottom: 1px solid rgba(28, 61, 46, 0.1);
-        }
-
-        .process-list-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .step-header {
-            display: flex;
-            align-items: baseline;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .step-number {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: var(--accent);
-            opacity: 0.9;
-            line-height: 1;
-        }
-
-        .step-header h3 {
-            font-size: 2.5rem;
-            color: var(--green);
-            margin: 0;
-        }
-
-        .step-body {
-            display: flex;
-            gap: 4rem;
-            align-items: flex-start;
-        }
-
-        .step-text {
-            flex: 1;
-        }
-
-        .step-desc {
-            font-size: 1.15rem;
-            line-height: 1.7;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-        }
-
-        .step-text ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .step-text li {
-            margin-bottom: 1.5rem;
-            color: var(--text-muted);
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            font-size: 1.05rem;
-            line-height: 1.6;
-        }
-
-        .step-text li strong {
-            color: var(--text);
-            display: block;
-            margin-bottom: 0.2rem;
-            font-size: 1.15rem;
-        }
-
-        .step-text li::before {
-            content: '✓';
-            color: var(--accent);
-            font-weight: bold;
-            font-size: 1.4rem;
-            margin-top: -0.2rem;
-        }
-
-        .step-image {
-            width: 450px;
-            flex-shrink: 0;
-        }
-
-        .step-image img {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-            border-radius: var(--radius-lg);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
-            transition: transform 0.5s ease;
-        }
-
-        .step-image:hover img {
-            transform: scale(1.02);
-        }
-
-        /* Mobile Layout */
-        @media (max-width: 900px) {
-            .step-body {
-                flex-direction: column;
-                gap: 2rem;
-            }
-            .step-image {
-                width: 100%;
-            }
-            .step-image img {
-                height: 250px;
-            }
-            .step-header {
-                gap: 1rem;
-            }
-            .step-number {
-                font-size: 2.5rem;
-            }
-            .step-header h3 {
-                font-size: 2rem;
-            }
-        }
-
-        .promise-section {
-            background: var(--cream-dark);
-            padding: 5rem 5%;
-            margin-top: 4rem;
-        }
-
-        .promise-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            text-align: center;
-        }
-
-        .promise-item {
-            padding: 2rem;
-        }
-
-        .promise-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .promise-item h4 {
-            font-size: 1.2rem;
-            color: var(--green);
-            margin-bottom: 0.5rem;
-        }
-
-        .promise-item p {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        .model-section {
-            padding: 6rem 5%;
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .model-section h2 {
-            font-size: 2.5rem;
-            color: var(--green);
-            margin-bottom: 1.5rem;
-        }
-
-        .model-section p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-        }
-    </style>
 </head>
 
 <body>
@@ -341,7 +121,7 @@
                             </ul>
                         </div>
                         <div class="step-image">
-                            <img src="assets/soil_prep.png" alt="Soil Preparation">
+                            <img src="assets/soil_prep.png" alt="Soil Preparation" loading="lazy">
                         </div>
                     </div>
                 </div>
@@ -377,7 +157,7 @@
                             </ul>
                         </div>
                         <div class="step-image">
-                            <img src="assets/sowing.png" alt="Sowing Seeds">
+                            <img src="assets/sowing.png" alt="Sowing Seeds" loading="lazy">
                         </div>
                     </div>
                 </div>
@@ -419,7 +199,7 @@
                             </ul>
                         </div>
                         <div class="step-image">
-                            <img src="assets/irrigation.png" alt="Irrigation and Care">
+                            <img src="assets/irrigation.png" alt="Irrigation and Care" loading="lazy">
                         </div>
                     </div>
                 </div>
@@ -455,7 +235,7 @@
                             </ul>
                         </div>
                         <div class="step-image">
-                            <img src="assets/harvesting.png" alt="Harvesting Crops">
+                            <img src="assets/harvesting.png" alt="Harvesting Crops" loading="lazy">
                         </div>
                     </div>
                 </div>
@@ -497,7 +277,7 @@
                             </ul>
                         </div>
                         <div class="step-image">
-                            <img src="assets/packaging.png" alt="Packaging">
+                            <img src="assets/packaging.png" alt="Packaging" loading="lazy">
                         </div>
                     </div>
                 </div>
@@ -581,12 +361,13 @@
             </div>
             <div class="footer-links-group">
                 <h4>Contact</h4>
-                <a href="https://wa.me/919824664973?text=Hi,%20I%20need%20help%20with%20nutrivae%20products" target="_blank" style="text-decoration:none;">+91 98246-64973 ↗</a>
+                <a href="https://wa.me/919824664973?text=Hi,%20I%20need%20help%20with%20nutrivae%20products" target="_blank" class="footer-contact-link" aria-label="Contact us on WhatsApp">+91 98246-64973 ↗</a>
                 <span>India</span>
             </div>
         </div>
         <div class="footer-bottom">
             <span>&copy; 2026 Nutrivae Foods. All rights reserved.</span>
+            <span class="fssai-placeholder">FSSAI Lic No. XXXXXXXXXXXXXX</span>
             <span>Thoughtfully Grown, Carefully Crafted.</span>
         </div>
     </footer>

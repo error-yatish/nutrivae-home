@@ -16,488 +16,6 @@
     <!-- Lenis smooth scroll -->
     <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .page-header-minimal {
-            padding: 8rem 5% 1rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .page-header-minimal h1 {
-            font-size: 2.5rem;
-            color: var(--green);
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-        }
-
-        .page-header-minimal p {
-            font-size: 1rem;
-            color: var(--text-muted);
-        }
-
-        /* Minimal Filter bar */
-        .filter-bar {
-            display: flex;
-            gap: 1.5rem;
-            padding: 1rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-            border-bottom: 1px solid rgba(28, 61, 46, 0.1);
-            overflow-x: auto;
-            white-space: nowrap;
-            scrollbar-width: none;
-        }
-
-        .filter-bar::-webkit-scrollbar {
-            display: none;
-        }
-
-        .filter-btn {
-            padding: 0.5rem 0;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            cursor: pointer;
-            background: none;
-            border: none;
-            border-bottom: 2px solid transparent;
-            transition: color 0.3s, border-color 0.3s;
-        }
-
-        .filter-btn:hover,
-        .filter-btn.active {
-            color: var(--green);
-            border-bottom: 2px solid var(--green);
-        }
-
-        /* Journey List Layout */
-        .journey-list-container {
-            padding: 2rem 5% 4rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .journey-list {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .journey-row {
-            display: flex;
-            align-items: center;
-            padding: 1.5rem 1rem;
-            gap: 2rem;
-            border-bottom: 1px solid rgba(28, 61, 46, 0.1);
-            transition: background 0.3s ease;
-        }
-
-        .journey-row:last-child {
-            border-bottom: none;
-        }
-
-        .journey-row:hover {
-            background: rgba(136, 176, 75, 0.05); /* very faint green tint */
-        }
-
-        .jr-image {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: var(--cream-dark);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            overflow: hidden;
-        }
-
-        .jr-image img {
-            width: 70%;
-            height: 70%;
-            object-fit: contain;
-        }
-
-        .jr-info {
-            flex-grow: 1;
-            min-width: 200px;
-        }
-
-        .jr-info h3 {
-            font-size: 1.25rem;
-            color: var(--green);
-            margin-bottom: 0.2rem;
-        }
-
-        .jr-info p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .jr-status {
-            flex-shrink: 0;
-            min-width: 120px;
-        }
-
-        .status-badge {
-            display: inline-block;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            padding: 0.4rem 1rem;
-            border-radius: 99px;
-        }
-
-        .jr-availability {
-            flex-shrink: 0;
-            min-width: 160px;
-            text-align: right;
-        }
-
-        .jr-availability .next-harvest {
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .jr-availability .buy-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.5rem 1.2rem;
-            background: var(--green);
-            color: var(--white);
-            border-radius: 99px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: background 0.3s;
-        }
-
-        .jr-availability .buy-btn:hover {
-            background: var(--green-mid);
-        }
-
-        .jr-action {
-            flex-shrink: 0;
-        }
-
-        .jr-action .btn-journey {
-            background: none;
-            border: 1.5px solid var(--accent);
-            color: var(--accent);
-            padding: 0.5rem 1.2rem;
-            border-radius: 99px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .jr-action .btn-journey:hover {
-            background: var(--accent);
-            color: var(--white);
-        }
-
-        /* Promise strip */
-        .promise-strip {
-            background: var(--cream-dark);
-            padding: 3rem 5%;
-        }
-
-        .promise-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            text-align: center;
-        }
-
-        .promise-item .p-icon {
-            font-size: 2rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .promise-item h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--green);
-            margin-bottom: 0.3rem;
-        }
-
-        .promise-item p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        @media (max-width: 900px) {
-            .journey-row {
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
-            .jr-info { width: 100%; }
-            .promise-inner {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .promise-inner {
-                grid-template-columns: 1fr;
-            }
-        }
-        /* Journey Modal Styles */
-        .journey-modal-body::-webkit-scrollbar {
-            width: 8px;
-        }
-        .journey-modal-body::-webkit-scrollbar-track {
-            background: rgba(28, 61, 46, 0.05);
-            border-radius: 4px;
-        }
-        .journey-modal-body::-webkit-scrollbar-thumb {
-            background: rgba(28, 61, 46, 0.2);
-            border-radius: 4px;
-        }
-        .journey-modal-body::-webkit-scrollbar-thumb:hover {
-            background: rgba(28, 61, 46, 0.4);
-        }
-
-        /* Lightbox Styles */
-        #lightbox-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 10000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            cursor: zoom-out;
-        }
-        #lightbox-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        #lightbox-img {
-            max-width: 90%;
-            max-height: 90vh;
-            border-radius: 4px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            transform: scale(0.95);
-        }
-        #lightbox-overlay.active #lightbox-img {
-            transform: scale(1);
-        }
-        .journey-modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s ease;
-        }
-        .journey-modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .journey-modal-content {
-            background: var(--cream);
-            width: 90%;
-            max-width: 100%;
-            max-height: 90vh;
-            border-radius: var(--radius-lg);
-            position: relative;
-            transform: translateY(30px);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            overflow: hidden; /* Clips the scrollbar to the border radius */
-        }
-        .journey-modal-body {
-            padding: 3rem;
-            max-height: 90vh;
-            overflow-y: auto;
-            border-radius: var(--radius-lg);
-            box-sizing: border-box;
-            overscroll-behavior: contain;
-        }
-        .journey-modal-overlay.active .journey-modal-content {
-            transform: translateY(0);
-        }
-        .journey-modal-close {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: none;
-            border: none;
-            font-size: 2rem;
-            line-height: 1;
-            color: var(--green);
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-        .journey-modal-close:hover {
-            color: var(--accent);
-        }
-        .journey-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        .journey-header h2 {
-            font-size: 2rem;
-            color: var(--green);
-            margin: 0.5rem 0;
-        }
-        .journey-meta {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-        }
-        .journey-meta strong {
-            color: var(--text);
-        }
-        .timeline-container {
-            position: relative;
-            padding-left: 2rem;
-        }
-        .timeline-line {
-            position: absolute;
-            left: 5px;
-            top: 10px;
-            bottom: 10px;
-            width: 2px;
-            background: rgba(28, 61, 46, 0.1);
-        }
-        .timeline-step {
-            position: relative;
-            margin-bottom: 2rem;
-        }
-        .timeline-step:last-child {
-            margin-bottom: 0;
-        }
-        .timeline-dot {
-            position: absolute;
-            left: -2rem;
-            top: 5px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--accent);
-            border: 3px solid var(--cream);
-            box-shadow: 0 0 0 2px rgba(28, 61, 46, 0.1);
-            z-index: 2;
-        }
-        .timeline-content h4 {
-            font-size: 1.1rem;
-            color: var(--green);
-            margin-bottom: 0.3rem;
-        }
-        .timeline-content p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        /* Journey Button */
-        .btn-journey {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.65rem 1rem;
-            background: transparent;
-            color: var(--green);
-            border: 1.5px solid rgba(28, 61, 46, 0.2);
-            border-radius: 99px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            white-space: nowrap;
-        }
-        .btn-journey:hover {
-            border-color: var(--green);
-            background: rgba(28, 61, 46, 0.04);
-        }
-        .prod-foot-actions {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-        .prod-foot {
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-        .prod-foot .prod-nutrition {
-            width: 100%;
-            margin-top: 0.5rem;
-        }
-    
-        /* Search Bar */
-        .products-search-bar {
-            margin-bottom: 2rem;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 0 5%;
-        }
-
-        .products-search-bar input {
-            width: 100%;
-            padding: 1rem 1.5rem;
-            border: 1px solid rgba(28, 61, 46, 0.15);
-            border-radius: var(--radius-lg);
-            font-size: 1rem;
-            font-family: inherit;
-            color: var(--text);
-            background: var(--white);
-            transition: all 0.3s;
-        }
-
-        .products-search-bar input:focus {
-            outline: none;
-            border-color: var(--green);
-            box-shadow: 0 0 0 4px rgba(28, 61, 46, 0.05);
-        }
-
-        /* Pagination */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 3rem;
-        }
-
-        .page-btn {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(28, 61, 46, 0.1);
-            background: var(--white);
-            border-radius: 8px;
-            color: var(--green);
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .page-btn:hover {
-            border-color: var(--green);
-            background: rgba(28, 61, 46, 0.04);
-        }
-
-        .page-btn.active {
-            background: var(--green);
-            color: var(--white);
-            border-color: var(--green);
-        }
-
-    </style>
 </head>
 
 <body>
@@ -583,7 +101,7 @@
                 <!-- Farm 1: Ready for Sale -->
                 <div class="journey-row" data-category="ready">
                     <div class="jr-image">
-                        <img src="assets/toor_daal.png" alt="Toor Daal">
+                        <img src="assets/toor_daal.png" alt="Toor Daal" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Toor Daal</h3>
@@ -603,7 +121,7 @@
                 <!-- Farm 2: Harvesting -->
                 <div class="journey-row" data-category="harvesting">
                     <div class="jr-image">
-                        <img src="assets/moong_daal.png" alt="Moong Daal">
+                        <img src="assets/moong_daal.png" alt="Moong Daal" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Moong Daal</h3>
@@ -623,7 +141,7 @@
                 <!-- Farm 3: Soil Preparation -->
                 <div class="journey-row" data-category="soil">
                     <div class="jr-image">
-                        <img src="assets/toor_daal.png" alt="Toor Daal">
+                        <img src="assets/toor_daal.png" alt="Toor Daal" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Toor Daal</h3>
@@ -643,7 +161,7 @@
                 <!-- Farm 4: Planting -->
                 <div class="journey-row" data-category="planting">
                     <div class="jr-image">
-                        <img src="assets/mungfali.png" alt="Mungfali">
+                        <img src="assets/mungfali.png" alt="Mungfali" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Mungfali (Peanuts)</h3>
@@ -724,7 +242,7 @@
                     </div>
 <div class="journey-row" data-category="ready">
                     <div class="jr-image">
-                        <img src="assets/toor_daal.png" alt="Toor Daal">
+                        <img src="assets/toor_daal.png" alt="Toor Daal" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Toor Daal</h3>
@@ -744,7 +262,7 @@
                 <!-- Farm 2: Harvesting -->
                 <div class="journey-row" data-category="harvesting">
                     <div class="jr-image">
-                        <img src="assets/moong_daal.png" alt="Moong Daal">
+                        <img src="assets/moong_daal.png" alt="Moong Daal" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Moong Daal</h3>
@@ -764,7 +282,7 @@
                 <!-- Farm 3: Soil Preparation -->
                 <div class="journey-row" data-category="soil">
                     <div class="jr-image">
-                        <img src="assets/toor_daal.png" alt="Toor Daal">
+                        <img src="assets/toor_daal.png" alt="Toor Daal" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Toor Daal</h3>
@@ -784,149 +302,7 @@
                 <!-- Farm 4: Planting -->
                 <div class="journey-row" data-category="planting">
                     <div class="jr-image">
-                        <img src="assets/mungfali.png" alt="Mungfali">
-                    </div>
-                    <div class="jr-info">
-                        <h3>Mungfali (Peanuts)</h3>
-                        <p>Saurashtra Farm &bull; Farmer: Karsan Bhai</p>
-                    </div>
-                    <div class="jr-status">
-                        <span class="status-badge" style="background: rgba(107, 142, 35, 0.15); color: #6b8e23;">Planting</span>
-                    </div>
-                    <div class="jr-availability">
-                        <span class="next-harvest" style="color: #6b8e23;">Next Harvest: Dec 2026</span>
-                    </div>
-                    <div class="jr-action">
-                        <button class="btn-journey" data-journey="true" data-product="Mungfali" data-farmer="Karsan Bhai" data-location="Saurashtra, India" data-times="May 2026|Current|Pending|Pending|Pending" data-images="|assets/farm_field.png|||">View Journey</button>
-                    </div>
-                </div>
-
-
-            </div>
-            
-            <!-- Pagination -->
-            <div class="pagination" id="pagination-controls">
-                <!-- JS generated -->
-            </div>
-        </section>
-
-        <!-- Journey Modal -->
-        <div class="journey-modal-overlay" id="journey-modal">
-            <div class="journey-modal-content">
-                <button class="journey-modal-close" id="journey-modal-close">&times;</button>
-                <div class="journey-modal-body" data-lenis-prevent>
-                    <div class="journey-header">
-                        <span class="section-tag">Product Journey</span>
-                        <h2 id="journey-title">Product Name</h2>
-                        <p class="journey-meta">Farmer: <strong id="journey-farmer"></strong> &nbsp;&bull;&nbsp; Location: <a id="journey-location-link" href="#" target="_blank" style="color: var(--green); text-decoration: underline;"><strong id="journey-location"></strong></a></p>
-                    </div>
-                    <div class="timeline-container" id="journey-timeline">
-                        <div class="timeline-line"></div>
-                        <div class="timeline-step">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h4>Soil Preparation <span class="step-time" style="font-size: 0.85em; font-weight: normal; color: var(--text-muted); float: right;"></span></h4>
-                                <p>Rich, nutrient-dense soil prepared using natural methods.</p>
-                                <div class="step-gallery" style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
-                            </div>
-                        </div>
-                        <div class="timeline-step">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h4>Planting <span class="step-time" style="font-size: 0.85em; font-weight: normal; color: var(--text-muted); float: right;"></span></h4>
-                                <p>Sourced heirloom seeds planted with care and intention.</p>
-                                <div class="step-gallery" style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
-                            </div>
-                        </div>
-                        <div class="timeline-step">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h4>Harvesting <span class="step-time" style="font-size: 0.85em; font-weight: normal; color: var(--text-muted); float: right;"></span></h4>
-                                <p>Hand-picked at peak ripeness to ensure maximum flavor and nutrition.</p>
-                                <div class="step-gallery" style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
-                            </div>
-                        </div>
-                        <div class="timeline-step">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h4>Processing <span class="step-time" style="font-size: 0.85em; font-weight: normal; color: var(--text-muted); float: right;"></span></h4>
-                                <p>Cleaned and naturally processed without harsh chemicals.</p>
-                                <div class="step-gallery" style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
-                            </div>
-                        </div>
-                        <div class="timeline-step">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <h4>Packaging <span class="step-time" style="font-size: 0.85em; font-weight: normal; color: var(--text-muted); float: right;"></span></h4>
-                                <p>Sealed fresh in eco-conscious packaging for your pantry.</p>
-                                <div class="step-gallery" style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
-                            </div>
-                        </div>
-                    </div>
-
-<div class="journey-row" data-category="ready">
-                    <div class="jr-image">
-                        <img src="assets/toor_daal.png" alt="Toor Daal">
-                    </div>
-                    <div class="jr-info">
-                        <h3>Toor Daal</h3>
-                        <p>Gujarat Farm &bull; Farmer: Ramesh Patel</p>
-                    </div>
-                    <div class="jr-status">
-                        <span class="status-badge" style="background: rgba(136, 176, 75, 0.15); color: var(--green);">Ready for Sale</span>
-                    </div>
-                    <div class="jr-availability">
-                        <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20Toor%20Daal%20from%20Gujarat" target="_blank" class="buy-btn">Buy via WhatsApp ↗</a>
-                    </div>
-                    <div class="jr-action">
-                        <button class="btn-journey" data-journey="true" data-product="Toor Daal" data-farmer="Ramesh Patel" data-location="Gujarat, India" data-times="June 2025|July 2025|Nov 2025|Jan 2026|Feb 2026" data-images="||assets/farm_field.png|assets/ingredients_flat.png|">View Journey</button>
-                    </div>
-                </div>
-
-                <!-- Farm 2: Harvesting -->
-                <div class="journey-row" data-category="harvesting">
-                    <div class="jr-image">
-                        <img src="assets/moong_daal.png" alt="Moong Daal">
-                    </div>
-                    <div class="jr-info">
-                        <h3>Moong Daal</h3>
-                        <p>Rajasthan Farm &bull; Farmer: Anil Singh</p>
-                    </div>
-                    <div class="jr-status">
-                        <span class="status-badge" style="background: rgba(224, 159, 62, 0.15); color: var(--accent);">Harvesting</span>
-                    </div>
-                    <div class="jr-availability">
-                        <span class="next-harvest" style="color: var(--accent);">Next Harvest: Oct 2026</span>
-                    </div>
-                    <div class="jr-action">
-                        <button class="btn-journey" data-journey="true" data-product="Moong Daal" data-farmer="Anil Singh" data-location="Rajasthan, India" data-times="May 2026|June 2026|Oct 2026|Pending|Pending" data-images="||assets/farm_field.png||">View Journey</button>
-                    </div>
-                </div>
-
-                <!-- Farm 3: Soil Preparation -->
-                <div class="journey-row" data-category="soil">
-                    <div class="jr-image">
-                        <img src="assets/toor_daal.png" alt="Toor Daal">
-                    </div>
-                    <div class="jr-info">
-                        <h3>Toor Daal</h3>
-                        <p>Maharashtra Farm &bull; Farmer: Vikram Rao</p>
-                    </div>
-                    <div class="jr-status">
-                        <span class="status-badge" style="background: rgba(139, 110, 78, 0.15); color: #8b6e4e;">Soil Prep</span>
-                    </div>
-                    <div class="jr-availability">
-                        <span class="next-harvest" style="color: #8b6e4e;">Next Harvest: Feb 2027</span>
-                    </div>
-                    <div class="jr-action">
-                        <button class="btn-journey" data-journey="true" data-product="Toor Daal" data-farmer="Vikram Rao" data-location="Maharashtra, India" data-times="Current|Pending|Pending|Pending|Pending" data-images="assets/farm_field.png||||">View Journey</button>
-                    </div>
-                </div>
-
-                <!-- Farm 4: Planting -->
-                <div class="journey-row" data-category="planting">
-                    <div class="jr-image">
-                        <img src="assets/mungfali.png" alt="Mungfali">
+                        <img src="assets/mungfali.png" alt="Mungfali" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Mungfali (Peanuts)</h3>
@@ -1008,7 +384,7 @@
 
 <div class="journey-row" data-category="ready">
                     <div class="jr-image">
-                        <img src="assets/toor_daal.png" alt="Toor Daal">
+                        <img src="assets/toor_daal.png" alt="Toor Daal" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Toor Daal</h3>
@@ -1028,7 +404,7 @@
                 <!-- Farm 2: Harvesting -->
                 <div class="journey-row" data-category="harvesting">
                     <div class="jr-image">
-                        <img src="assets/moong_daal.png" alt="Moong Daal">
+                        <img src="assets/moong_daal.png" alt="Moong Daal" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Moong Daal</h3>
@@ -1048,7 +424,7 @@
                 <!-- Farm 3: Soil Preparation -->
                 <div class="journey-row" data-category="soil">
                     <div class="jr-image">
-                        <img src="assets/toor_daal.png" alt="Toor Daal">
+                        <img src="assets/toor_daal.png" alt="Toor Daal" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Toor Daal</h3>
@@ -1068,7 +444,7 @@
                 <!-- Farm 4: Planting -->
                 <div class="journey-row" data-category="planting">
                     <div class="jr-image">
-                        <img src="assets/mungfali.png" alt="Mungfali">
+                        <img src="assets/mungfali.png" alt="Mungfali" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Mungfali (Peanuts)</h3>
@@ -1150,7 +526,7 @@
 
 <div class="journey-row" data-category="ready">
                     <div class="jr-image">
-                        <img src="assets/toor_daal.png" alt="Toor Daal">
+                        <img src="assets/toor_daal.png" alt="Toor Daal" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Toor Daal</h3>
@@ -1170,7 +546,7 @@
                 <!-- Farm 2: Harvesting -->
                 <div class="journey-row" data-category="harvesting">
                     <div class="jr-image">
-                        <img src="assets/moong_daal.png" alt="Moong Daal">
+                        <img src="assets/moong_daal.png" alt="Moong Daal" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Moong Daal</h3>
@@ -1190,7 +566,7 @@
                 <!-- Farm 3: Soil Preparation -->
                 <div class="journey-row" data-category="soil">
                     <div class="jr-image">
-                        <img src="assets/toor_daal.png" alt="Toor Daal">
+                        <img src="assets/toor_daal.png" alt="Toor Daal" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Toor Daal</h3>
@@ -1210,7 +586,7 @@
                 <!-- Farm 4: Planting -->
                 <div class="journey-row" data-category="planting">
                     <div class="jr-image">
-                        <img src="assets/mungfali.png" alt="Mungfali">
+                        <img src="assets/mungfali.png" alt="Mungfali" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Mungfali (Peanuts)</h3>
@@ -1292,7 +668,7 @@
 
 <div class="journey-row" data-category="ready">
                     <div class="jr-image">
-                        <img src="assets/toor_daal.png" alt="Toor Daal">
+                        <img src="assets/toor_daal.png" alt="Toor Daal" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Toor Daal</h3>
@@ -1312,7 +688,7 @@
                 <!-- Farm 2: Harvesting -->
                 <div class="journey-row" data-category="harvesting">
                     <div class="jr-image">
-                        <img src="assets/moong_daal.png" alt="Moong Daal">
+                        <img src="assets/moong_daal.png" alt="Moong Daal" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Moong Daal</h3>
@@ -1332,7 +708,7 @@
                 <!-- Farm 3: Soil Preparation -->
                 <div class="journey-row" data-category="soil">
                     <div class="jr-image">
-                        <img src="assets/toor_daal.png" alt="Toor Daal">
+                        <img src="assets/toor_daal.png" alt="Toor Daal" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Toor Daal</h3>
@@ -1352,7 +728,7 @@
                 <!-- Farm 4: Planting -->
                 <div class="journey-row" data-category="planting">
                     <div class="jr-image">
-                        <img src="assets/mungfali.png" alt="Mungfali">
+                        <img src="assets/mungfali.png" alt="Mungfali" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Mungfali (Peanuts)</h3>
@@ -1434,7 +810,7 @@
 
 <div class="journey-row" data-category="ready">
                     <div class="jr-image">
-                        <img src="assets/toor_daal.png" alt="Toor Daal">
+                        <img src="assets/toor_daal.png" alt="Toor Daal" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Toor Daal</h3>
@@ -1454,7 +830,7 @@
                 <!-- Farm 2: Harvesting -->
                 <div class="journey-row" data-category="harvesting">
                     <div class="jr-image">
-                        <img src="assets/moong_daal.png" alt="Moong Daal">
+                        <img src="assets/moong_daal.png" alt="Moong Daal" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Moong Daal</h3>
@@ -1474,7 +850,7 @@
                 <!-- Farm 3: Soil Preparation -->
                 <div class="journey-row" data-category="soil">
                     <div class="jr-image">
-                        <img src="assets/toor_daal.png" alt="Toor Daal">
+                        <img src="assets/toor_daal.png" alt="Toor Daal" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Toor Daal</h3>
@@ -1494,7 +870,7 @@
                 <!-- Farm 4: Planting -->
                 <div class="journey-row" data-category="planting">
                     <div class="jr-image">
-                        <img src="assets/mungfali.png" alt="Mungfali">
+                        <img src="assets/mungfali.png" alt="Mungfali" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Mungfali (Peanuts)</h3>
@@ -1576,7 +952,7 @@
 
 <div class="journey-row" data-category="ready">
                     <div class="jr-image">
-                        <img src="assets/toor_daal.png" alt="Toor Daal">
+                        <img src="assets/toor_daal.png" alt="Toor Daal" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Toor Daal</h3>
@@ -1596,7 +972,7 @@
                 <!-- Farm 2: Harvesting -->
                 <div class="journey-row" data-category="harvesting">
                     <div class="jr-image">
-                        <img src="assets/moong_daal.png" alt="Moong Daal">
+                        <img src="assets/moong_daal.png" alt="Moong Daal" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Moong Daal</h3>
@@ -1616,7 +992,7 @@
                 <!-- Farm 3: Soil Preparation -->
                 <div class="journey-row" data-category="soil">
                     <div class="jr-image">
-                        <img src="assets/toor_daal.png" alt="Toor Daal">
+                        <img src="assets/toor_daal.png" alt="Toor Daal" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Toor Daal</h3>
@@ -1636,7 +1012,7 @@
                 <!-- Farm 4: Planting -->
                 <div class="journey-row" data-category="planting">
                     <div class="jr-image">
-                        <img src="assets/mungfali.png" alt="Mungfali">
+                        <img src="assets/mungfali.png" alt="Mungfali" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Mungfali (Peanuts)</h3>
@@ -1718,7 +1094,7 @@
 
 <div class="journey-row" data-category="ready">
                     <div class="jr-image">
-                        <img src="assets/toor_daal.png" alt="Toor Daal">
+                        <img src="assets/toor_daal.png" alt="Toor Daal" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Toor Daal</h3>
@@ -1738,7 +1114,7 @@
                 <!-- Farm 2: Harvesting -->
                 <div class="journey-row" data-category="harvesting">
                     <div class="jr-image">
-                        <img src="assets/moong_daal.png" alt="Moong Daal">
+                        <img src="assets/moong_daal.png" alt="Moong Daal" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Moong Daal</h3>
@@ -1758,7 +1134,7 @@
                 <!-- Farm 3: Soil Preparation -->
                 <div class="journey-row" data-category="soil">
                     <div class="jr-image">
-                        <img src="assets/toor_daal.png" alt="Toor Daal">
+                        <img src="assets/toor_daal.png" alt="Toor Daal" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Toor Daal</h3>
@@ -1778,7 +1154,149 @@
                 <!-- Farm 4: Planting -->
                 <div class="journey-row" data-category="planting">
                     <div class="jr-image">
-                        <img src="assets/mungfali.png" alt="Mungfali">
+                        <img src="assets/mungfali.png" alt="Mungfali" loading="lazy">
+                    </div>
+                    <div class="jr-info">
+                        <h3>Mungfali (Peanuts)</h3>
+                        <p>Saurashtra Farm &bull; Farmer: Karsan Bhai</p>
+                    </div>
+                    <div class="jr-status">
+                        <span class="status-badge" style="background: rgba(107, 142, 35, 0.15); color: #6b8e23;">Planting</span>
+                    </div>
+                    <div class="jr-availability">
+                        <span class="next-harvest" style="color: #6b8e23;">Next Harvest: Dec 2026</span>
+                    </div>
+                    <div class="jr-action">
+                        <button class="btn-journey" data-journey="true" data-product="Mungfali" data-farmer="Karsan Bhai" data-location="Saurashtra, India" data-times="May 2026|Current|Pending|Pending|Pending" data-images="|assets/farm_field.png|||">View Journey</button>
+                    </div>
+                </div>
+
+
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination" id="pagination-controls">
+                <!-- JS generated -->
+            </div>
+        </section>
+
+        <!-- Journey Modal -->
+        <div class="journey-modal-overlay" id="journey-modal">
+            <div class="journey-modal-content">
+                <button class="journey-modal-close" id="journey-modal-close">&times;</button>
+                <div class="journey-modal-body" data-lenis-prevent>
+                    <div class="journey-header">
+                        <span class="section-tag">Product Journey</span>
+                        <h2 id="journey-title">Product Name</h2>
+                        <p class="journey-meta">Farmer: <strong id="journey-farmer"></strong> &nbsp;&bull;&nbsp; Location: <a id="journey-location-link" href="#" target="_blank" style="color: var(--green); text-decoration: underline;"><strong id="journey-location"></strong></a></p>
+                    </div>
+                    <div class="timeline-container" id="journey-timeline">
+                        <div class="timeline-line"></div>
+                        <div class="timeline-step">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>Soil Preparation <span class="step-time" style="font-size: 0.85em; font-weight: normal; color: var(--text-muted); float: right;"></span></h4>
+                                <p>Rich, nutrient-dense soil prepared using natural methods.</p>
+                                <div class="step-gallery" style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
+                            </div>
+                        </div>
+                        <div class="timeline-step">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>Planting <span class="step-time" style="font-size: 0.85em; font-weight: normal; color: var(--text-muted); float: right;"></span></h4>
+                                <p>Sourced heirloom seeds planted with care and intention.</p>
+                                <div class="step-gallery" style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
+                            </div>
+                        </div>
+                        <div class="timeline-step">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>Harvesting <span class="step-time" style="font-size: 0.85em; font-weight: normal; color: var(--text-muted); float: right;"></span></h4>
+                                <p>Hand-picked at peak ripeness to ensure maximum flavor and nutrition.</p>
+                                <div class="step-gallery" style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
+                            </div>
+                        </div>
+                        <div class="timeline-step">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>Processing <span class="step-time" style="font-size: 0.85em; font-weight: normal; color: var(--text-muted); float: right;"></span></h4>
+                                <p>Cleaned and naturally processed without harsh chemicals.</p>
+                                <div class="step-gallery" style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
+                            </div>
+                        </div>
+                        <div class="timeline-step">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>Packaging <span class="step-time" style="font-size: 0.85em; font-weight: normal; color: var(--text-muted); float: right;"></span></h4>
+                                <p>Sealed fresh in eco-conscious packaging for your pantry.</p>
+                                <div class="step-gallery" style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+<div class="journey-row" data-category="ready">
+                    <div class="jr-image">
+                        <img src="assets/toor_daal.png" alt="Toor Daal" loading="lazy">
+                    </div>
+                    <div class="jr-info">
+                        <h3>Toor Daal</h3>
+                        <p>Gujarat Farm &bull; Farmer: Ramesh Patel</p>
+                    </div>
+                    <div class="jr-status">
+                        <span class="status-badge" style="background: rgba(136, 176, 75, 0.15); color: var(--green);">Ready for Sale</span>
+                    </div>
+                    <div class="jr-availability">
+                        <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20Toor%20Daal%20from%20Gujarat" target="_blank" class="buy-btn">Buy via WhatsApp ↗</a>
+                    </div>
+                    <div class="jr-action">
+                        <button class="btn-journey" data-journey="true" data-product="Toor Daal" data-farmer="Ramesh Patel" data-location="Gujarat, India" data-times="June 2025|July 2025|Nov 2025|Jan 2026|Feb 2026" data-images="||assets/farm_field.png|assets/ingredients_flat.png|">View Journey</button>
+                    </div>
+                </div>
+
+                <!-- Farm 2: Harvesting -->
+                <div class="journey-row" data-category="harvesting">
+                    <div class="jr-image">
+                        <img src="assets/moong_daal.png" alt="Moong Daal" loading="lazy">
+                    </div>
+                    <div class="jr-info">
+                        <h3>Moong Daal</h3>
+                        <p>Rajasthan Farm &bull; Farmer: Anil Singh</p>
+                    </div>
+                    <div class="jr-status">
+                        <span class="status-badge" style="background: rgba(224, 159, 62, 0.15); color: var(--accent);">Harvesting</span>
+                    </div>
+                    <div class="jr-availability">
+                        <span class="next-harvest" style="color: var(--accent);">Next Harvest: Oct 2026</span>
+                    </div>
+                    <div class="jr-action">
+                        <button class="btn-journey" data-journey="true" data-product="Moong Daal" data-farmer="Anil Singh" data-location="Rajasthan, India" data-times="May 2026|June 2026|Oct 2026|Pending|Pending" data-images="||assets/farm_field.png||">View Journey</button>
+                    </div>
+                </div>
+
+                <!-- Farm 3: Soil Preparation -->
+                <div class="journey-row" data-category="soil">
+                    <div class="jr-image">
+                        <img src="assets/toor_daal.png" alt="Toor Daal" loading="lazy">
+                    </div>
+                    <div class="jr-info">
+                        <h3>Toor Daal</h3>
+                        <p>Maharashtra Farm &bull; Farmer: Vikram Rao</p>
+                    </div>
+                    <div class="jr-status">
+                        <span class="status-badge" style="background: rgba(139, 110, 78, 0.15); color: #8b6e4e;">Soil Prep</span>
+                    </div>
+                    <div class="jr-availability">
+                        <span class="next-harvest" style="color: #8b6e4e;">Next Harvest: Feb 2027</span>
+                    </div>
+                    <div class="jr-action">
+                        <button class="btn-journey" data-journey="true" data-product="Toor Daal" data-farmer="Vikram Rao" data-location="Maharashtra, India" data-times="Current|Pending|Pending|Pending|Pending" data-images="assets/farm_field.png||||">View Journey</button>
+                    </div>
+                </div>
+
+                <!-- Farm 4: Planting -->
+                <div class="journey-row" data-category="planting">
+                    <div class="jr-image">
+                        <img src="assets/mungfali.png" alt="Mungfali" loading="lazy">
                     </div>
                     <div class="jr-info">
                         <h3>Mungfali (Peanuts)</h3>
@@ -1865,7 +1383,7 @@
 
         <!-- Lightbox -->
         <div id="lightbox-overlay">
-            <img id="lightbox-img" src="" alt="Expanded View">
+            <img id="lightbox-img" src="" alt="Expanded View" loading="lazy">
         </div>
 
     </main>
@@ -1908,12 +1426,13 @@
             </div>
             <div class="footer-links-group">
                 <h4>Contact</h4>
-                <a href="https://wa.me/919824664973?text=Hi,%20I%20need%20help%20with%20nutrivae%20products" target="_blank" style="text-decoration:none;">+91 98246-64973 ↗</a>
+                <a href="https://wa.me/919824664973?text=Hi,%20I%20need%20help%20with%20nutrivae%20products" target="_blank" class="footer-contact-link" aria-label="Contact us on WhatsApp">+91 98246-64973 ↗</a>
                 <span>India</span>
             </div>
         </div>
         <div class="footer-bottom">
             <span>&copy; 2026 Nutrivae Foods. All rights reserved.</span>
+            <span class="fssai-placeholder">FSSAI Lic No. XXXXXXXXXXXXXX</span>
             <span>Thoughtfully Grown, Carefully Crafted.</span>
         </div>
     </footer>

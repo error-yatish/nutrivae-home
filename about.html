@@ -16,136 +16,6 @@
     <!-- Lenis smooth scroll -->
     <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .page-hero {
-            min-height: 60vh;
-            display: flex;
-            align-items: center;
-            padding: 10rem 5% 5rem;
-            background: var(--cream);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .page-hero-inner {
-            max-width: 800px;
-        }
-
-        .page-hero h1 {
-            font-size: clamp(3rem, 5vw, 5rem);
-            color: var(--green);
-            margin-bottom: 1.5rem;
-        }
-
-        .page-hero p {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            line-height: 1.8;
-            max-width: 620px;
-        }
-
-        .page-hero-blob {
-            position: absolute;
-            right: -10%;
-            top: 10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(ellipse, rgba(74, 124, 95, 0.1) 0%, transparent 70%);
-            border-radius: 60% 40% 70% 30%;
-            animation: blobMorph 8s ease-in-out infinite;
-        }
-
-        .story-content-section {
-            padding: 5rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .story-two-col {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: center;
-            margin-bottom: 6rem;
-        }
-
-        .story-two-col.reverse {
-            direction: rtl;
-        }
-
-        .story-two-col.reverse>* {
-            direction: ltr;
-        }
-
-        .story-col-img {
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-            box-shadow: var(--shadow-soft);
-        }
-
-        .story-col-img img {
-            width: 100%;
-            height: 420px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .story-col-text h2 {
-            font-size: clamp(1.8rem, 3vw, 2.5rem);
-            color: var(--green);
-            margin-bottom: 1rem;
-        }
-
-        .story-col-text p {
-            font-size: 1rem;
-            color: var(--text-muted);
-            line-height: 1.85;
-            margin-bottom: 1.2rem;
-        }
-
-        .story-values {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            padding: 5rem 5%;
-            background: var(--green);
-        }
-
-        .story-val-card {
-            padding: 2.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: var(--radius-lg);
-        }
-
-        .story-val-card .val-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .story-val-card h3 {
-            font-size: 1.3rem;
-            color: var(--white);
-            margin-bottom: 0.7rem;
-        }
-
-        .story-val-card p {
-            font-size: 0.92rem;
-            color: rgba(255, 255, 255, 0.6);
-            line-height: 1.7;
-        }
-
-        @media (max-width: 900px) {
-            .story-two-col {
-                grid-template-columns: 1fr;
-                direction: ltr !important;
-                gap: 2.5rem;
-            }
-
-            .story-values {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -217,7 +87,7 @@
         <section class="story-content-section">
             <div class="story-two-col" data-animate="fade-up">
                 <div class="story-col-img">
-                    <img src="assets/farm_field.png" alt="Our farm roots">
+                    <img src="assets/farm_field.png" alt="Our farm roots" loading="lazy">
                 </div>
                 <div class="story-col-text">
                     <span class="section-tag">Our Roots</span>
@@ -232,7 +102,7 @@
 
             <div class="story-two-col reverse" data-animate="fade-up">
                 <div class="story-col-img">
-                    <img src="assets/ingredients_flat.png" alt="Our ingredients">
+                    <img src="assets/ingredients_flat.png" alt="Our ingredients" loading="lazy">
                 </div>
                 <div class="story-col-text">
                     <span class="section-tag">Our Science</span>
@@ -319,12 +189,13 @@
             </div>
             <div class="footer-links-group">
                 <h4>Contact</h4>
-                <a href="https://wa.me/919824664973?text=Hi,%20I%20need%20help%20with%20nutrivae%20products" target="_blank" style="text-decoration:none;">+91 98246-64973 ↗</a>
+                <a href="https://wa.me/919824664973?text=Hi,%20I%20need%20help%20with%20nutrivae%20products" target="_blank" class="footer-contact-link" aria-label="Contact us on WhatsApp">+91 98246-64973 ↗</a>
                 <span>India</span>
             </div>
         </div>
         <div class="footer-bottom">
             <span>&copy; 2026 Nutrivae Foods. All rights reserved.</span>
+            <span class="fssai-placeholder">FSSAI Lic No. XXXXXXXXXXXXXX</span>
             <span>Thoughtfully Grown, Carefully Crafted.</span>
         </div>
     </footer>

@@ -16,208 +16,6 @@
     <!-- Lenis smooth scroll -->
     <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .page-hero {
-            min-height: 40vh;
-            display: flex;
-            align-items: center;
-            padding: 10rem 5% 3rem;
-            background: var(--cream);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .page-hero-inner {
-            max-width: 700px;
-        }
-
-        .page-hero h1 {
-            font-size: clamp(3rem, 5vw, 5rem);
-            color: var(--green);
-            margin-bottom: 1rem;
-        }
-
-        .page-hero p {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-        }
-
-        .page-hero-blob {
-            position: absolute;
-            right: -10%;
-            top: 10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(ellipse, rgba(74, 124, 95, 0.1) 0%, transparent 70%);
-            border-radius: 60% 40% 70% 30%;
-            animation: blobMorph 8s ease-in-out infinite;
-        }
-
-        /* Contact layout */
-        .contact-section {
-            padding: 5rem 5%;
-            max-width: 1300px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1.4fr;
-            gap: 5rem;
-            align-items: start;
-        }
-
-        /* Info side */
-        .contact-info h2 {
-            font-size: 2.2rem;
-            color: var(--green);
-            margin-bottom: 1rem;
-        }
-
-        .contact-info p {
-            font-size: 1rem;
-            color: var(--text-muted);
-            line-height: 1.8;
-            margin-bottom: 2.5rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 1.8rem;
-        }
-
-        .contact-item-icon {
-            width: 48px;
-            height: 48px;
-            background: rgba(46, 94, 70, 0.1);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            flex-shrink: 0;
-        }
-
-        .contact-item-text h4 {
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 0.2rem;
-        }
-
-        .contact-item-text p {
-            font-size: 1rem;
-            color: var(--green);
-            font-weight: 500;
-        }
-
-        .contact-socials {
-            display: flex;
-            gap: 0.8rem;
-            margin-top: 2rem;
-        }
-
-        .contact-social-btn {
-            display: flex;
-            align-items: center;
-        }
-
-        .article-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 5rem 5%;
-        }
-
-        .article-hero {
-            width: 100%;
-            height: 50vh;
-            min-height: 400px;
-            object-fit: cover;
-            border-radius: var(--radius-xl);
-            margin-bottom: 3rem;
-        }
-
-        .article-header {
-            margin-bottom: 3rem;
-            text-align: center;
-        }
-
-        .article-meta {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
-        }
-
-        .article-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            color: var(--green);
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-        }
-
-        .article-body {
-            font-size: 1.15rem;
-            line-height: 1.8;
-            color: var(--text);
-        }
-
-        .article-body h2 {
-            font-size: 2rem;
-            color: var(--green);
-            margin: 3rem 0 1.5rem;
-        }
-
-        .article-body p {
-            margin-bottom: 1.5rem;
-        }
-
-        .article-body img {
-            width: 100%;
-            border-radius: var(--radius-lg);
-            margin: 2rem 0;
-        }
-
-        .article-body blockquote {
-            border-left: 4px solid var(--accent);
-            padding-left: 1.5rem;
-            margin: 2.5rem 0;
-            font-size: 1.4rem;
-            font-style: italic;
-            color: var(--green-mid);
-        }
-
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--green);
-            text-decoration: none;
-            font-weight: 600;
-            margin-bottom: 2rem;
-            transition: transform 0.3s ease;
-        }
-
-        .back-btn:hover {
-            transform: translateX(-5px);
-        }
-
-        .related-articles {
-            padding: 5rem 5%;
-            background: var(--cream);
-            margin-top: 2rem;
-        }
-
-        .related-articles h2 {
-            text-align: center;
-            font-family: 'Fraunces', serif;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--green);
-        }
-    </style>
 </head>
 
 <body>
@@ -316,13 +114,13 @@
             <h2>Read Next</h2>
             <div class="blog-grid" style="max-width: 1200px; margin: 0 auto;">
                 <article class="blog-card" data-animate="fade-up">
-                    <img src="assets/farm_field.png" alt="Farm field" />
+                    <img src="assets/farm_field.png" alt="Farm field" / loading="lazy">
                     <h3>Sustainable sourcing explained</h3>
                     <p>How we ensure responsible farming practices.</p>
                     <a href="blog-post.html" class="btn-text-link">Read more →</a>
                 </article>
                 <article class="blog-card" data-animate="fade-up" data-delay="100">
-                    <img src="assets/harvesting.png" alt="Harvesting crops" />
+                    <img src="assets/harvesting.png" alt="Harvesting crops" / loading="lazy">
                     <h3>Cooking with Nutrivae</h3>
                     <p>Simple recipes to incorporate our products.</p>
                     <a href="blog-post.html" class="btn-text-link">Read more →</a>
@@ -369,12 +167,13 @@
             </div>
             <div class="footer-links-group">
                 <h4>Contact</h4>
-                <a href="https://wa.me/919824664973?text=Hi,%20I%20need%20help%20with%20nutrivae%20products" target="_blank" style="text-decoration:none;">+91 98246-64973 ↗</a>
+                <a href="https://wa.me/919824664973?text=Hi,%20I%20need%20help%20with%20nutrivae%20products" target="_blank" class="footer-contact-link" aria-label="Contact us on WhatsApp">+91 98246-64973 ↗</a>
                 <span>India</span>
             </div>
         </div>
         <div class="footer-bottom">
             <span>&copy; 2026 Nutrivae Foods. All rights reserved.</span>
+            <span class="fssai-placeholder">FSSAI Lic No. XXXXXXXXXXXXXX</span>
             <span>Thoughtfully Grown, Carefully Crafted.</span>
         </div>
     </footer>

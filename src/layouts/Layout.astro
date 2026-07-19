@@ -10,6 +10,7 @@ interface Props {
 }
 
 const { title, description = "Nutrivae focuses on clean, plant-based foods made with care, consistency, and integrity. Pure, accessible, and trustworthy nutrition for everyday life.", currentPath } = Astro.props;
+const PUBLIC_STRAPI_URL = (typeof process !== 'undefined' && process.env && process.env.PUBLIC_STRAPI_URL) || import.meta.env.PUBLIC_STRAPI_URL || 'http://127.0.0.1:1337';
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -28,6 +29,9 @@ const { title, description = "Nutrivae focuses on clean, plant-based foods made 
     <!-- Lenis smooth scroll -->
     <script is:inline src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
     <link rel="stylesheet" href="/styles.css">
+    <script is:inline define:vars={{ PUBLIC_STRAPI_URL }}>
+        window.STRAPI_URL = PUBLIC_STRAPI_URL;
+    </script>
 </head>
 
 <body class={currentPath === '/' ? "home" : ""}>

@@ -1,5 +1,5 @@
-// For client-side auth, we hardcode the URL or use PUBLIC_ env vars
-const STRAPI_URL = import.meta.env.STRAPI_URL || 'http://127.0.0.1:1337';
+// For client-side auth, we read from window.STRAPI_URL or fallback
+const STRAPI_URL = (typeof window !== 'undefined' && window.STRAPI_URL) || import.meta.env.STRAPI_URL || 'http://127.0.0.1:1337';
 
 export async function login(identifier, password) {
     const res = await fetch(`${STRAPI_URL}/api/auth/local`, {

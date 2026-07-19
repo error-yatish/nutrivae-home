@@ -10,7 +10,7 @@ interface Props {
 }
 
 const { title, description = "Nutrivae focuses on clean, plant-based foods made with care, consistency, and integrity. Pure, accessible, and trustworthy nutrition for everyday life.", currentPath } = Astro.props;
-const PUBLIC_STRAPI_URL = (typeof process !== 'undefined' && process.env && process.env.PUBLIC_STRAPI_URL) || import.meta.env.PUBLIC_STRAPI_URL || 'http://127.0.0.1:1337';
+const PUBLIC_STRAPI_URL = (typeof globalThis !== 'undefined' && (globalThis as any).process?.env?.PUBLIC_STRAPI_URL) || import.meta.env.PUBLIC_STRAPI_URL || 'http://127.0.0.1:1337';
 ---
 <!DOCTYPE html>
 <html lang="en">

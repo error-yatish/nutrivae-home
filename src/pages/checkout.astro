@@ -175,6 +175,7 @@ if (!FEATURES.enableCartAndAuth) {
   <script>
     import { cartItems, getCartTotal, clearCart } from '../store/cartStore.js';
     import { getUser } from '../services/auth.js';
+    import { STRAPI_URL } from '../config';
 
     // Populate user details if logged in
     async function prefillForm() {
@@ -271,7 +272,6 @@ if (!FEATURES.enableCartAndAuth) {
 
             try {
                 // Determine Strapi URL dynamically or fallback
-                const STRAPI_URL = (typeof window !== 'undefined' && window.STRAPI_URL) || 'http://127.0.0.1:1337';
                 const res = await fetch(`${STRAPI_URL}/api/orders`, {
                     method: 'POST',
                     headers,

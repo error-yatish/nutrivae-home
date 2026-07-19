@@ -1,8 +1,6 @@
 
 
-// Environment variables can be configured in settings or .env file
-const STRAPI_URL = (typeof process !== 'undefined' && process.env && process.env.STRAPI_URL) || import.meta.env.STRAPI_URL || 'http://127.0.0.1:1337';
-const STRAPI_TOKEN = (typeof process !== 'undefined' && process.env && process.env.STRAPI_TOKEN) || import.meta.env.STRAPI_TOKEN || '';
+import { STRAPI_URL, STRAPI_TOKEN } from '../config';
 
 /**
  * Service to interact with the Strapi REST API.

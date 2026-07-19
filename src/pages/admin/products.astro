@@ -220,6 +220,7 @@ if (!FEATURES.enableCartAndAuth) {
   <script>
     import { getUser, checkIsAdmin } from '../../services/auth';
     import { getProducts, createProduct, updateProduct, deleteProduct } from '../../services/api';
+    import { STRAPI_URL } from '../../config';
 
     let currentProducts = [];
     let jwtToken = null;
@@ -347,7 +348,6 @@ if (!FEATURES.enableCartAndAuth) {
         const formData = new FormData();
         formData.append('files', file);
         try {
-            const STRAPI_URL = (typeof window !== 'undefined' && window.STRAPI_URL) || 'http://127.0.0.1:1337';
             const res = await fetch(`${STRAPI_URL}/api/upload`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${jwtToken}` },

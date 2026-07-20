@@ -52,6 +52,9 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::journey.journey"
+    },
+    "variants": {
+      "type": "json"
     }
   }
 }

@@ -31,10 +31,11 @@ export async function getProducts() {
                     category: p.category,
                     isNew: p.isNew,
                     price: p.price,
+                    variants: p.variants || [{ size: '500g', price: p.price }],
                     whatsappLink: p.whatsappLink,
                     nutrition: p.nutrition,
                     description: p.description,
-                    specs: p.specs,
+                    specs: Array.isArray(p.specs) ? p.specs : (p.specs && typeof p.specs === 'object' ? Object.entries(p.specs).map(([k,v]) => `${k}: ${v}`) : []),
                     image: p.image
                 }
             }));

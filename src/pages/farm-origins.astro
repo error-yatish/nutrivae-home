@@ -7,7 +7,7 @@ const allJourneys = await getJourneys();
 ---
 
 <Layout title="Farm Origins | Nutrivae Foods" currentPath="/farm-origins">
-  <main style="background: #FFFDFC; padding-top: 100px;">
+  <main style="padding-top: 100px;">
     
     <!-- Header Area -->
     <div style="max-width: 1300px; margin: 0 auto; padding: 20px;">
@@ -108,8 +108,8 @@ const allJourneys = await getJourneys();
                     </div>
                   ) : (
                     j.data.whatsappLink && (
-                      <a href={j.data.whatsappLink} target="_blank" class="buy-btn" style="margin-left: 15px; display: inline-block;">
-                        Buy via WhatsApp ↗
+                      <a href={`https://wa.me/919824664973?text=${encodeURIComponent("Hello Nutrivae,\nI'd like to order:\n" + j.data.name + " 500g\nQuantity: 2\nPlease help me place the order.")}`} target="_blank" class="buy-btn" style="margin-left: 15px; display: inline-block;">
+                        Order on WhatsApp
                       </a>
                     )
                   )

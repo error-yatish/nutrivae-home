@@ -8,15 +8,18 @@ export const cartItems = persistentMap('cart:', {}, {
 });
 
 export function addToCart(product) {
-    const existing = cartItems.get()[product.id];
+    // Determine unique ID for cart item (product id + size)
+    const cartId = product.size ? `${product.id}-${product.size}` : product.id;
+    const existing = cartItems.get()[cartId];
     if (existing) {
-        cartItems.setKey(product.id, {
+        cartItems.setKey(cartId, {
             ...existing,
             quantity: existing.quantity + 1
         });
     } else {
-        cartItems.setKey(product.id, {
+        cartItems.setKey(cartId, {
             ...product,
+            cartId, // store this for easy reference
             quantity: 1
         });
     }

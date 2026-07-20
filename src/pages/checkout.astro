@@ -220,7 +220,7 @@ if (!FEATURES.enableCartAndAuth) {
                 div.innerHTML = `
                     <img src="/${item.image.replace(/^\/?/, '')}" alt="${item.name}">
                     <div class="checkout-item-info">
-                        <div class="checkout-item-title">${item.name}</div>
+                        <div class="checkout-item-title">${item.name} ${item.size ? '- ' + item.size : ''}</div>
                         <div class="checkout-item-qty">Qty: ${item.quantity}</div>
                     </div>
                     <div class="checkout-item-price">₹${item.price * item.quantity}</div>

@@ -73,22 +73,37 @@ const PUBLIC_STRAPI_URL = (typeof globalThis !== 'undefined' && (globalThis as a
       import { addToCart, updateQuantity, removeFromCart, cartItems } from "../store/cartStore.js";
 
       document.addEventListener("DOMContentLoaded", () => {
-        cartItems.subscribe((items) => {
+        function updateCartControls(items) {
           document.querySelectorAll(".cart-control-container").forEach(container => {
-            const productId = container.getAttribute("data-product-id");
+            const productData = container.getAttribute("data-product-json");
+            if (!productData) return;
+            const product = JSON.parse(productData);
+            const cartId = product.size ? `${product.id}-${product.size}` : product.id;
+            
             const initBtn = container.querySelector(".add-init-btn");
             const qtyControl = container.querySelector(".qty-control");
             const qtyVal = container.querySelector(".qty-val");
             
-            if (items[productId]) {
+            if (!initBtn || !qtyControl || !qtyVal) return;
+
+            if (items[cartId]) {
               initBtn.style.display = "none";
               qtyControl.style.display = "flex";
-              qtyVal.textContent = items[productId].quantity;
+              qtyVal.textContent = items[cartId].quantity;
             } else {
               initBtn.style.display = "block";
               qtyControl.style.display = "none";
             }
           });
+        }
+
+        cartItems.subscribe((items) => {
+          updateCartControls(items);
+        });
+
+        // Listen for variant changes from products.astro
+        document.body.addEventListener('variant-changed', () => {
+          updateCartControls(cartItems.get());
         });
 
         document.body.addEventListener("click", (e) => {
@@ -103,21 +118,23 @@ const PUBLIC_STRAPI_URL = (typeof globalThis !== 'undefined' && (globalThis as a
           const incBtn = e.target.closest(".qty-inc-btn");
           if (incBtn) {
             const container = incBtn.closest(".cart-control-container");
-            const productId = container.getAttribute("data-product-id");
+            const product = JSON.parse(container.getAttribute("data-product-json"));
+            const cartId = product.size ? `${product.id}-${product.size}` : product.id;
             const currentQty = parseInt(container.querySelector(".qty-val").textContent);
-            updateQuantity(productId, currentQty + 1);
+            updateQuantity(cartId, currentQty + 1);
             return;
           }
 
           const decBtn = e.target.closest(".qty-dec-btn");
           if (decBtn) {
             const container = decBtn.closest(".cart-control-container");
-            const productId = container.getAttribute("data-product-id");
+            const product = JSON.parse(container.getAttribute("data-product-json"));
+            const cartId = product.size ? `${product.id}-${product.size}` : product.id;
             const currentQty = parseInt(container.querySelector(".qty-val").textContent);
             if (currentQty <= 1) {
-              removeFromCart(productId);
+              removeFromCart(cartId);
             } else {
-              updateQuantity(productId, currentQty - 1);
+              updateQuantity(cartId, currentQty - 1);
             }
             return;
           }

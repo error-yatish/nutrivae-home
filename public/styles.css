@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
 
 :root {
-  --cream:       #fdfaf4;
-  --cream-dark:  #f2ece0;
+  --cream:       #f0EDE6;
+  --cream-dark:  #dbd7c9;
   --green:       #015027;
   --green-mid:   #2e5e46;
   --green-light: #4a7c5f;
@@ -1030,7 +1030,7 @@ img { display: block; max-width: 100%; }
   margin: 0 auto;
 }
 .review-card {
-  background: var(--bg-alt);
+  background: #e0ddd1;
   padding: 3.5rem 2.5rem;
   border-radius: var(--radius-lg);
   border: 1px solid rgba(0,0,0,0.03);

@@ -24,6 +24,9 @@ if (product.data.journey) {
     journeyTimes = product.data.journey.times ? product.data.journey.times.split('|') : [];
     journeyImages = product.data.journey.images ? product.data.journey.images.split('|') : [];
 }
+
+const waMsg = `Hello Nutrivae,\nI'd like to order:\n${product.data.name} 500g\nQuantity: 2\nPlease help me place the order.`;
+const waLink = `https://wa.me/919824664973?text=${encodeURIComponent(waMsg)}`;
 ---
 
 <Layout title={`${product.data.name} | Nutrivae Foods`} currentPath="/products">
@@ -51,7 +54,7 @@ if (product.data.journey) {
                 )}
 
                 <div class="specs-list">
-                    {product.data.specs.map(spec => (
+                    {product.data.specs && Array.isArray(product.data.specs) && product.data.specs.map(spec => (
                         <span class="spec-item">{spec}</span>
                     ))}
                 </div>
@@ -63,14 +66,27 @@ if (product.data.journey) {
                     </div>
                 )}
 
+                {product.data.variants && product.data.variants.length > 0 && (
+                    <div class="variant-selector" style="margin-bottom: 20px;">
+                        <h4 style="margin-bottom: 10px; font-size: 1rem; color: var(--text-dark);">Select Size:</h4>
+                        <div style="display: flex; gap: 10px;">
+                            {product.data.variants.map((v, idx) => (
+                                <button class="variant-btn" data-size={v.size} data-price={v.price} style="padding: 8px 16px; border: 1px solid var(--border); border-radius: 20px; background: white; color: var(--text-dark); cursor: pointer; transition: all 0.2s;">
+                                    {v.size}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                )}
+                
                 <div class="action-box">
                     {FEATURES.enableCartAndAuth ? (
                         <>
-                            <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 15px; color: var(--green);">₹{product.data.price}</div>
+                            <div id="product-price-display" style="font-size: 1.5rem; font-weight: bold; margin-bottom: 15px; color: var(--green);">₹{product.data.price}</div>
                             <button id="add-to-cart-btn" class="btn-primary" data-product={JSON.stringify(product.data)}>Add to Cart</button>
                         </>
                     ) : (
-                        <a href={product.data.whatsappLink} target="_blank" class="btn-primary" style="text-decoration:none; display:inline-block; text-align:center;">Buy via WhatsApp ↗</a>
+                        <a id="wa-order-btn" href={waLink} data-raw-product={JSON.stringify(product.data)} target="_blank" class="btn-primary" style="text-decoration:none; display:inline-block; text-align:center;">Order on WhatsApp</a>
                     )}
                     <p class="shipping-note">Free shipping on orders over ₹500</p>
                 </div>
@@ -444,9 +460,53 @@ if (product.data.journey) {
     import { addToCart } from '../../store/cartStore.js';
     
     const btn = document.getElementById('add-to-cart-btn');
+    const variantBtns = document.querySelectorAll('.variant-btn');
+    const priceDisplay = document.getElementById('product-price-display');
+    const waLinkBtn = document.getElementById('wa-order-btn');
+    let selectedVariant = null;
+
+    if (variantBtns.length > 0) {
+        variantBtns.forEach(vBtn => {
+            vBtn.addEventListener('click', (e) => {
+                variantBtns.forEach(b => {
+                    b.style.borderColor = 'var(--border)';
+                    b.style.background = 'white';
+                    b.style.color = 'var(--text-dark)';
+                });
+                
+                const target = e.currentTarget;
+                target.style.borderColor = 'var(--green)';
+                target.style.background = 'var(--green)';
+                target.style.color = 'white';
+                
+                selectedVariant = {
+                    size: target.dataset.size,
+                    price: Number(target.dataset.price)
+                };
+                
+                if (priceDisplay) {
+                    priceDisplay.textContent = `₹${selectedVariant.price}`;
+                }
+
+                if (waLinkBtn) {
+                    const productData = JSON.parse(waLinkBtn.dataset.rawProduct);
+                    const waMsg = `Hello Nutrivae,\nI'd like to order:\n${productData.name} ${selectedVariant.size}\nQuantity: 2\nPlease help me place the order.`;
+                    waLinkBtn.href = `https://wa.me/919824664973?text=${encodeURIComponent(waMsg)}`;
+                }
+            });
+        });
+        
+        // init active state
+        variantBtns[0].click();
+    }
+
     if (btn) {
         btn.addEventListener('click', () => {
             const product = JSON.parse(btn.dataset.product);
+            if (selectedVariant) {
+                product.price = selectedVariant.price;
+                product.size = selectedVariant.size;
+            }
             addToCart(product);
             // Open the cart drawer
             window.dispatchEvent(new Event('open-cart'));

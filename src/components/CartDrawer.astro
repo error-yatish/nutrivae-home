@@ -184,12 +184,12 @@
                 div.innerHTML = `
                     <img src="/${item.image.replace(/^\/?/, '')}" alt="${item.name}">
                     <div class="cart-item-details">
-                        <div class="cart-item-title">${item.name}</div>
+                        <div class="cart-item-title">${item.name} ${item.size ? '- ' + item.size : ''}</div>
                         <div class="cart-item-price">₹${item.price}</div>
                         <div class="qty-controls">
-                            <button class="qty-btn minus" data-id="${item.id}">-</button>
+                            <button class="qty-btn minus" data-id="${item.cartId || item.id}">-</button>
                             <span>${item.quantity}</span>
-                            <button class="qty-btn plus" data-id="${item.id}">+</button>
+                            <button class="qty-btn plus" data-id="${item.cartId || item.id}">+</button>
                         </div>
                     </div>
                 `;

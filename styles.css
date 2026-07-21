@@ -5895,3 +5895,7 @@ section, .page-hero, .page-hero-inner, .intro-section, .products-section, .produ
   padding: 1.5rem 0 !important;
   border-bottom: none !important;
 }
+/* ===================== REVIEWS SECTION TRANSPARENCY FIX ===================== */
+.reviews-section {
+  background-color: transparent !important;
+}

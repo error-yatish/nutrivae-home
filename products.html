@@ -272,18 +272,22 @@
                 grid-template-columns: 1fr;
             }
         }
+
         /* Journey Modal Styles */
         .journey-modal-body::-webkit-scrollbar {
             width: 8px;
         }
+
         .journey-modal-body::-webkit-scrollbar-track {
             background: rgba(28, 61, 46, 0.05);
             border-radius: 4px;
         }
+
         .journey-modal-body::-webkit-scrollbar-thumb {
             background: rgba(28, 61, 46, 0.2);
             border-radius: 4px;
         }
+
         .journey-modal-body::-webkit-scrollbar-thumb:hover {
             background: rgba(28, 61, 46, 0.4);
         }
@@ -291,7 +295,10 @@
         /* Lightbox Styles */
         #lightbox-overlay {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: rgba(0, 0, 0, 0.9);
             z-index: 10000;
             display: flex;
@@ -302,24 +309,31 @@
             transition: all 0.3s ease;
             cursor: zoom-out;
         }
+
         #lightbox-overlay.active {
             opacity: 1;
             visibility: visible;
         }
+
         #lightbox-img {
             max-width: 90%;
             max-height: 90vh;
             border-radius: 4px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             transform: scale(0.95);
         }
+
         #lightbox-overlay.active #lightbox-img {
             transform: scale(1);
         }
+
         .journey-modal-overlay {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(8px);
             z-index: 9999;
@@ -330,10 +344,12 @@
             visibility: hidden;
             transition: all 0.4s ease;
         }
+
         .journey-modal-overlay.active {
             opacity: 1;
             visibility: visible;
         }
+
         .journey-modal-content {
             background: var(--cream);
             width: 90%;
@@ -343,8 +359,10 @@
             position: relative;
             transform: translateY(30px);
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            overflow: hidden; /* Clips the scrollbar to the border radius */
+            overflow: hidden;
+            /* Clips the scrollbar to the border radius */
         }
+
         .journey-modal-body {
             padding: 3rem;
             max-height: 90vh;
@@ -353,9 +371,11 @@
             box-sizing: border-box;
             overscroll-behavior: contain;
         }
+
         .journey-modal-overlay.active .journey-modal-content {
             transform: translateY(0);
         }
+
         .journey-modal-close {
             position: absolute;
             top: 1.5rem;
@@ -368,29 +388,36 @@
             cursor: pointer;
             transition: color 0.3s;
         }
+
         .journey-modal-close:hover {
             color: var(--accent);
         }
+
         .journey-header {
             text-align: center;
             margin-bottom: 3rem;
         }
+
         .journey-header h2 {
             font-size: 2rem;
             color: var(--green);
             margin: 0.5rem 0;
         }
+
         .journey-meta {
             font-size: 0.95rem;
             color: var(--text-muted);
         }
+
         .journey-meta strong {
             color: var(--text);
         }
+
         .timeline-container {
             position: relative;
             padding-left: 2rem;
         }
+
         .timeline-line {
             position: absolute;
             left: 5px;
@@ -399,13 +426,16 @@
             width: 2px;
             background: rgba(28, 61, 46, 0.1);
         }
+
         .timeline-step {
             position: relative;
             margin-bottom: 2rem;
         }
+
         .timeline-step:last-child {
             margin-bottom: 0;
         }
+
         .timeline-dot {
             position: absolute;
             left: -2rem;
@@ -418,11 +448,13 @@
             box-shadow: 0 0 0 2px rgba(28, 61, 46, 0.1);
             z-index: 2;
         }
+
         .timeline-content h4 {
             font-size: 1.1rem;
             color: var(--green);
             margin-bottom: 0.3rem;
         }
+
         .timeline-content p {
             font-size: 0.9rem;
             color: var(--text-muted);
@@ -444,24 +476,28 @@
             transition: all 0.3s;
             white-space: nowrap;
         }
+
         .btn-journey:hover {
             border-color: var(--green);
             background: rgba(28, 61, 46, 0.04);
         }
+
         .prod-foot-actions {
             display: flex;
             gap: 0.5rem;
             flex-wrap: wrap;
         }
+
         .prod-foot {
             flex-wrap: wrap;
             gap: 0.5rem;
         }
+
         .prod-foot .prod-nutrition {
             width: 100%;
             margin-top: 0.5rem;
         }
-    
+
         /* Products Layout (Sidebar + Grid) */
         .products-layout {
             display: grid;
@@ -474,7 +510,9 @@
         }
 
         /* Filter Sidebar */
-        .filter-sidebar { max-height: calc(100vh - 120px); overflow-y: auto;
+        .filter-sidebar {
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
             background: var(--card-bg);
             border-radius: var(--radius-lg);
             border: 1px solid rgba(28, 61, 46, 0.07);
@@ -609,15 +647,18 @@
             .products-layout {
                 grid-template-columns: 1fr;
             }
-            .filter-sidebar { max-height: calc(100vh - 120px); overflow-y: auto;
+
+            .filter-sidebar {
+                max-height: calc(100vh - 120px);
+                overflow-y: auto;
                 position: static;
                 margin-bottom: 2rem;
             }
+
             .full-grid {
                 grid-template-columns: 1fr;
             }
         }
-
     </style>
 </head>
 
@@ -708,30 +749,25 @@
                 <div class="products-search-bar">
                     <input type="text" id="productSearch" placeholder="Search products...">
                 </div>
-                
+
                 <!-- Products Grid -->
                 <div class="full-grid" id="products-grid">
 
-                <!-- Toor Daal -->
-                <div class="prod-item" data-animate="fade-up" data-delay="0" data-category="daal protein">
-                    <div class="prod-img">
-                        <div class="prod-badge-row">
-                            <span class="prod-label green">Bestseller</span>
-                            <span class="prod-label gold">High Protein</span>
+                    <!-- Whole Coriander -->
+                    <div class="prod-item" data-animate="fade-up" data-category="spices">
+                        <div class="prod-img">
+                            <img src="assets/whole-coriander.png" alt="Whole Coriander">
                         </div>
-                        <img src="assets/toor_daal.png" alt="Toor Daal">
-                    </div>
-                    <div class="prod-info">
-                        <h3>Toor Daal</h3>
-                        <p class="prod-sub">Yellow Split Pigeon Peas</p>
-                        <div class="prod-specs">
-                            <span class="spec-tag">🌱 Plant-Based</span>
-                            <span class="spec-tag">💪 High Protein</span>
-                            <span class="spec-tag">✦ Clean Label</span>
-                            <span class="spec-tag">🚫 No Preservatives</span>
-                        </div>
-                        <div class="prod-foot">
-                            <div class="prod-foot-actions" style="flex-direction: column; align-items: stretch; gap: 10px;">
+                        <div class="prod-info">
+                            <h3>Whole Coriander</h3>
+                            <p class="prod-sub">Premium Whole Coriander</p>
+                            <div class="prod-specs">
+                                <span class="spec-tag">🌱 Plant-Based</span>
+                                <span class="spec-tag">💪 Nutritious</span>
+                                <span class="spec-tag">✦ Clean Label</span>
+                            </div>
+                            <div class="prod-foot-actions"
+                                style="flex-direction: column; align-items: stretch; gap: 10px;">
                                 <div class="prod-variant-selector">
                                     <select class="pack-size">
                                         <option value="250g">250 g</option>
@@ -742,30 +778,25 @@
                                 </div>
                                 <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
                             </div>
-                            <span class="prod-nutrition">~22g protein / 100g</span>
+                            <span class="prod-nutrition">100% Natural</span>
                         </div>
                     </div>
-                </div>
 
-                <!-- Moong Daal -->
-                <div class="prod-item" data-animate="fade-up" data-delay="100" data-category="daal protein">
-                    <div class="prod-img" style="background: var(--green);">
-                        <div class="prod-badge-row">
-                            <span class="prod-label gold">Popular</span>
+                    <!-- Coriander Powder -->
+                    <div class="prod-item" data-animate="fade-up" data-category="spices">
+                        <div class="prod-img">
+                            <img src="assets/coriander-powder.png" alt="Coriander Powder">
                         </div>
-                        <img src="assets/moong_daal.png" alt="Moong Daal">
-                    </div>
-                    <div class="prod-info">
-                        <h3>Moong Daal</h3>
-                        <p class="prod-sub">Yellow Split Mung Beans</p>
-                        <div class="prod-specs">
-                            <span class="spec-tag">🌱 Plant-Based</span>
-                            <span class="spec-tag">💪 High Protein</span>
-                            <span class="spec-tag">✦ Clean Label</span>
-                            <span class="spec-tag">🚫 No Preservatives</span>
-                        </div>
-                        <div class="prod-foot">
-                            <div class="prod-foot-actions" style="flex-direction: column; align-items: stretch; gap: 10px;">
+                        <div class="prod-info">
+                            <h3>Coriander Powder</h3>
+                            <p class="prod-sub">Premium Coriander Powder</p>
+                            <div class="prod-specs">
+                                <span class="spec-tag">🌱 Plant-Based</span>
+                                <span class="spec-tag">💪 Nutritious</span>
+                                <span class="spec-tag">✦ Clean Label</span>
+                            </div>
+                            <div class="prod-foot-actions"
+                                style="flex-direction: column; align-items: stretch; gap: 10px;">
                                 <div class="prod-variant-selector">
                                     <select class="pack-size">
                                         <option value="250g">250 g</option>
@@ -776,29 +807,216 @@
                                 </div>
                                 <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
                             </div>
-                            <span class="prod-nutrition">~24g protein / 100g</span>
+                            <span class="prod-nutrition">100% Natural</span>
                         </div>
                     </div>
-                </div>
 
-                <!-- Mungfali -->
-                <div class="prod-item" data-animate="fade-up" data-delay="200" data-category="nuts protein">
-                    <div class="prod-img">
-                        <div class="prod-badge-row">
-                            <span class="prod-label green">New</span>
+                    <!-- Cumin Coriander Powder -->
+                    <div class="prod-item" data-animate="fade-up" data-category="spices">
+                        <div class="prod-img">
+                            <img src="assets/cumin-coriander-powder.png" alt="Cumin Coriander Powder">
                         </div>
-                        <img src="assets/mungfali.png" alt="Mungfali">
+                        <div class="prod-info">
+                            <h3>Cumin Coriander Powder</h3>
+                            <p class="prod-sub">Premium Cumin Coriander Powder</p>
+                            <div class="prod-specs">
+                                <span class="spec-tag">🌱 Plant-Based</span>
+                                <span class="spec-tag">💪 Nutritious</span>
+                                <span class="spec-tag">✦ Clean Label</span>
+                            </div>
+                            <div class="prod-foot-actions"
+                                style="flex-direction: column; align-items: stretch; gap: 10px;">
+                                <div class="prod-variant-selector">
+                                    <select class="pack-size">
+                                        <option value="250g">250 g</option>
+                                        <option value="500g" selected>500 g</option>
+                                        <option value="1Kg">1 Kg</option>
+                                    </select>
+                                    <input type="number" class="pack-qty" value="1" min="1" max="99">
+                                </div>
+                                <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
+                            </div>
+                            <span class="prod-nutrition">100% Natural</span>
+                        </div>
                     </div>
-                    <div class="prod-info">
-                        <h3>Mungfali</h3>
-                        <p class="prod-sub">Raw Whole Peanuts</p>
-                        <div class="prod-specs">
-                            <span class="spec-tag">🌱 Plant-Based</span>
-                            <span class="spec-tag">💪 High Protein</span>
-                            <span class="spec-tag">✦ Clean Label</span>
-                            <span class="spec-tag">🚫 No Preservatives</span>
+
+                    <!-- Cumin Seeds -->
+                    <div class="prod-item" data-animate="fade-up" data-category="spices">
+                        <div class="prod-img">
+                            <img src="assets/cumin.png" alt="Cumin Seeds">
                         </div>
-                        <div class="prod-foot-actions" style="flex-direction: column; align-items: stretch; gap: 10px;">
+                        <div class="prod-info">
+                            <h3>Cumin Seeds</h3>
+                            <p class="prod-sub">Premium Cumin Seeds</p>
+                            <div class="prod-specs">
+                                <span class="spec-tag">🌱 Plant-Based</span>
+                                <span class="spec-tag">💪 Nutritious</span>
+                                <span class="spec-tag">✦ Clean Label</span>
+                            </div>
+                            <div class="prod-foot-actions"
+                                style="flex-direction: column; align-items: stretch; gap: 10px;">
+                                <div class="prod-variant-selector">
+                                    <select class="pack-size">
+                                        <option value="250g">250 g</option>
+                                        <option value="500g" selected>500 g</option>
+                                        <option value="1Kg">1 Kg</option>
+                                    </select>
+                                    <input type="number" class="pack-qty" value="1" min="1" max="99">
+                                </div>
+                                <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
+                            </div>
+                            <span class="prod-nutrition">100% Natural</span>
+                        </div>
+                    </div>
+
+                    <!-- Fennel Seeds -->
+                    <div class="prod-item" data-animate="fade-up" data-category="spices">
+                        <div class="prod-img">
+                            <img src="assets/fennel.png" alt="Fennel Seeds">
+                        </div>
+                        <div class="prod-info">
+                            <h3>Fennel Seeds</h3>
+                            <p class="prod-sub">Premium Fennel Seeds</p>
+                            <div class="prod-specs">
+                                <span class="spec-tag">🌱 Plant-Based</span>
+                                <span class="spec-tag">💪 Nutritious</span>
+                                <span class="spec-tag">✦ Clean Label</span>
+                            </div>
+                            <div class="prod-foot-actions"
+                                style="flex-direction: column; align-items: stretch; gap: 10px;">
+                                <div class="prod-variant-selector">
+                                    <select class="pack-size">
+                                        <option value="250g">250 g</option>
+                                        <option value="500g" selected>500 g</option>
+                                        <option value="1Kg">1 Kg</option>
+                                    </select>
+                                    <input type="number" class="pack-qty" value="1" min="1" max="99">
+                                </div>
+                                <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
+                            </div>
+                            <span class="prod-nutrition">100% Natural</span>
+                        </div>
+                    </div>
+
+                    <!-- Soyabean -->
+                    <div class="prod-item" data-animate="fade-up" data-category="pulses">
+                        <div class="prod-img">
+                            <img src="assets/soyabean.png" alt="Soyabean">
+                        </div>
+                        <div class="prod-info">
+                            <h3>Soyabean</h3>
+                            <p class="prod-sub">Premium Soyabean</p>
+                            <div class="prod-specs">
+                                <span class="spec-tag">🌱 Plant-Based</span>
+                                <span class="spec-tag">💪 Nutritious</span>
+                                <span class="spec-tag">✦ Clean Label</span>
+                            </div>
+                            <div class="prod-foot-actions"
+                                style="flex-direction: column; align-items: stretch; gap: 10px;">
+                                <div class="prod-variant-selector">
+                                    <select class="pack-size">
+                                        <option value="250g">250 g</option>
+                                        <option value="500g" selected>500 g</option>
+                                        <option value="1Kg">1 Kg</option>
+                                    </select>
+                                    <input type="number" class="pack-qty" value="1" min="1" max="99">
+                                </div>
+                                <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
+                            </div>
+                            <span class="prod-nutrition">100% Natural</span>
+                        </div>
+                    </div>
+
+                    <!-- Toor Daal -->
+                    <div class="prod-item" data-animate="fade-up" data-delay="0" data-category="daal protein">
+                        <div class="prod-img">
+                            <div class="prod-badge-row">
+                                <span class="prod-label green">Bestseller</span>
+                                <span class="prod-label gold">High Protein</span>
+                            </div>
+                            <img src="assets/toor_daal.png" alt="Toor Daal">
+                        </div>
+                        <div class="prod-info">
+                            <h3>Toor Daal</h3>
+                            <p class="prod-sub">Yellow Split Pigeon Peas</p>
+                            <div class="prod-specs">
+                                <span class="spec-tag">🌱 Plant-Based</span>
+                                <span class="spec-tag">💪 High Protein</span>
+                                <span class="spec-tag">✦ Clean Label</span>
+                                <span class="spec-tag">🚫 No Preservatives</span>
+                            </div>
+                            <div class="prod-foot">
+                                <div class="prod-foot-actions"
+                                    style="flex-direction: column; align-items: stretch; gap: 10px;">
+                                    <div class="prod-variant-selector">
+                                        <select class="pack-size">
+                                            <option value="250g">250 g</option>
+                                            <option value="500g" selected>500 g</option>
+                                            <option value="1Kg">1 Kg</option>
+                                        </select>
+                                        <input type="number" class="pack-qty" value="1" min="1" max="99">
+                                    </div>
+                                    <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
+                                </div>
+                                <span class="prod-nutrition">~22g protein / 100g</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Moong Daal -->
+                    <div class="prod-item" data-animate="fade-up" data-delay="100" data-category="daal protein">
+                        <div class="prod-img" style="background: var(--green);">
+                            <div class="prod-badge-row">
+                                <span class="prod-label gold">Popular</span>
+                            </div>
+                            <img src="assets/moong_daal.png" alt="Moong Daal">
+                        </div>
+                        <div class="prod-info">
+                            <h3>Moong Daal</h3>
+                            <p class="prod-sub">Yellow Split Mung Beans</p>
+                            <div class="prod-specs">
+                                <span class="spec-tag">🌱 Plant-Based</span>
+                                <span class="spec-tag">💪 High Protein</span>
+                                <span class="spec-tag">✦ Clean Label</span>
+                                <span class="spec-tag">🚫 No Preservatives</span>
+                            </div>
+                            <div class="prod-foot">
+                                <div class="prod-foot-actions"
+                                    style="flex-direction: column; align-items: stretch; gap: 10px;">
+                                    <div class="prod-variant-selector">
+                                        <select class="pack-size">
+                                            <option value="250g">250 g</option>
+                                            <option value="500g" selected>500 g</option>
+                                            <option value="1Kg">1 Kg</option>
+                                        </select>
+                                        <input type="number" class="pack-qty" value="1" min="1" max="99">
+                                    </div>
+                                    <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
+                                </div>
+                                <span class="prod-nutrition">~24g protein / 100g</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mungfali -->
+                    <div class="prod-item" data-animate="fade-up" data-delay="200" data-category="nuts protein">
+                        <div class="prod-img">
+                            <div class="prod-badge-row">
+                                <span class="prod-label green">New</span>
+                            </div>
+                            <img src="assets/mungfali.png" alt="Mungfali">
+                        </div>
+                        <div class="prod-info">
+                            <h3>Mungfali</h3>
+                            <p class="prod-sub">Raw Whole Peanuts</p>
+                            <div class="prod-specs">
+                                <span class="spec-tag">🌱 Plant-Based</span>
+                                <span class="spec-tag">💪 High Protein</span>
+                                <span class="spec-tag">✦ Clean Label</span>
+                                <span class="spec-tag">🚫 No Preservatives</span>
+                            </div>
+                            <div class="prod-foot-actions"
+                                style="flex-direction: column; align-items: stretch; gap: 10px;">
                                 <div class="prod-variant-selector">
                                     <select class="pack-size">
                                         <option value="250g">250 g</option>
@@ -810,23 +1028,24 @@
                                 <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
                             </div>
                             <span class="prod-nutrition">~26g protein / 100g</span>
-                    </div>
-                </div>
-
-                <!-- Black Till -->
-                <div class="prod-item" data-animate="fade-up" data-delay="300" data-category="seeds protein">
-                    <div class="prod-img">
-                        <img src="assets/black_till.png" alt="Black Till">
-                    </div>
-                    <div class="prod-info">
-                        <h3>Black Till</h3>
-                        <p class="prod-sub">Black Sesame Seeds</p>
-                        <div class="prod-specs">
-                            <span class="spec-tag">🌱 Plant-Based</span>
-                            <span class="spec-tag">💪 High Protein</span>
-                            <span class="spec-tag">✦ Clean Label</span>
                         </div>
-                        <div class="prod-foot-actions" style="flex-direction: column; align-items: stretch; gap: 10px;">
+                    </div>
+
+                    <!-- Black Till -->
+                    <div class="prod-item" data-animate="fade-up" data-delay="300" data-category="seeds protein">
+                        <div class="prod-img">
+                            <img src="assets/black_till.png" alt="Black Till">
+                        </div>
+                        <div class="prod-info">
+                            <h3>Black Till</h3>
+                            <p class="prod-sub">Black Sesame Seeds</p>
+                            <div class="prod-specs">
+                                <span class="spec-tag">🌱 Plant-Based</span>
+                                <span class="spec-tag">💪 High Protein</span>
+                                <span class="spec-tag">✦ Clean Label</span>
+                            </div>
+                            <div class="prod-foot-actions"
+                                style="flex-direction: column; align-items: stretch; gap: 10px;">
                                 <div class="prod-variant-selector">
                                     <select class="pack-size">
                                         <option value="250g">250 g</option>
@@ -838,23 +1057,24 @@
                                 <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
                             </div>
                             <span class="prod-nutrition">~18g protein / 100g</span>
-                    </div>
-                </div>
-
-                <!-- Whole Mung -->
-                <div class="prod-item" data-animate="fade-up" data-delay="400" data-category="daal protein">
-                    <div class="prod-img">
-                        <img src="assets/whole_mung.png" alt="Whole Mung">
-                    </div>
-                    <div class="prod-info">
-                        <h3>Whole Mung</h3>
-                        <p class="prod-sub">Whole Green Mung Beans</p>
-                        <div class="prod-specs">
-                            <span class="spec-tag">🌱 Plant-Based</span>
-                            <span class="spec-tag">💪 High Protein</span>
-                            <span class="spec-tag">✦ Clean Label</span>
                         </div>
-                        <div class="prod-foot-actions" style="flex-direction: column; align-items: stretch; gap: 10px;">
+                    </div>
+
+                    <!-- Whole Mung -->
+                    <div class="prod-item" data-animate="fade-up" data-delay="400" data-category="daal protein">
+                        <div class="prod-img">
+                            <img src="assets/whole_mung.png" alt="Whole Mung">
+                        </div>
+                        <div class="prod-info">
+                            <h3>Whole Mung</h3>
+                            <p class="prod-sub">Whole Green Mung Beans</p>
+                            <div class="prod-specs">
+                                <span class="spec-tag">🌱 Plant-Based</span>
+                                <span class="spec-tag">💪 High Protein</span>
+                                <span class="spec-tag">✦ Clean Label</span>
+                            </div>
+                            <div class="prod-foot-actions"
+                                style="flex-direction: column; align-items: stretch; gap: 10px;">
                                 <div class="prod-variant-selector">
                                     <select class="pack-size">
                                         <option value="250g">250 g</option>
@@ -866,11 +1086,11 @@
                                 <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
                             </div>
                             <span class="prod-nutrition">~24g protein / 100g</span>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Basmati Rice -->
-                <div class="prod-item" data-animate="fade-up" data-delay="500" data-category="grains">
+                    <!-- Basmati Rice -->
+                    <!-- <div class="prod-item" data-animate="fade-up" data-delay="500" data-category="grains">
                     <div class="prod-img">
                         <img src="assets/basmati_rice.png" alt="Basmati Rice">
                     </div>
@@ -894,22 +1114,23 @@
                             </div>
                             <span class="prod-nutrition">Premium Quality</span>
                     </div>
-                </div>
+                </div> -->
 
-                <!-- White Till -->
-                <div class="prod-item" data-animate="fade-up" data-delay="600" data-category="seeds protein">
-                    <div class="prod-img">
-                        <img src="assets/white_till.png" alt="White Till">
-                    </div>
-                    <div class="prod-info">
-                        <h3>White Till</h3>
-                        <p class="prod-sub">White Sesame Seeds</p>
-                        <div class="prod-specs">
-                            <span class="spec-tag">🌱 Plant-Based</span>
-                            <span class="spec-tag">💪 High Protein</span>
-                            <span class="spec-tag">✦ Clean Label</span>
+                    <!-- White Till -->
+                    <div class="prod-item" data-animate="fade-up" data-delay="600" data-category="seeds protein">
+                        <div class="prod-img">
+                            <img src="assets/white_till.png" alt="White Till">
                         </div>
-                        <div class="prod-foot-actions" style="flex-direction: column; align-items: stretch; gap: 10px;">
+                        <div class="prod-info">
+                            <h3>White Till</h3>
+                            <p class="prod-sub">White Sesame Seeds</p>
+                            <div class="prod-specs">
+                                <span class="spec-tag">🌱 Plant-Based</span>
+                                <span class="spec-tag">💪 High Protein</span>
+                                <span class="spec-tag">✦ Clean Label</span>
+                            </div>
+                            <div class="prod-foot-actions"
+                                style="flex-direction: column; align-items: stretch; gap: 10px;">
                                 <div class="prod-variant-selector">
                                     <select class="pack-size">
                                         <option value="250g">250 g</option>
@@ -921,23 +1142,24 @@
                                 <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
                             </div>
                             <span class="prod-nutrition">~18g protein / 100g</span>
-                    </div>
-                </div>
-
-                <!-- Whole Bajra -->
-                <div class="prod-item" data-animate="fade-up" data-delay="700" data-category="grains">
-                    <div class="prod-img">
-                        <img src="assets/bajra.png" alt="Bajra">
-                    </div>
-                    <div class="prod-info">
-                        <h3>Whole Bajra</h3>
-                        <p class="prod-sub">Premium Whole Bajra</p>
-                        <div class="prod-specs">
-                            <span class="spec-tag">🌱 Plant-Based</span>
-                            <span class="spec-tag">💪 High Fiber</span>
-                            <span class="spec-tag">✦ Clean Label</span>
                         </div>
-                        <div class="prod-foot-actions" style="flex-direction: column; align-items: stretch; gap: 10px;">
+                    </div>
+
+                    <!-- Whole Bajra -->
+                    <div class="prod-item" data-animate="fade-up" data-delay="700" data-category="grains">
+                        <div class="prod-img">
+                            <img src="assets/bajra.png" alt="Bajra">
+                        </div>
+                        <div class="prod-info">
+                            <h3>Whole Bajra</h3>
+                            <p class="prod-sub">Premium Whole Bajra</p>
+                            <div class="prod-specs">
+                                <span class="spec-tag">🌱 Plant-Based</span>
+                                <span class="spec-tag">💪 High Fiber</span>
+                                <span class="spec-tag">✦ Clean Label</span>
+                            </div>
+                            <div class="prod-foot-actions"
+                                style="flex-direction: column; align-items: stretch; gap: 10px;">
                                 <div class="prod-variant-selector">
                                     <select class="pack-size">
                                         <option value="250g">250 g</option>
@@ -949,12 +1171,11 @@
                                 <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
                             </div>
                             <span class="prod-nutrition">Rich in Fiber</span>
+                        </div>
                     </div>
-                </div>
 
-                
-                <!-- Bajra Flour -->
-                <div class="prod-item" data-animate="fade-up" data-category="flour">
+                    <!-- Bajra Flour -->
+                    <!-- <div class="prod-item" data-animate="fade-up" data-category="flour">
                     <div class="prod-img">
                         <img src="assets/bajra-flour.png" alt="Bajra Flour">
                     </div>
@@ -979,9 +1200,10 @@
                             </div>
                             <span class="prod-nutrition">100% Natural</span>
                     </div>
-                </div>
-                <!-- Black Chana -->
-                <div class="prod-item" data-animate="fade-up" data-category="pulses">
+                </div> -->
+
+                    <!-- Black Chana -->
+                    <!-- <div class="prod-item" data-animate="fade-up" data-category="pulses">
                     <div class="prod-img">
                         <img src="assets/black-chana.png" alt="Black Chana">
                     </div>
@@ -1006,21 +1228,23 @@
                             </div>
                             <span class="prod-nutrition">100% Natural</span>
                     </div>
-                </div>
-                <!-- Brown Chana -->
-                <div class="prod-item" data-animate="fade-up" data-category="pulses">
-                    <div class="prod-img">
-                        <img src="assets/brown-chana.png" alt="Brown Chana">
-                    </div>
-                    <div class="prod-info">
-                        <h3>Brown Chana</h3>
-                        <p class="prod-sub">Premium Brown Chana</p>
-                        <div class="prod-specs">
-                            <span class="spec-tag">🌱 Plant-Based</span>
-                            <span class="spec-tag">💪 Nutritious</span>
-                            <span class="spec-tag">✦ Clean Label</span>
+                </div> -->
+
+                    <!-- Brown Chana -->
+                    <div class="prod-item" data-animate="fade-up" data-category="pulses">
+                        <div class="prod-img">
+                            <img src="assets/brown-chana.png" alt="Brown Chana">
                         </div>
-                        <div class="prod-foot-actions" style="flex-direction: column; align-items: stretch; gap: 10px;">
+                        <div class="prod-info">
+                            <h3>Brown Chana</h3>
+                            <p class="prod-sub">Premium Brown Chana</p>
+                            <div class="prod-specs">
+                                <span class="spec-tag">🌱 Plant-Based</span>
+                                <span class="spec-tag">💪 Nutritious</span>
+                                <span class="spec-tag">✦ Clean Label</span>
+                            </div>
+                            <div class="prod-foot-actions"
+                                style="flex-direction: column; align-items: stretch; gap: 10px;">
                                 <div class="prod-variant-selector">
                                     <select class="pack-size">
                                         <option value="250g">250 g</option>
@@ -1032,22 +1256,24 @@
                                 <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
                             </div>
                             <span class="prod-nutrition">100% Natural</span>
-                    </div>
-                </div>
-                <!-- Carom Seeds -->
-                <div class="prod-item" data-animate="fade-up" data-category="spices">
-                    <div class="prod-img">
-                        <img src="assets/carom.png" alt="Carom Seeds">
-                    </div>
-                    <div class="prod-info">
-                        <h3>Carom Seeds</h3>
-                        <p class="prod-sub">Premium Carom Seeds</p>
-                        <div class="prod-specs">
-                            <span class="spec-tag">🌱 Plant-Based</span>
-                            <span class="spec-tag">💪 Nutritious</span>
-                            <span class="spec-tag">✦ Clean Label</span>
                         </div>
-                        <div class="prod-foot-actions" style="flex-direction: column; align-items: stretch; gap: 10px;">
+                    </div>
+
+                    <!-- Carom Seeds -->
+                    <div class="prod-item" data-animate="fade-up" data-category="spices">
+                        <div class="prod-img">
+                            <img src="assets/carom.png" alt="Carom Seeds">
+                        </div>
+                        <div class="prod-info">
+                            <h3>Carom Seeds</h3>
+                            <p class="prod-sub">Premium Carom Seeds</p>
+                            <div class="prod-specs">
+                                <span class="spec-tag">🌱 Plant-Based</span>
+                                <span class="spec-tag">💪 Nutritious</span>
+                                <span class="spec-tag">✦ Clean Label</span>
+                            </div>
+                            <div class="prod-foot-actions"
+                                style="flex-direction: column; align-items: stretch; gap: 10px;">
                                 <div class="prod-variant-selector">
                                     <select class="pack-size">
                                         <option value="250g">250 g</option>
@@ -1059,22 +1285,24 @@
                                 <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
                             </div>
                             <span class="prod-nutrition">100% Natural</span>
-                    </div>
-                </div>
-                <!-- Chana Dal -->
-                <div class="prod-item" data-animate="fade-up" data-category="pulses">
-                    <div class="prod-img">
-                        <img src="assets/chana-dal.png" alt="Chana Dal">
-                    </div>
-                    <div class="prod-info">
-                        <h3>Chana Dal</h3>
-                        <p class="prod-sub">Premium Chana Dal</p>
-                        <div class="prod-specs">
-                            <span class="spec-tag">🌱 Plant-Based</span>
-                            <span class="spec-tag">💪 Nutritious</span>
-                            <span class="spec-tag">✦ Clean Label</span>
                         </div>
-                        <div class="prod-foot-actions" style="flex-direction: column; align-items: stretch; gap: 10px;">
+                    </div>
+
+                    <!-- Chana Dal -->
+                    <div class="prod-item" data-animate="fade-up" data-category="pulses">
+                        <div class="prod-img">
+                            <img src="assets/chana-dal.png" alt="Chana Dal">
+                        </div>
+                        <div class="prod-info">
+                            <h3>Chana Dal</h3>
+                            <p class="prod-sub">Premium Chana Dal</p>
+                            <div class="prod-specs">
+                                <span class="spec-tag">🌱 Plant-Based</span>
+                                <span class="spec-tag">💪 Nutritious</span>
+                                <span class="spec-tag">✦ Clean Label</span>
+                            </div>
+                            <div class="prod-foot-actions"
+                                style="flex-direction: column; align-items: stretch; gap: 10px;">
                                 <div class="prod-variant-selector">
                                     <select class="pack-size">
                                         <option value="250g">250 g</option>
@@ -1086,22 +1314,24 @@
                                 <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
                             </div>
                             <span class="prod-nutrition">100% Natural</span>
-                    </div>
-                </div>
-                <!-- Coriander Powder -->
-                <div class="prod-item" data-animate="fade-up" data-category="spices">
-                    <div class="prod-img">
-                        <img src="assets/coriander-powder.png" alt="Coriander Powder">
-                    </div>
-                    <div class="prod-info">
-                        <h3>Coriander Powder</h3>
-                        <p class="prod-sub">Premium Coriander Powder</p>
-                        <div class="prod-specs">
-                            <span class="spec-tag">🌱 Plant-Based</span>
-                            <span class="spec-tag">💪 Nutritious</span>
-                            <span class="spec-tag">✦ Clean Label</span>
                         </div>
-                        <div class="prod-foot-actions" style="flex-direction: column; align-items: stretch; gap: 10px;">
+                    </div>
+
+                    <!-- Moong Flour -->
+                    <div class="prod-item" data-animate="fade-up" data-category="flour">
+                        <div class="prod-img">
+                            <img src="assets/moong-flour.png" alt="Moong Flour">
+                        </div>
+                        <div class="prod-info">
+                            <h3>Moong Flour</h3>
+                            <p class="prod-sub">Premium Moong Flour</p>
+                            <div class="prod-specs">
+                                <span class="spec-tag">🌱 Plant-Based</span>
+                                <span class="spec-tag">💪 Nutritious</span>
+                                <span class="spec-tag">✦ Clean Label</span>
+                            </div>
+                            <div class="prod-foot-actions"
+                                style="flex-direction: column; align-items: stretch; gap: 10px;">
                                 <div class="prod-variant-selector">
                                     <select class="pack-size">
                                         <option value="250g">250 g</option>
@@ -1113,22 +1343,24 @@
                                 <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
                             </div>
                             <span class="prod-nutrition">100% Natural</span>
-                    </div>
-                </div>
-                <!-- Cumin Coriander Powder -->
-                <div class="prod-item" data-animate="fade-up" data-category="spices">
-                    <div class="prod-img">
-                        <img src="assets/cumin-coriander-powder.png" alt="Cumin Coriander Powder">
-                    </div>
-                    <div class="prod-info">
-                        <h3>Cumin Coriander Powder</h3>
-                        <p class="prod-sub">Premium Cumin Coriander Powder</p>
-                        <div class="prod-specs">
-                            <span class="spec-tag">🌱 Plant-Based</span>
-                            <span class="spec-tag">💪 Nutritious</span>
-                            <span class="spec-tag">✦ Clean Label</span>
                         </div>
-                        <div class="prod-foot-actions" style="flex-direction: column; align-items: stretch; gap: 10px;">
+                    </div>
+
+                    <!-- Red Chilli Powder -->
+                    <div class="prod-item" data-animate="fade-up" data-category="spices">
+                        <div class="prod-img">
+                            <img src="assets/red-chilli-powder.png" alt="Red Chilli Powder">
+                        </div>
+                        <div class="prod-info">
+                            <h3>Red Chilli Powder</h3>
+                            <p class="prod-sub">Premium Red Chilli Powder</p>
+                            <div class="prod-specs">
+                                <span class="spec-tag">🌱 Plant-Based</span>
+                                <span class="spec-tag">💪 Nutritious</span>
+                                <span class="spec-tag">✦ Clean Label</span>
+                            </div>
+                            <div class="prod-foot-actions"
+                                style="flex-direction: column; align-items: stretch; gap: 10px;">
                                 <div class="prod-variant-selector">
                                     <select class="pack-size">
                                         <option value="250g">250 g</option>
@@ -1140,199 +1372,10 @@
                                 <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
                             </div>
                             <span class="prod-nutrition">100% Natural</span>
-                    </div>
-                </div>
-                <!-- Cumin Seeds -->
-                <div class="prod-item" data-animate="fade-up" data-category="spices">
-                    <div class="prod-img">
-                        <img src="assets/cumin.png" alt="Cumin Seeds">
-                    </div>
-                    <div class="prod-info">
-                        <h3>Cumin Seeds</h3>
-                        <p class="prod-sub">Premium Cumin Seeds</p>
-                        <div class="prod-specs">
-                            <span class="spec-tag">🌱 Plant-Based</span>
-                            <span class="spec-tag">💪 Nutritious</span>
-                            <span class="spec-tag">✦ Clean Label</span>
                         </div>
-                        <div class="prod-foot-actions" style="flex-direction: column; align-items: stretch; gap: 10px;">
-                                <div class="prod-variant-selector">
-                                    <select class="pack-size">
-                                        <option value="250g">250 g</option>
-                                        <option value="500g" selected>500 g</option>
-                                        <option value="1Kg">1 Kg</option>
-                                    </select>
-                                    <input type="number" class="pack-qty" value="1" min="1" max="99">
-                                </div>
-                                <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
-                            </div>
-                            <span class="prod-nutrition">100% Natural</span>
                     </div>
                 </div>
-                <!-- Fennel Seeds -->
-                <div class="prod-item" data-animate="fade-up" data-category="spices">
-                    <div class="prod-img">
-                        <img src="assets/fennel.png" alt="Fennel Seeds">
-                    </div>
-                    <div class="prod-info">
-                        <h3>Fennel Seeds</h3>
-                        <p class="prod-sub">Premium Fennel Seeds</p>
-                        <div class="prod-specs">
-                            <span class="spec-tag">🌱 Plant-Based</span>
-                            <span class="spec-tag">💪 Nutritious</span>
-                            <span class="spec-tag">✦ Clean Label</span>
-                        </div>
-                        <div class="prod-foot-actions" style="flex-direction: column; align-items: stretch; gap: 10px;">
-                                <div class="prod-variant-selector">
-                                    <select class="pack-size">
-                                        <option value="250g">250 g</option>
-                                        <option value="500g" selected>500 g</option>
-                                        <option value="1Kg">1 Kg</option>
-                                    </select>
-                                    <input type="number" class="pack-qty" value="1" min="1" max="99">
-                                </div>
-                                <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
-                            </div>
-                            <span class="prod-nutrition">100% Natural</span>
-                    </div>
-                </div>
-                <!-- Moong Flour -->
-                <div class="prod-item" data-animate="fade-up" data-category="flour">
-                    <div class="prod-img">
-                        <img src="assets/moong-flour.png" alt="Moong Flour">
-                    </div>
-                    <div class="prod-info">
-                        <h3>Moong Flour</h3>
-                        <p class="prod-sub">Premium Moong Flour</p>
-                        <div class="prod-specs">
-                            <span class="spec-tag">🌱 Plant-Based</span>
-                            <span class="spec-tag">💪 Nutritious</span>
-                            <span class="spec-tag">✦ Clean Label</span>
-                        </div>
-                        <div class="prod-foot-actions" style="flex-direction: column; align-items: stretch; gap: 10px;">
-                                <div class="prod-variant-selector">
-                                    <select class="pack-size">
-                                        <option value="250g">250 g</option>
-                                        <option value="500g" selected>500 g</option>
-                                        <option value="1Kg">1 Kg</option>
-                                    </select>
-                                    <input type="number" class="pack-qty" value="1" min="1" max="99">
-                                </div>
-                                <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
-                            </div>
-                            <span class="prod-nutrition">100% Natural</span>
-                    </div>
-                </div>
-                <!-- Red Chilli Powder -->
-                <div class="prod-item" data-animate="fade-up" data-category="spices">
-                    <div class="prod-img">
-                        <img src="assets/red-chilli-powder.png" alt="Red Chilli Powder">
-                    </div>
-                    <div class="prod-info">
-                        <h3>Red Chilli Powder</h3>
-                        <p class="prod-sub">Premium Red Chilli Powder</p>
-                        <div class="prod-specs">
-                            <span class="spec-tag">🌱 Plant-Based</span>
-                            <span class="spec-tag">💪 Nutritious</span>
-                            <span class="spec-tag">✦ Clean Label</span>
-                        </div>
-                        <div class="prod-foot-actions" style="flex-direction: column; align-items: stretch; gap: 10px;">
-                                <div class="prod-variant-selector">
-                                    <select class="pack-size">
-                                        <option value="250g">250 g</option>
-                                        <option value="500g" selected>500 g</option>
-                                        <option value="1Kg">1 Kg</option>
-                                    </select>
-                                    <input type="number" class="pack-qty" value="1" min="1" max="99">
-                                </div>
-                                <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
-                            </div>
-                            <span class="prod-nutrition">100% Natural</span>
-                    </div>
-                </div>
-                <!-- Soyabean -->
-                <div class="prod-item" data-animate="fade-up" data-category="pulses">
-                    <div class="prod-img">
-                        <img src="assets/soyabean.png" alt="Soyabean">
-                    </div>
-                    <div class="prod-info">
-                        <h3>Soyabean</h3>
-                        <p class="prod-sub">Premium Soyabean</p>
-                        <div class="prod-specs">
-                            <span class="spec-tag">🌱 Plant-Based</span>
-                            <span class="spec-tag">💪 Nutritious</span>
-                            <span class="spec-tag">✦ Clean Label</span>
-                        </div>
-                        <div class="prod-foot-actions" style="flex-direction: column; align-items: stretch; gap: 10px;">
-                                <div class="prod-variant-selector">
-                                    <select class="pack-size">
-                                        <option value="250g">250 g</option>
-                                        <option value="500g" selected>500 g</option>
-                                        <option value="1Kg">1 Kg</option>
-                                    </select>
-                                    <input type="number" class="pack-qty" value="1" min="1" max="99">
-                                </div>
-                                <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
-                            </div>
-                            <span class="prod-nutrition">100% Natural</span>
-                    </div>
-                </div>
-                <!-- Whole Coriander -->
-                <div class="prod-item" data-animate="fade-up" data-category="spices">
-                    <div class="prod-img">
-                        <img src="assets/whole-coriander.png" alt="Whole Coriander">
-                    </div>
-                    <div class="prod-info">
-                        <h3>Whole Coriander</h3>
-                        <p class="prod-sub">Premium Whole Coriander</p>
-                        <div class="prod-specs">
-                            <span class="spec-tag">🌱 Plant-Based</span>
-                            <span class="spec-tag">💪 Nutritious</span>
-                            <span class="spec-tag">✦ Clean Label</span>
-                        </div>
-                        <div class="prod-foot-actions" style="flex-direction: column; align-items: stretch; gap: 10px;">
-                                <div class="prod-variant-selector">
-                                    <select class="pack-size">
-                                        <option value="250g">250 g</option>
-                                        <option value="500g" selected>500 g</option>
-                                        <option value="1Kg">1 Kg</option>
-                                    </select>
-                                    <input type="number" class="pack-qty" value="1" min="1" max="99">
-                                </div>
-                                <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
-                            </div>
-                            <span class="prod-nutrition">100% Natural</span>
-                    </div>
-                </div>
-                <!-- Whole Wheat -->
-                <div class="prod-item" data-animate="fade-up" data-category="grains">
-                    <div class="prod-img">
-                        <img src="assets/whole_wheat.jpg" alt="Whole Wheat">
-                    </div>
-                    <div class="prod-info">
-                        <h3>Whole Wheat</h3>
-                        <p class="prod-sub">Premium Whole Wheat</p>
-                        <div class="prod-specs">
-                            <span class="spec-tag">🌱 Plant-Based</span>
-                            <span class="spec-tag">💪 Nutritious</span>
-                            <span class="spec-tag">✦ Clean Label</span>
-                        </div>
-                        <div class="prod-foot-actions" style="flex-direction: column; align-items: stretch; gap: 10px;">
-                                <div class="prod-variant-selector">
-                                    <select class="pack-size">
-                                        <option value="250g">250 g</option>
-                                        <option value="500g" selected>500 g</option>
-                                        <option value="1Kg">1 Kg</option>
-                                    </select>
-                                    <input type="number" class="pack-qty" value="1" min="1" max="99">
-                                </div>
-                                <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
-                            </div>
-                            <span class="prod-nutrition">100% Natural</span>
-                    </div>
-                </div>
-                </div>
-                
+
                 <!-- Pagination -->
                 <div class="pagination" id="pagination-controls">
                     <!-- JS generated -->
@@ -1389,48 +1432,66 @@
                     <div class="journey-header">
                         <span class="section-tag">Product Journey</span>
                         <h2 id="journey-title">Product Name</h2>
-                        <p class="journey-meta">Farmer: <strong id="journey-farmer"></strong> &nbsp;&bull;&nbsp; Location: <a id="journey-location-link" href="#" target="_blank" style="color: var(--green); text-decoration: underline;"><strong id="journey-location"></strong></a></p>
+                        <p class="journey-meta">Farmer: <strong id="journey-farmer"></strong> &nbsp;&bull;&nbsp;
+                            Location: <a id="journey-location-link" href="#" target="_blank"
+                                style="color: var(--green); text-decoration: underline;"><strong
+                                    id="journey-location"></strong></a></p>
                     </div>
                     <div class="timeline-container" id="journey-timeline">
                         <div class="timeline-line"></div>
                         <div class="timeline-step">
                             <div class="timeline-dot"></div>
                             <div class="timeline-content">
-                                <h4>Soil Preparation <span class="step-time" style="font-size: 0.85em; font-weight: normal; color: var(--text-muted); float: right;"></span></h4>
+                                <h4>Soil Preparation <span class="step-time"
+                                        style="font-size: 0.85em; font-weight: normal; color: var(--text-muted); float: right;"></span>
+                                </h4>
                                 <p>Rich, nutrient-dense soil prepared using natural methods.</p>
-                                <div class="step-gallery" style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
+                                <div class="step-gallery"
+                                    style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
                             </div>
                         </div>
                         <div class="timeline-step">
                             <div class="timeline-dot"></div>
                             <div class="timeline-content">
-                                <h4>Planting <span class="step-time" style="font-size: 0.85em; font-weight: normal; color: var(--text-muted); float: right;"></span></h4>
+                                <h4>Planting <span class="step-time"
+                                        style="font-size: 0.85em; font-weight: normal; color: var(--text-muted); float: right;"></span>
+                                </h4>
                                 <p>Sourced heirloom seeds planted with care and intention.</p>
-                                <div class="step-gallery" style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
+                                <div class="step-gallery"
+                                    style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
                             </div>
                         </div>
                         <div class="timeline-step">
                             <div class="timeline-dot"></div>
                             <div class="timeline-content">
-                                <h4>Harvesting <span class="step-time" style="font-size: 0.85em; font-weight: normal; color: var(--text-muted); float: right;"></span></h4>
+                                <h4>Harvesting <span class="step-time"
+                                        style="font-size: 0.85em; font-weight: normal; color: var(--text-muted); float: right;"></span>
+                                </h4>
                                 <p>Hand-picked at peak ripeness to ensure maximum flavor and nutrition.</p>
-                                <div class="step-gallery" style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
+                                <div class="step-gallery"
+                                    style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
                             </div>
                         </div>
                         <div class="timeline-step">
                             <div class="timeline-dot"></div>
                             <div class="timeline-content">
-                                <h4>Processing <span class="step-time" style="font-size: 0.85em; font-weight: normal; color: var(--text-muted); float: right;"></span></h4>
+                                <h4>Processing <span class="step-time"
+                                        style="font-size: 0.85em; font-weight: normal; color: var(--text-muted); float: right;"></span>
+                                </h4>
                                 <p>Cleaned and naturally processed without harsh chemicals.</p>
-                                <div class="step-gallery" style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
+                                <div class="step-gallery"
+                                    style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
                             </div>
                         </div>
                         <div class="timeline-step">
                             <div class="timeline-dot"></div>
                             <div class="timeline-content">
-                                <h4>Packaging <span class="step-time" style="font-size: 0.85em; font-weight: normal; color: var(--text-muted); float: right;"></span></h4>
+                                <h4>Packaging <span class="step-time"
+                                        style="font-size: 0.85em; font-weight: normal; color: var(--text-muted); float: right;"></span>
+                                </h4>
                                 <p>Sealed fresh in eco-conscious packaging for your pantry.</p>
-                                <div class="step-gallery" style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
+                                <div class="step-gallery"
+                                    style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;"></div>
                             </div>
                         </div>
                     </div>
@@ -1449,7 +1510,8 @@
         <div class="footer-top">
             <div class="footer-brand">
                 <img src="assets/logo.svg" alt="Nutrivae" class="footer-logo">
-                <p>Thoughtfully Grown, Carefully Crafted. Clean, plant-based foods made with care, consistency, and integrity.
+                <p>Thoughtfully Grown, Carefully Crafted. Clean, plant-based foods made with care, consistency, and
+                    integrity.
                 </p>
                 <div class="footer-socials">
                     <a href="https://www.instagram.com/nutrivae.official/?hl=en" target="_blank" aria-label="Instagram">
@@ -1460,7 +1522,8 @@
                             <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
                         </svg>
                     </a>
-                    <a href="https://www.facebook.com/profile.php?id=61588123586823" target="_blank" aria-label="Facebook">
+                    <a href="https://www.facebook.com/profile.php?id=61588123586823" target="_blank"
+                        aria-label="Facebook">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
@@ -1490,7 +1553,8 @@
             </div>
             <div class="footer-links-group">
                 <h4>Contact</h4>
-                <a href="https://wa.me/919824664973?text=Hi,%20I%20need%20help%20with%20nutrivae%20products" target="_blank" style="text-decoration:none;">+91 98246-64973 ↗</a>
+                <a href="https://wa.me/919824664973?text=Hi,%20I%20need%20help%20with%20nutrivae%20products"
+                    target="_blank" style="text-decoration:none;">+91 98246-64973 ↗</a>
                 <span>India</span>
             </div>
         </div>
@@ -1508,13 +1572,13 @@
             // Custom Cursor
             const cursor = document.getElementById('cursor');
             const follower = document.getElementById('cursor-follower');
-            
+
             document.addEventListener('mousemove', (e) => {
                 if (cursor && cursor.style) {
                     cursor.style.left = e.clientX + 'px';
                     cursor.style.top = e.clientY + 'px';
                 }
-                
+
                 setTimeout(() => {
                     if (follower && follower.style) {
                         follower.style.left = e.clientX + 'px';
@@ -1566,7 +1630,7 @@
             // --- Pagination and Filtering Logic ---
             const ITEMS_PER_PAGE = 9;
             let currentPage = 1;
-            
+
             // Convert NodeList to Array to keep track of all original products
             const products = Array.from(document.querySelectorAll('.prod-item'));
             const grid = document.getElementById('products-grid');
@@ -1577,7 +1641,7 @@
             let currentCategory = 'all';
             let searchQuery = '';
 
-            window.renderProducts = function() {
+            window.renderProducts = function () {
                 if (!grid || !paginationControls) return;
 
                 // Filter products
@@ -1585,27 +1649,27 @@
                     const category = (product.getAttribute('data-category') || '').toLowerCase();
                     const h3 = product.querySelector('h3');
                     const title = h3 ? h3.textContent.toLowerCase() : '';
-                    
+
                     const matchesCategory = currentCategory === 'all' || category.includes(currentCategory);
                     const matchesSearch = title.includes(searchQuery.toLowerCase());
-                    
+
                     return matchesCategory && matchesSearch;
                 });
 
                 // Pagination calculation
                 const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
-                
+
                 if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
                 if (currentPage < 1) currentPage = 1;
 
                 const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
                 const endIndex = startIndex + ITEMS_PER_PAGE;
-                
+
                 const productsToShow = filteredProducts.slice(startIndex, endIndex);
 
                 // Clear grid and append filtered elements
                 grid.innerHTML = '';
-                
+
                 if (filteredProducts.length === 0) {
                     grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding: 4rem; color: var(--text-muted);">No products found matching your search.</div>';
                 } else {
@@ -1641,7 +1705,7 @@
             };
 
             // Event Listeners for Category Filters
-            if(filterBtns) {
+            if (filterBtns) {
                 filterBtns.forEach(btn => {
                     btn.addEventListener('click', () => {
                         filterBtns.forEach(b => b.classList.remove('active'));
@@ -1654,7 +1718,7 @@
             }
 
             // Event Listener for Search
-            if(searchInput) {
+            if (searchInput) {
                 searchInput.addEventListener('input', (e) => {
                     searchQuery = e.target.value;
                     currentPage = 1; // Reset to page 1
@@ -1669,19 +1733,19 @@
             console.error("Pagination error", e);
         }
         // WhatsApp Ordering Logic
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             if (e.target.classList.contains('btn-whatsapp-order')) {
                 const btn = e.target;
                 const prodItem = btn.closest('.prod-item');
                 if (!prodItem) return;
-                
+
                 const productName = prodItem.querySelector('h3').textContent.trim();
                 const packSize = prodItem.querySelector('.pack-size').value;
                 const packQty = prodItem.querySelector('.pack-qty').value;
-                
+
                 const message = `Hello Nutrivae,\nI'd like to order:\n• ${productName} ${packSize}\nQuantity: ${packQty}\nPlease help me place the order.`;
                 const encodedMessage = encodeURIComponent(message);
-                
+
                 const whatsappUrl = `https://wa.me/919824664973?text=${encodedMessage}`;
                 window.open(whatsappUrl, '_blank');
             }

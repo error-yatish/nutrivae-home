@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
 
 :root {
-  --cream:       #f0EDE6;
-  --cream-dark:  #dbd7c9;
+  --cream:       #f7f9f7;
+  --cream-dark:  #e9eee9;
   --green:       #015027;
   --green-mid:   #2e5e46;
   --green-light: #4a7c5f;

@@ -257,8 +257,9 @@ img { display: block; max-width: 100%; }
   transition: background 0.4s, box-shadow 0.4s, padding 0.3s;
 }
 #header.scrolled {
-  background: rgba(253,250,244,0.95);
+  background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   box-shadow: 0 2px 20px rgba(0,0,0,0.06);
   padding: 0.7rem 5%;
 }
@@ -5771,4 +5772,56 @@ section, .page-hero, .intro-section, .products-section, .products-container, .fa
 .stats-band, .hero-section .hero-bg, .footer {
   /* Let these keep their original solid colors (e.g. green) if they have them, 
      but ensure transparent cream elements don't block the body */
+}
+/* ===================== TIMELINE FIX ===================== */
+.timeline-section {
+  background-color: var(--green) !important;
+}
+
+/* ===================== PRODUCT VARIANT SELECTORS ===================== */
+.prod-variant-selector {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+  align-items: center;
+}
+
+.pack-size {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid rgba(46, 94, 70, 0.2);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pack-size:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 2px rgba(46, 94, 70, 0.1);
+}
+
+.pack-qty {
+  width: 60px;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid rgba(46, 94, 70, 0.2);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.pack-qty:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 2px rgba(46, 94, 70, 0.1);
 }

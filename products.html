@@ -755,9 +755,16 @@
                             <span class="spec-tag">🚫 No Preservatives</span>
                         </div>
                         <div class="prod-foot">
-                            <div class="prod-foot-actions">
-                                <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20Toor%20Daal" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
-                                <button class="btn-journey" data-journey="true" data-product="Toor Daal" data-farmer="Ramesh Patel" data-location="Gujarat, India" data-times="June 2025|July 2025|Nov 2025|Jan 2026|Feb 2026" data-images="||assets/farm_field.png|assets/ingredients_flat.png,assets/toor_daal.png|">View Journey</button>
+                            <div class="prod-foot-actions" style="flex-direction: column; align-items: stretch; gap: 10px;">
+                                <div class="prod-variant-selector">
+                                    <select class="pack-size">
+                                        <option value="250g">250 g</option>
+                                        <option value="500g" selected>500 g</option>
+                                        <option value="1Kg">1 Kg</option>
+                                    </select>
+                                    <input type="number" class="pack-qty" value="1" min="1" max="99">
+                                </div>
+                                <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
                             </div>
                             <span class="prod-nutrition">~22g protein / 100g</span>
                         </div>
@@ -782,9 +789,16 @@
                             <span class="spec-tag">🚫 No Preservatives</span>
                         </div>
                         <div class="prod-foot">
-                            <div class="prod-foot-actions">
-                                <a href="https://wa.me/919824664973?text=Hi,%20I%20am%20interested%20in%20buying%20Moong%20Daal" target="_blank" class="prod-cta-btn" style="text-decoration:none;">Buy via WhatsApp ↗</a>
-                                <button class="btn-journey" data-journey="true" data-product="Moong Daal" data-farmer="Sunita Devi" data-location="Rajasthan, India" data-times="May 2025|June 2025|Oct 2025|Dec 2025|Jan 2026" data-images="|||assets/ingredients_flat.png|">View Journey</button>
+                            <div class="prod-foot-actions" style="flex-direction: column; align-items: stretch; gap: 10px;">
+                                <div class="prod-variant-selector">
+                                    <select class="pack-size">
+                                        <option value="250g">250 g</option>
+                                        <option value="500g" selected>500 g</option>
+                                        <option value="1Kg">1 Kg</option>
+                                    </select>
+                                    <input type="number" class="pack-qty" value="1" min="1" max="99">
+                                </div>
+                                <button class="prod-cta-btn btn-whatsapp-order">Order on WhatsApp ↗</button>
                             </div>
                             <span class="prod-nutrition">~24g protein / 100g</span>
                         </div>
@@ -1511,6 +1525,24 @@
         } catch (e) {
             console.error("Pagination error", e);
         }
+        // WhatsApp Ordering Logic
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('btn-whatsapp-order')) {
+                const btn = e.target;
+                const prodItem = btn.closest('.prod-item');
+                if (!prodItem) return;
+                
+                const productName = prodItem.querySelector('h3').textContent.trim();
+                const packSize = prodItem.querySelector('.pack-size').value;
+                const packQty = prodItem.querySelector('.pack-qty').value;
+                
+                const message = `Hello Nutrivae,\nI'd like to order:\n• ${productName} ${packSize}\nQuantity: ${packQty}\nPlease help me place the order.`;
+                const encodedMessage = encodeURIComponent(message);
+                
+                const whatsappUrl = `https://wa.me/919824664973?text=${encodedMessage}`;
+                window.open(whatsappUrl, '_blank');
+            }
+        });
     </script>
 </body>
 

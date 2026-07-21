@@ -5758,21 +5758,6 @@ footer {
 
 /* Background adjustment to unify the page and make glassmorphism visible */
 body {
-  background-color: #f7f9f7 !important;
-  background-image: 
-    radial-gradient(circle at 15% 50%, rgba(200, 230, 200, 0.5) 0px, transparent 50%),
-    radial-gradient(circle at 85% 30%, rgba(240, 220, 200, 0.4) 0px, transparent 50%) !important;
-  background-attachment: fixed !important;
-}
-
-section, .page-hero, .intro-section, .products-section, .products-container, .faq-section, .contact-section, .blog-preview, .promise-strip, .related-articles, .process-step, .testimonials {
-  background-color: transparent !important;
-}
-
-.stats-band, .hero-section .hero-bg, .footer {
-  /* Let these keep their original solid colors (e.g. green) if they have them, 
-     but ensure transparent cream elements don't block the body */
-}
 /* ===================== TIMELINE FIX ===================== */
 .timeline-section {
   background-color: var(--green) !important;
@@ -5828,4 +5813,20 @@ section, .page-hero, .intro-section, .products-section, .products-container, .fa
 /* ===================== STATS BAND FIX ===================== */
 .stats-band {
   background-color: var(--green) !important;
+}
+/* Background adjustment to unify the page and make glassmorphism visible */
+body {
+  background-color: #f7f9f7 !important;
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(200, 230, 200, 0.5) 0px, transparent 50%),
+    radial-gradient(circle at 85% 30%, rgba(240, 220, 200, 0.4) 0px, transparent 50%) !important;
+  background-attachment: fixed !important;
+}
+
+section, .page-hero, .page-hero-inner, .intro-section, .products-section, .products-container, .faq-section, .contact-section, .blog-preview, .promise-strip, .promise-section, .related-articles, .process-step, .testimonials, .story-content-section, .story-two-col {
+  background-color: transparent !important;
+}
+
+.stats-band, .hero-section .hero-bg, .footer {
+  /* Let these keep their original solid colors */
 }

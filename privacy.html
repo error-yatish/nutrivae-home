@@ -1,301 +1,426 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Privacy Policy | Nutrivae Foods</title>
-    <meta name="description" content="How we protect and manage your data.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta name="description" content="How we protect and manage your data." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <!-- Lenis smooth scroll -->
     <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
     <style>
-        .page-hero {
-            min-height: 60vh;
-            display: flex;
-            align-items: center;
-            padding: 10rem 5% 5rem;
-            background: var(--cream);
-            position: relative;
-            overflow: hidden;
-        }
+      .page-hero {
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+        padding: 10rem 5% 5rem;
+        background: var(--cream);
+        position: relative;
+        overflow: hidden;
+      }
 
-        .page-hero-inner {
-            max-width: 800px;
-        }
+      .page-hero-inner {
+        max-width: 800px;
+      }
 
-        .page-hero h1 {
-            font-size: clamp(3rem, 5vw, 5rem);
-            color: var(--green);
-            margin-bottom: 1.5rem;
-        }
+      .page-hero h1 {
+        font-size: clamp(3rem, 5vw, 5rem);
+        color: var(--green);
+        margin-bottom: 1.5rem;
+      }
 
-        .page-hero p {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            line-height: 1.8;
-            max-width: 620px;
-        }
+      .page-hero p {
+        font-size: 1.25rem;
+        color: var(--text-muted);
+        line-height: 1.8;
+        max-width: 620px;
+      }
 
-        .page-hero-blob {
-            position: absolute;
-            right: -10%;
-            top: 10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(ellipse, rgba(74, 124, 95, 0.1) 0%, transparent 70%);
-            border-radius: 60% 40% 70% 30%;
-            animation: blobMorph 8s ease-in-out infinite;
-        }
+      .page-hero-blob {
+        position: absolute;
+        right: -10%;
+        top: 10%;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(
+          ellipse,
+          rgba(74, 124, 95, 0.1) 0%,
+          transparent 70%
+        );
+        border-radius: 60% 40% 70% 30%;
+        animation: blobMorph 8s ease-in-out infinite;
+      }
 
-        .story-content-section {
-            padding: 5rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+      .story-content-section {
+        padding: 5rem 5%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
 
+      .story-two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+        align-items: center;
+        margin-bottom: 6rem;
+      }
+
+      .story-two-col.reverse {
+        direction: rtl;
+      }
+
+      .story-two-col.reverse > * {
+        direction: ltr;
+      }
+
+      .story-col-img {
+        border-radius: var(--radius-xl);
+        overflow: hidden;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .story-col-img img {
+        width: 100%;
+        height: 420px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .story-col-text h2 {
+        font-size: clamp(1.8rem, 3vw, 2.5rem);
+        color: var(--green);
+        margin-bottom: 1rem;
+      }
+
+      .story-col-text p {
+        font-size: 1rem;
+        color: var(--text-muted);
+        line-height: 1.85;
+        margin-bottom: 1.2rem;
+      }
+
+      .story-values {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        padding: 5rem 5%;
+        background: var(--green);
+      }
+
+      .story-val-card {
+        padding: 2.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: var(--radius-lg);
+      }
+
+      .story-val-card .val-icon {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      .story-val-card h3 {
+        font-size: 1.3rem;
+        color: var(--white);
+        margin-bottom: 0.7rem;
+      }
+
+      .story-val-card p {
+        font-size: 0.92rem;
+        color: rgba(255, 255, 255, 0.6);
+        line-height: 1.7;
+      }
+
+      @media (max-width: 900px) {
         .story-two-col {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: center;
-            margin-bottom: 6rem;
-        }
-
-        .story-two-col.reverse {
-            direction: rtl;
-        }
-
-        .story-two-col.reverse>* {
-            direction: ltr;
-        }
-
-        .story-col-img {
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-            box-shadow: var(--shadow-soft);
-        }
-
-        .story-col-img img {
-            width: 100%;
-            height: 420px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .story-col-text h2 {
-            font-size: clamp(1.8rem, 3vw, 2.5rem);
-            color: var(--green);
-            margin-bottom: 1rem;
-        }
-
-        .story-col-text p {
-            font-size: 1rem;
-            color: var(--text-muted);
-            line-height: 1.85;
-            margin-bottom: 1.2rem;
+          grid-template-columns: 1fr;
+          direction: ltr !important;
+          gap: 2.5rem;
         }
 
         .story-values {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            padding: 5rem 5%;
-            background: var(--green);
+          grid-template-columns: 1fr;
         }
-
-        .story-val-card {
-            padding: 2.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: var(--radius-lg);
-        }
-
-        .story-val-card .val-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .story-val-card h3 {
-            font-size: 1.3rem;
-            color: var(--white);
-            margin-bottom: 0.7rem;
-        }
-
-        .story-val-card p {
-            font-size: 0.92rem;
-            color: rgba(255, 255, 255, 0.6);
-            line-height: 1.7;
-        }
-
-        @media (max-width: 900px) {
-            .story-two-col {
-                grid-template-columns: 1fr;
-                direction: ltr !important;
-                gap: 2.5rem;
-            }
-
-            .story-values {
-                grid-template-columns: 1fr;
-            }
-        }
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- Custom cursor -->
     <div class="cursor" id="cursor"></div>
     <div class="cursor-follower" id="cursor-follower">
-        <svg width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <mask id="leaf-mask">
-                    <rect width="24" height="24" fill="white" />
-                    <path d="M 12.5,15 C 15,11 18,8 21,7" fill="none" stroke="black" stroke-width="0.8"
-                        stroke-linecap="round" />
-                    <path d="M 10.5,14.5 C 8,12 5.5,10 4,9" fill="none" stroke="black" stroke-width="0.6"
-                        stroke-linecap="round" />
-                </mask>
-            </defs>
-            <g mask="url(#leaf-mask)">
-                <path d="M 12,17 C 12,8 18,2 23,2 C 23,12 16,17 12,17 Z" fill="#88b04b" />
-                <path d="M 11.5,16 C 10,10 6,5 2,6 C 2,13 8,16 11.5,16 Z" fill="#88b04b" />
-                <path d="M 11,22 C 11.2,20 11.8,18 12,17" fill="none" stroke="#88b04b" stroke-width="1.5"
-                    stroke-linecap="round" />
-            </g>
-        </svg>
+      <svg
+        width="32"
+        height="32"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <mask id="leaf-mask">
+            <rect width="24" height="24" fill="white" />
+            <path
+              d="M 12.5,15 C 15,11 18,8 21,7"
+              fill="none"
+              stroke="black"
+              stroke-width="0.8"
+              stroke-linecap="round"
+            />
+            <path
+              d="M 10.5,14.5 C 8,12 5.5,10 4,9"
+              fill="none"
+              stroke="black"
+              stroke-width="0.6"
+              stroke-linecap="round"
+            />
+          </mask>
+        </defs>
+        <g mask="url(#leaf-mask)">
+          <path
+            d="M 12,17 C 12,8 18,2 23,2 C 23,12 16,17 12,17 Z"
+            fill="#88b04b"
+          />
+          <path
+            d="M 11.5,16 C 10,10 6,5 2,6 C 2,13 8,16 11.5,16 Z"
+            fill="#88b04b"
+          />
+          <path
+            d="M 11,22 C 11.2,20 11.8,18 12,17"
+            fill="none"
+            stroke="#88b04b"
+            stroke-width="1.5"
+            stroke-linecap="round"
+          />
+        </g>
+      </svg>
     </div>
 
     <header id="header">
-        <div class="header-inner">
-            <nav class="nav-links" id="nav-links">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="about.html" class="nav-link active">Our Story</a>
-                <a href="products.html" class="nav-link">Products</a>
+      <div class="header-inner">
+        <nav class="nav-links" id="nav-links">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="about.html" class="nav-link active">Our Story</a>
+          <a href="products.html" class="nav-link">Products</a>
 
-                <a href="process.html" class="nav-link">How We Grow</a>
-                <a href="contact.html" class="nav-link">Contact</a>
-            </nav>
-            <a href="index.html" class="logo">
-                <img src="assets/logo.svg" alt="Nutrivae Foods" class="logo-img">
-            </a>
-            <div class="header-actions">
-                <a href="products.html" class="btn-pill" id="header-cta">Shop Now</a>
-                <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
-                    <span></span><span></span><span></span>
-                </button>
-            </div>
+          <a href="process.html" class="nav-link">How We Grow</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+        </nav>
+        <a href="index.html" class="logo">
+          <img src="assets/logo.svg" alt="Nutrivae Foods" class="logo-img" />
+        </a>
+        <div class="header-actions">
+          <a href="products.html" class="btn-pill" id="header-cta">Shop Now</a>
+          <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+            <span></span><span></span><span></span>
+          </button>
         </div>
+      </div>
     </header>
 
     <div class="mobile-menu" id="mobile-menu">
-        <a href="index.html">Home</a>
-        <a href="about.html">Our Story</a>
-        <a href="products.html">Products</a>
+      <a href="index.html">Home</a>
+      <a href="about.html">Our Story</a>
+      <a href="products.html">Products</a>
 
-        <a href="process.html">How We Grow</a>
-        <a href="contact.html">Contact</a>
+      <a href="process.html">How We Grow</a>
+      <a href="contact.html">Contact</a>
     </div>
 
     <main>
-        <section class="page-hero">
-            <div class="page-hero-inner">
-                <span class="section-tag" data-animate="fade-up">Legal</span>
-                <h1 data-animate="fade-up" data-delay="100">Privacy <em>Policy.</em></h1>
-                <p data-animate="fade-up" data-delay="200">How we protect and manage your data.</p>
-            </div>
-            <div class="page-hero-blob"></div>
-        </section>
+      <section class="page-hero">
+        <div class="page-hero-inner">
+          <span class="section-tag" data-animate="fade-up">Legal</span>
+          <h1 data-animate="fade-up" data-delay="100">
+            Privacy <em>Policy.</em>
+          </h1>
+          <p data-animate="fade-up" data-delay="200">
+            How we protect and manage your data.
+          </p>
+        </div>
+        <div class="page-hero-blob"></div>
+      </section>
 
-        <section style="max-width: 800px; margin: 4rem auto; padding: 0 20px; color: var(--text);">
-            <div style="background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); padding: 3rem; border-radius: var(--radius-lg); border: 1px solid rgba(255, 255, 255, 0.8); box-shadow: 0 8px 32px rgba(28, 61, 46, 0.05);">
-                <h3 style="margin-top: 0;">1. Information We Collect</h3>
-                <p>When you visit our site, we automatically collect certain information about your device, including information about your web browser, IP address, time zone, and some of the cookies that are installed on your device. Additionally, as you browse the site, we collect information about the individual web pages or products that you view.</p>
-                <p>We collect Device Information using the following technologies: "Cookies", "Log files", "Web beacons", "tags", and "pixels".</p>
-                <p>When you make a purchase or attempt to make a purchase, we collect certain information from you, including your name, billing address, shipping address, payment information, email address, and phone number.</p>
+      <section
+        style="
+          max-width: 800px;
+          margin: 4rem auto;
+          padding: 0 20px;
+          color: var(--text);
+        "
+      >
+        <div
+          style="
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 32px rgba(28, 61, 46, 0.05);
+          "
+        >
+          <h3 style="margin-top: 0">1. Information We Collect</h3>
+          <p>
+            When you visit our site, we automatically collect certain
+            information about your device, including information about your web
+            browser, IP address, time zone, and some of the cookies that are
+            installed on your device. Additionally, as you browse the site, we
+            collect information about the individual web pages or products that
+            you view.
+          </p>
+          <p>
+            We collect Device Information using the following technologies:
+            "Cookies", "Log files", "Web beacons", "tags", and "pixels".
+          </p>
+          <p>
+            When you make a purchase or attempt to make a purchase, we collect
+            certain information from you, including your name, billing address,
+            shipping address, payment information, email address, and phone
+            number.
+          </p>
 
-                <h3 style="margin-top: 2rem;">2. How We Use Your Information</h3>
-                <p>We use the Order Information that we collect generally to fulfill any orders placed through the Site (including processing your payment information, arranging for shipping, and providing you with invoices and/or order confirmations). Additionally, we use this Order Information to:</p>
-                <ul style="padding-left: 20px; margin-bottom: 20px;">
-                    <li>Communicate with you;</li>
-                    <li>Screen our orders for potential risk or fraud; and</li>
-                    <li>When in line with the preferences you have shared with us, provide you with information or advertising relating to our products or services.</li>
-                </ul>
+          <h3 style="margin-top: 2rem">2. How We Use Your Information</h3>
+          <p>
+            We use the Order Information that we collect generally to fulfill
+            any orders placed through the Site (including processing your
+            payment information, arranging for shipping, and providing you with
+            invoices and/or order confirmations). Additionally, we use this
+            Order Information to:
+          </p>
+          <ul style="padding-left: 20px; margin-bottom: 20px">
+            <li>Communicate with you;</li>
+            <li>Screen our orders for potential risk or fraud; and</li>
+            <li>
+              When in line with the preferences you have shared with us, provide
+              you with information or advertising relating to our products or
+              services.
+            </li>
+          </ul>
 
-                <h3 style="margin-top: 2rem;">3. Sharing Your Personal Information</h3>
-                <p>We share your Personal Information with third parties to help us use your Personal Information, as described above. We may also share your Personal Information to comply with applicable laws and regulations, to respond to a subpoena, search warrant or other lawful request for information we receive, or to otherwise protect our rights.</p>
+          <h3 style="margin-top: 2rem">3. Sharing Your Personal Information</h3>
+          <p>
+            We share your Personal Information with third parties to help us use
+            your Personal Information, as described above. We may also share
+            your Personal Information to comply with applicable laws and
+            regulations, to respond to a subpoena, search warrant or other
+            lawful request for information we receive, or to otherwise protect
+            our rights.
+          </p>
 
-                <h3 style="margin-top: 2rem;">4. Data Retention</h3>
-                <p>When you place an order through the Site, we will maintain your Order Information for our records unless and until you ask us to delete this information.</p>
+          <h3 style="margin-top: 2rem">4. Data Retention</h3>
+          <p>
+            When you place an order through the Site, we will maintain your
+            Order Information for our records unless and until you ask us to
+            delete this information.
+          </p>
 
-                <h3 style="margin-top: 2rem;">5. Changes</h3>
-                <p>We may update this privacy policy from time to time in order to reflect, for example, changes to our practices or for other operational, legal or regulatory reasons.</p>
-            </div>
-        </section>
+          <h3 style="margin-top: 2rem">5. Changes</h3>
+          <p>
+            We may update this privacy policy from time to time in order to
+            reflect, for example, changes to our practices or for other
+            operational, legal or regulatory reasons.
+          </p>
+        </div>
+      </section>
     </main>
 
     <footer>
-        <div class="footer-top">
-            <div class="footer-brand">
-                <img src="assets/logo.svg" alt="Nutrivae" class="footer-logo">
-                <p>Thoughtfully Grown, Carefully Crafted. Clean, plant-based foods made with care, consistency, and integrity.
-                </p>
-                <div class="footer-socials">
-                    <a href="https://www.instagram.com/nutrivae.official/?hl=en" target="_blank" aria-label="Instagram">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <rect x="2" y="2" width="20" height="20" rx="5" />
-                            <circle cx="12" cy="12" r="4" />
-                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-                        </svg>
-                    </a>
-                    <a href="https://www.facebook.com/profile.php?id=61588123586823" target="_blank" aria-label="Facebook">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-                        </svg>
-                    </a>
-                </div>
-            </div>
-            <div class="footer-links-group">
-                <h4>Company</h4>
-                <a href="about.html">Our Story</a>
-                <a href="products.html">Products</a>
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="assets/logo.svg" alt="Nutrivae" class="footer-logo" />
+          <p>
+            Thoughtfully Grown, Carefully Crafted. Clean, plant-based foods made
+            with care, consistency, and integrity.
+          </p>
+          <div class="footer-socials">
+            <a
+              href="https://www.instagram.com/nutrivae.official/?hl=en"
+              target="_blank"
+              aria-label="Instagram"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle
+                  cx="17.5"
+                  cy="6.5"
+                  r="1"
+                  fill="currentColor"
+                  stroke="none"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://www.facebook.com/profile.php?id=61588123586823"
+              target="_blank"
+              aria-label="Facebook"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-links-group">
+          <h4>Company</h4>
+          <a href="about.html">Our Story</a>
+          <a href="products.html">Products</a>
 
-                <a href="contact.html">Contact Us</a>
-            </div>
-            <div class="footer-links-group">
-                <h4>Legal</h4>
-                <a href="terms.html">Terms & Conditions</a>
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="returns.html">Return Policy</a>
-                <a href="shipping.html">Shipping Info</a>
-            </div>
-            <div class="footer-links-group">
-                <h4>Products</h4>
-                <a href="products.html">Toor Daal</a>
-                <a href="products.html">Moong Daal</a>
-                <a href="products.html">Mungfali</a>
-            </div>
-            <div class="footer-links-group">
-                <h4>Contact</h4>
-                <a href="https://wa.me/919824664973?text=Hi,%20I%20need%20help%20with%20nutrivae%20products" target="_blank" style="text-decoration:none;">+91 98246-64973 ↗</a>
-                <span>India</span>
-            </div>
+          <a href="contact.html">Contact Us</a>
         </div>
-        <div class="footer-bottom">
-            <span>&copy; 2026 Nutrivae Foods. All rights reserved.</span>
-            <span>Thoughtfully Grown, Carefully Crafted.</span>
+        <div class="footer-links-group">
+          <h4>Legal</h4>
+          <a href="terms.html">Terms & Conditions</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="returns.html">Return Policy</a>
+          <a href="shipping.html">Shipping Info</a>
         </div>
+        <div class="footer-links-group">
+          <h4>Products</h4>
+          <a href="products.html">Toor Daal</a>
+          <a href="products.html">Moong Daal</a>
+          <a href="products.html">Mungfali</a>
+        </div>
+        <div class="footer-links-group">
+          <h4>Contact</h4>
+          <a
+            href="https://wa.me/919824664973?text=Hi,%20I%20need%20help%20with%20nutrivae%20products"
+            target="_blank"
+            style="text-decoration: none"
+            >+91 98246-64973 ↗</a
+          >
+          <span>India</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Nutrivae Foods. All rights reserved.</span>
+        <span>Thoughtfully Grown, Carefully Crafted.</span>
+      </div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>

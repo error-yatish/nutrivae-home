@@ -5830,3 +5830,7 @@ section, .page-hero, .page-hero-inner, .intro-section, .products-section, .produ
 .stats-band, .hero-section .hero-bg, .footer {
   /* Let these keep their original solid colors */
 }
+/* ===================== STORY VALUES FIX ===================== */
+.story-values {
+  background-color: var(--green) !important;
+}

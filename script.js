@@ -30,6 +30,14 @@ function initLoader() {
   const loader = document.getElementById('page-loader');
   if (!loader) { initAfterLoad(); return; }
 
+  // Check if loader has already played in this session
+  if (sessionStorage.getItem('loaderPlayed')) {
+    loader.style.display = 'none';
+    loader.classList.add('hidden');
+    initAfterLoad();
+    return;
+  }
+
   const bar = document.getElementById('loader-bar');
   const label = document.getElementById('loader-label');
   let progress = 0;
@@ -45,6 +53,7 @@ function initLoader() {
     clearInterval(interval);
     if (bar) bar.style.width = '100%';
     if (label) label.textContent = '100%';
+    sessionStorage.setItem('loaderPlayed', 'true');
     gsap.to(loader, {
       yPercent: -100,
       duration: 0.9,

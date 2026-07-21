@@ -5825,3 +5825,7 @@ section, .page-hero, .intro-section, .products-section, .products-container, .fa
   border-color: var(--green);
   box-shadow: 0 0 0 2px rgba(46, 94, 70, 0.1);
 }
+/* ===================== STATS BAND FIX ===================== */
+.stats-band {
+  background-color: var(--green) !important;
+}

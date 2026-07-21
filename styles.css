@@ -5834,3 +5834,31 @@ section, .page-hero, .page-hero-inner, .intro-section, .products-section, .produ
 .story-values {
   background-color: var(--green) !important;
 }
+/* ===================== STORY VALUES GLASSMORPHISM ===================== */
+.story-values {
+  background-color: transparent !important;
+}
+
+.story-val-card {
+  background: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 8px 32px rgba(28, 61, 46, 0.05) !important;
+  padding: 2.5rem;
+  border-radius: var(--radius-lg);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.story-val-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(28, 61, 46, 0.1);
+}
+
+.story-val-card h3 {
+  color: var(--text) !important;
+}
+
+.story-val-card p {
+  color: rgba(28, 61, 46, 0.75) !important;
+}
